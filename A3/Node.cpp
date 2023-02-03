@@ -2,7 +2,6 @@
 
 Node::Node()
 {
-    *children_[26];
     for (int i = 0; i < 26; i++)
     {
         children_[i] = nullptr;
@@ -11,12 +10,13 @@ Node::Node()
 
 Node::~Node()
 {
-    delete[] children_;
+    for (int i = 0; i < 26; i++)
+        delete children_[i];
 }
 
 Node::Node(const Node &other)
 {
-    children_ = other.children_;
+    *children_ = *other.children_;
     isWord_ = other.isWord_;
 }
 

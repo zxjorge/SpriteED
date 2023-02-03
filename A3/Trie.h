@@ -3,6 +3,8 @@
 #include <vector>
 #include <string.h>
 #include "Node.h"
+#ifndef TRIE_H
+#define TRIE_H
 
 class Trie
 {
@@ -22,3 +24,4 @@ public:
 private:
     std::vector<std::string> wordSearch(std::vector<std::string>& words, Node *root, std::string prefix);
 };
+#endif
