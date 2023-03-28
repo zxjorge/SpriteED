@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>383</width>
-    <height>285</height>
+    <width>618</width>
+    <height>373</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,6 +48,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="spacing">
+      <number>6</number>
+     </property>
      <item>
       <widget class="QLabel" name="brushSizeLabel">
        <property name="text">
@@ -56,14 +59,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="brushSizeTextBox">
-       <property name="baseSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
+      <widget class="QSpinBox" name="spinBox"/>
      </item>
      <item>
       <widget class="QSlider" name="brushSizeSlider">
@@ -84,5 +80,38 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>brushSizeSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>160</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>95</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>brushSizeSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>97</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>137</x>
+     <y>251</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

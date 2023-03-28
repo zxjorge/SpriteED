@@ -45,8 +45,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>497</width>
-          <height>227</height>
+          <width>491</width>
+          <height>207</height>
          </rect>
         </property>
        </widget>
@@ -93,5 +93,38 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>fpsSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>fpsSpinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>268</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>125</x>
+     <y>268</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fpsSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>fpsSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>127</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>267</x>
+     <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
