@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::BrushProperties *ui;
+    QColor currentColor = Qt::white;
 };
 
 #endif // BRUSHPROPERTIES_H

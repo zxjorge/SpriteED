@@ -72,6 +72,12 @@
    </item>
    <item>
     <widget class="QPushButton" name="colorPaletteButton">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="text">
       <string>Color Palette</string>
      </property>

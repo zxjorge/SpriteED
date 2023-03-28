@@ -23,6 +23,12 @@ BrushProperties::~BrushProperties()
 
 void BrushProperties::on_colorPaletteButton_clicked()
 {
-    QColor color = QColorDialog::getColor(Qt::white,this,"Choose a Color");
+    QColor color = QColorDialog::getColor(currentColor,this,"Choose a Color");
+    currentColor = color;
+    QPalette pal = ui->colorPaletteButton->palette();
+    pal.setColor(QPalette::Button, QColor(color));
+    ui->colorPaletteButton->setAutoFillBackground(true);
+    ui->colorPaletteButton->setPalette(pal);
+    ui->colorPaletteButton->update();
 }
 
