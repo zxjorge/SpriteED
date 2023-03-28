@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>383</width>
+    <height>285</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,12 +15,69 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="brushButton">
+       <property name="text">
+        <string>Brush</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="airBrushButton">
+       <property name="text">
+        <string>Air Brush</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="fillButton">
+       <property name="text">
+        <string>Fill</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="eraseButton">
+       <property name="text">
+        <string>Erase</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="brushSizeLabel">
+       <property name="text">
+        <string>Brush Size:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="brushSizeTextBox">
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="brushSizeSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="colorPaletteButton">
      <property name="text">
-      <string>BrushProperties</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <string>Color Palette</string>
      </property>
     </widget>
    </item>

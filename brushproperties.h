@@ -15,6 +15,9 @@ public:
     explicit BrushProperties(QWidget *parent = nullptr);
     ~BrushProperties();
 
+private slots:
+    void on_colorPaletteButton_clicked();
+
 private:
     Ui::BrushProperties *ui;
 };
