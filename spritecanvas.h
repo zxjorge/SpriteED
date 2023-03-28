@@ -3,14 +3,14 @@
 #include <QMouseEvent>
 #include <QImage>
 
-#ifndef MYCANVAS_H
-#define MYCANVAS_H
-class MyCanvas : public QWidget
+#ifndef SPRITECANVAS_H
+#define SPRITECANVAS_H
+class SpriteCanvas : public QWidget
 {
     Q_OBJECT
 
 public:
-    MyCanvas(QWidget *parent = nullptr);
+    SpriteCanvas(QWidget *parent = nullptr);
 
 protected:
 
@@ -25,4 +25,4 @@ private:
     QImage m_image;
 };
 
-#endif // MYCANVAS_H
+#endif // SPRITECANVAS_H
