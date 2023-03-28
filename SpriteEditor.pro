@@ -11,6 +11,8 @@ CONFIG += c++17
 SOURCES += \
     animationframes.cpp \
     brush.cpp \
+    brushproperties.cpp \
+    framesviewer.cpp \
     main.cpp \
     mainwindow.cpp \
     spritecanvas.cpp
@@ -18,11 +20,16 @@ SOURCES += \
 HEADERS += \
     animationframes.h \
     brush.h \
+    brushproperties.h \
+    framesviewer.h \
     mainwindow.h \
     spritecanvas.h
 
 FORMS += \
-    mainwindow.ui
+    brushproperties.ui \
+    framesviewer.ui \
+    mainwindow.ui \
+    spritecanvas.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
