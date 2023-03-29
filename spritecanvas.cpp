@@ -2,7 +2,6 @@
 #include "ui_spritecanvas.h"
 #include <iostream>
 #include <cmath>
-#include "brush.h"
 
 SpriteCanvas::SpriteCanvas(QWidget *parent) :
     QWidget(parent),
@@ -11,8 +10,11 @@ SpriteCanvas::SpriteCanvas(QWidget *parent) :
     ui->setupUi(this);
     sprite = QImage(16, 24, QImage::Format_ARGB32_Premultiplied);
     sprite.fill(Qt::white);
-    //Brush brush;
+
+
+
 }
+
 
 SpriteCanvas::~SpriteCanvas()
 {

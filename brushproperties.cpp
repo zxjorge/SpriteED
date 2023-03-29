@@ -3,6 +3,7 @@
 #include "ui_brushproperties.h"
 #include <QColorDialog>
 #include <QColor>
+#include "brush.h"
 
 
 BrushProperties::BrushProperties(QWidget *parent) :
@@ -28,6 +29,7 @@ void BrushProperties::on_colorPaletteButton_clicked()
 {
     QColor brushColor = QColorDialog::getColor(currentColor,this,"Choose a Color");
     currentColor = brushColor;
+    //setColor(brushColor);
        QString buttonColorString = QString("background-color: %1").arg(brushColor.name());
        ui->colorPaletteButton->setStyleSheet(buttonColorString);
 
@@ -35,6 +37,7 @@ void BrushProperties::on_colorPaletteButton_clicked()
 }
 
 void BrushProperties::on_brushButton_clicked() {
+    QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
     ui->brushButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
@@ -42,6 +45,7 @@ void BrushProperties::on_brushButton_clicked() {
 }
 
 void BrushProperties::on_airBrushButton_clicked() {
+    QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
     ui->airBrushButton->setStyleSheet(QString("background-color: grey"));
     ui->brushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
@@ -49,6 +53,7 @@ void BrushProperties::on_airBrushButton_clicked() {
 }
 
 void BrushProperties::on_fillButton_clicked() {
+    QApplication::setOverrideCursor(QCursor(Qt::BitmapCursor));
     ui->fillButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");

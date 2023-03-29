@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include <QPainter>
+#include "brush.h"
 
 enum DimensionLimit { WIDTH, HEIGHT };
 
