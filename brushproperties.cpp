@@ -37,7 +37,14 @@ void BrushProperties::on_colorPaletteButton_clicked()
 }
 
 void BrushProperties::on_brushButton_clicked() {
+    QPixmap brushCursorPixmap(":/icons/brush_icon.png");
+    QCursor brushCursor(brushCursorPixmap, 0, 0);
+    setCursor(brushCursor);
+
+
     QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
+
+
     ui->brushButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
