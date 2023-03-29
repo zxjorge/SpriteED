@@ -11,10 +11,10 @@ BrushProperties::BrushProperties(QWidget *parent) :
     ui(new Ui::BrushProperties)
 {
     ui->setupUi(this);
-    connect(ui->brushButton, &QPushButton::clicked, this, &BrushProperties::on_brushButton_clicked);
-    connect(ui->airBrushButton, &QPushButton::clicked, this, &BrushProperties::on_airBrushButton_clicked);
-    connect(ui->fillButton, &QPushButton::clicked, this, &BrushProperties::on_fillButton_clicked);
-    connect(ui->eraseButton, &QPushButton::clicked, this, &BrushProperties::on_eraseButton_clicked);
+    connect(ui->brushButton, &QPushButton::clicked, this, &::BrushProperties::onBrushButtonClicked);
+    connect(ui->airBrushButton, &QPushButton::clicked, this, &::BrushProperties::onAirBrushButtonClicked);
+    connect(ui->fillButton, &QPushButton::clicked, this, &::BrushProperties::onFillButtonClicked);
+    connect(ui->eraseButton, &QPushButton::clicked, this, &::BrushProperties::onEraseButtonClicked);
 
 }
 
@@ -27,7 +27,7 @@ void BrushProperties::setTool(Tool* tool) {
     this->tool = tool;
 }
 
-void BrushProperties::on_colorPaletteButton_clicked()
+void BrushProperties::onColorPaletteButtonClicked()
 {
     QColor brushColor = QColorDialog::getColor(currentColor,this,"Choose a Color");
     currentColor = brushColor;
@@ -38,7 +38,7 @@ void BrushProperties::on_colorPaletteButton_clicked()
 
 }
 
-void BrushProperties::on_brushButton_clicked() {
+void BrushProperties::onBrushButtonClicked() {
 
     emit showBrushIcon();
 
@@ -50,7 +50,7 @@ void BrushProperties::on_brushButton_clicked() {
     ui->eraseButton->setStyleSheet("");
 }
 
-void BrushProperties::on_airBrushButton_clicked() {
+void BrushProperties::onAirBrushButtonClicked() {
     emit showAirBrushIcon();
 
     ui->airBrushButton->setStyleSheet(QString("background-color: grey"));
@@ -59,7 +59,7 @@ void BrushProperties::on_airBrushButton_clicked() {
     ui->eraseButton->setStyleSheet("");
 }
 
-void BrushProperties::on_fillButton_clicked() {
+void BrushProperties::onFillButtonClicked() {
     emit showFillIcon();
 
 
@@ -69,7 +69,7 @@ void BrushProperties::on_fillButton_clicked() {
     ui->eraseButton->setStyleSheet("");
 }
 
-void BrushProperties::on_eraseButton_clicked() {
+void BrushProperties::onEraseButtonClicked() {
     emit showEraseIcon();
 
 
