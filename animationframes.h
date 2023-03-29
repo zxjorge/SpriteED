@@ -11,8 +11,9 @@ class AnimationFrames
 {
 public:
     AnimationFrames();
-    QImage* addFrame();
-    QImage* getFrame(int index);
+    QImage addFrame();
+    QImage getFrame(int index);
+    void updateFrame(int index, QImage image);
     void deleteFrame(int index);
     int getFrameCount();
 private:
