@@ -11,6 +11,8 @@ BrushProperties::BrushProperties(QWidget *parent) :
     ui(new Ui::BrushProperties)
 {
     ui->setupUi(this);
+    ui->brushButton->setStyleSheet(QString("background-color: grey"));
+    ui->colorPaletteButton->setStyleSheet(QString("background-color: black"));
     connect(ui->brushButton, &QPushButton::clicked, this, &::BrushProperties::onBrushButtonClicked);
     connect(ui->airBrushButton, &QPushButton::clicked, this, &::BrushProperties::onAirBrushButtonClicked);
     connect(ui->fillButton, &QPushButton::clicked, this, &::BrushProperties::onFillButtonClicked);
