@@ -7,6 +7,11 @@
 #include <QMenuBar>
 #include "tool.h"
 #include "animationframes.h"
+#include <QString>
+#include <QFile>
+#include <QTextStream>
+#include <QIODevice>
+#include <QFileDialog>
 
 
 QT_BEGIN_NAMESPACE
@@ -24,6 +29,8 @@ public:
 
 private slots:
     void on_actionAbout_triggered();
+
+    void on_actionOpen_triggered();
 
 private:
     Ui::MainWindow *ui;
