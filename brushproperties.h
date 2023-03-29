@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+
 namespace Ui {
 class BrushProperties;
 }
@@ -21,6 +22,13 @@ private slots:
     void on_airBrushButton_clicked();
     void on_fillButton_clicked();
     void on_eraseButton_clicked();
+
+ signals:
+    void showFillIcon();
+    void showEraseIcon();
+    void showAirBrushIcon();
+    void showBrushIcon();
+
 
 private:
     Ui::BrushProperties *ui;
