@@ -17,6 +17,10 @@ public:
 
 private slots:
     void on_colorPaletteButton_clicked();
+    void on_brushButton_clicked();
+    void on_airBrushButton_clicked();
+    void on_fillButton_clicked();
+    void on_eraseButton_clicked();
 
 private:
     Ui::BrushProperties *ui;

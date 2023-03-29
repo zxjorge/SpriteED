@@ -10,7 +10,10 @@ BrushProperties::BrushProperties(QWidget *parent) :
     ui(new Ui::BrushProperties)
 {
     ui->setupUi(this);
-
+    connect(ui->brushButton, &QPushButton::clicked, this, &BrushProperties::on_brushButton_clicked);
+    connect(ui->airBrushButton, &QPushButton::clicked, this, &BrushProperties::on_airBrushButton_clicked);
+    connect(ui->fillButton, &QPushButton::clicked, this, &BrushProperties::on_fillButton_clicked);
+    connect(ui->eraseButton, &QPushButton::clicked, this, &BrushProperties::on_eraseButton_clicked);
 
 }
 
@@ -31,3 +34,30 @@ void BrushProperties::on_colorPaletteButton_clicked()
 
 }
 
+void BrushProperties::on_brushButton_clicked() {
+    ui->brushButton->setStyleSheet(QString("background-color: grey"));
+    ui->airBrushButton->setStyleSheet("");
+    ui->fillButton->setStyleSheet("");
+    ui->eraseButton->setStyleSheet("");
+}
+
+void BrushProperties::on_airBrushButton_clicked() {
+    ui->airBrushButton->setStyleSheet(QString("background-color: grey"));
+    ui->brushButton->setStyleSheet("");
+    ui->fillButton->setStyleSheet("");
+    ui->eraseButton->setStyleSheet("");
+}
+
+void BrushProperties::on_fillButton_clicked() {
+    ui->fillButton->setStyleSheet(QString("background-color: grey"));
+    ui->airBrushButton->setStyleSheet("");
+    ui->brushButton->setStyleSheet("");
+    ui->eraseButton->setStyleSheet("");
+}
+
+void BrushProperties::on_eraseButton_clicked() {
+    ui->eraseButton->setStyleSheet(QString("background-color: grey"));
+    ui->airBrushButton->setStyleSheet("");
+    ui->brushButton->setStyleSheet("");
+    ui->fillButton->setStyleSheet("");
+}
