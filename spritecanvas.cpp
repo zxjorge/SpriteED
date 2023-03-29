@@ -11,8 +11,6 @@ SpriteCanvas::SpriteCanvas(QWidget *parent) :
     sprite = QImage(16, 24, QImage::Format_ARGB32_Premultiplied);
     sprite.fill(Qt::white);
 
-
-
 }
 
 

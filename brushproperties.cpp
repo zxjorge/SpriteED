@@ -37,12 +37,13 @@ void BrushProperties::on_colorPaletteButton_clicked()
 }
 
 void BrushProperties::on_brushButton_clicked() {
-    QPixmap brushCursorPixmap(":/icons/brush_icon.png");
-    QCursor brushCursor(brushCursorPixmap, 0, 0);
+    QPixmap brushPixmap(":/icons/brush_icon .png");
+    QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
     setCursor(brushCursor);
 
 
-    QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
+    //QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
 
 
     ui->brushButton->setStyleSheet(QString("background-color: grey"));
@@ -52,7 +53,11 @@ void BrushProperties::on_brushButton_clicked() {
 }
 
 void BrushProperties::on_airBrushButton_clicked() {
-    QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+    QPixmap brushPixmap(":/icons/airbrush_icon.png");
+    QPixmap scaledBrushPixmap = brushPixmap.scaled(90, 90, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
+    setCursor(brushCursor);
+
     ui->airBrushButton->setStyleSheet(QString("background-color: grey"));
     ui->brushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
@@ -60,7 +65,11 @@ void BrushProperties::on_airBrushButton_clicked() {
 }
 
 void BrushProperties::on_fillButton_clicked() {
-    QApplication::setOverrideCursor(QCursor(Qt::BitmapCursor));
+    QPixmap brushPixmap(":/icons/filltool_icon.png");
+    QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
+    setCursor(brushCursor);
+
     ui->fillButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");
@@ -68,6 +77,11 @@ void BrushProperties::on_fillButton_clicked() {
 }
 
 void BrushProperties::on_eraseButton_clicked() {
+    QPixmap brushPixmap(":/icons/erase_icon.png");
+    QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
+    setCursor(brushCursor);
+
     ui->eraseButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");
