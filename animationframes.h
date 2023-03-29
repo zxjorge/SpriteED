@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <vector>
+#include <QImage>
 
 using std::vector;
 

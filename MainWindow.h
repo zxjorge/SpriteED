@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "tool.h"
+#include "animationframes.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -14,7 +15,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent = nullptr);
 
     ~MainWindow();
 

@@ -2,6 +2,7 @@
 #define BRUSHPROPERTIES_H
 
 #include <QWidget>
+#include "tool.h"
 
 
 namespace Ui {
@@ -15,6 +16,8 @@ class BrushProperties : public QWidget
 public:
     explicit BrushProperties(QWidget *parent = nullptr);
     ~BrushProperties();
+
+    void setTool(Tool* tool);
 
 private slots:
     void on_colorPaletteButton_clicked();
@@ -33,6 +36,7 @@ private slots:
 private:
     Ui::BrushProperties *ui;
     QColor currentColor = Qt::white;
+    Tool* tool;
 };
 
 #endif // BRUSHPROPERTIES_H

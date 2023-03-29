@@ -1,10 +1,10 @@
 #include "animationframes.h"
-/*
+
 AnimationFrames::AnimationFrames()
 {
 
 }
-*/
+
 
 QImage* AnimationFrames::addFrame()
 {

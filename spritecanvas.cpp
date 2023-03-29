@@ -19,6 +19,10 @@ SpriteCanvas::~SpriteCanvas()
     delete ui;
 }
 
+void SpriteCanvas::setTool(Tool* tool) {
+    this->tool = tool;
+}
+
 void SpriteCanvas::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     float scale;

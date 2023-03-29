@@ -3,11 +3,13 @@
 #include "brushproperties.h"
 
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->brush_properties->setTool(tool);
+    ui->sprite_canvas->setTool(tool);
     connect(ui->brush_properties,
             &BrushProperties::showAirBrushIcon,
             ui->sprite_canvas,

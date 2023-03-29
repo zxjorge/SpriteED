@@ -3,7 +3,7 @@
 #include "ui_brushproperties.h"
 #include <QColorDialog>
 #include <QColor>
-#include "brush.h"
+#include "tool.h"
 
 
 BrushProperties::BrushProperties(QWidget *parent) :
@@ -23,7 +23,9 @@ BrushProperties::~BrushProperties()
     delete ui;
 }
 
-
+void BrushProperties::setTool(Tool* tool) {
+    this->tool = tool;
+}
 
 void BrushProperties::on_colorPaletteButton_clicked()
 {

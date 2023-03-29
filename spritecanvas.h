@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QMouseEvent>
+#include "tool.h"
 
 enum DimensionLimit { WIDTH, HEIGHT };
 
@@ -23,11 +24,14 @@ public:
     void showAirBrushIcon();
     void showBrushIcon();
 
+    void setTool(Tool* tool);
+
 private:
     Ui::SpriteCanvas *ui;
 
     QImage sprite;
     QPoint lastMousePos;
+    Tool* tool;
 
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
