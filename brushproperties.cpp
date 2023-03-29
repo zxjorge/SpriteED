@@ -15,7 +15,7 @@ BrushProperties::BrushProperties(QWidget *parent) :
     connect(ui->airBrushButton, &QPushButton::clicked, this, &::BrushProperties::onAirBrushButtonClicked);
     connect(ui->fillButton, &QPushButton::clicked, this, &::BrushProperties::onFillButtonClicked);
     connect(ui->eraseButton, &QPushButton::clicked, this, &::BrushProperties::onEraseButtonClicked);
-
+    connect(ui->colorPaletteButton, &QPushButton::clicked, this, &::BrushProperties::onColorPaletteButtonClicked);
 }
 
 BrushProperties::~BrushProperties()
