@@ -5,6 +5,8 @@
 #include <QMouseEvent>
 #include <QPainter>
 
+enum DimensionLimit { WIDTH, HEIGHT };
+
 namespace Ui {
 class SpriteCanvas;
 }
@@ -28,6 +30,7 @@ private:
     void paintEvent(QPaintEvent *event) override;
     float getPixelSize();
     QPoint getScaledMousePoint(QMouseEvent *event);
+    DimensionLimit getDimensionLimit();
 };
 
 #endif // SPRITECANVAS_H
