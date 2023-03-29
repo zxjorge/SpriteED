@@ -25,7 +25,7 @@ private slots:
     void onAirBrushButtonClicked();
     void onFillButtonClicked();
     void onEraseButtonClicked();
-
+    void onBrushSizeChanged();
  signals:
     void showFillIcon();
     void showEraseIcon();

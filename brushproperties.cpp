@@ -16,6 +16,7 @@ BrushProperties::BrushProperties(QWidget *parent) :
     connect(ui->fillButton, &QPushButton::clicked, this, &::BrushProperties::onFillButtonClicked);
     connect(ui->eraseButton, &QPushButton::clicked, this, &::BrushProperties::onEraseButtonClicked);
     connect(ui->colorPaletteButton, &QPushButton::clicked, this, &::BrushProperties::onColorPaletteButtonClicked);
+    connect(ui->spinBox, &QSpinBox::valueChanged, this, &::BrushProperties::onBrushSizeChanged);
 }
 
 BrushProperties::~BrushProperties()
@@ -23,6 +24,10 @@ BrushProperties::~BrushProperties()
     delete ui;
 }
 
+
+void BrushProperties::onBrushSizeChanged(){
+    tool->setBrushSize(ui->spinBox->value());
+}
 void BrushProperties::setTool(Tool* tool) {
     this->tool = tool;
 }
