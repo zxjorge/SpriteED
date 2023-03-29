@@ -2,7 +2,6 @@
 
 Tool::Tool() :
     brushPen(QPen()),
-    erasePen(QPen()),
     selectedToolType(ToolType::BRUSH)
 {
 
