@@ -17,27 +17,35 @@ SpriteCanvas::~SpriteCanvas()
     delete ui;
 }
 
-void SpriteCanvas::paintEvent(QPaintEvent *event) {
+void SpriteCanvas::paintEvent(QPaintEvent*) {
     QPainter painter(this);
-    QBrush brush = QBrush(Qt::BrushStyle::SolidPattern);
-    int pixelSize = getPixelSize();
-
-    for (int x = 0; x < sprite.width(); x++) {
-        for (int y = 0; y < sprite.height(); y++) {
-            brush.setColor(sprite.pixelColor(x, y));
-            painter.fillRect(
-                x * pixelSize,
-                y * pixelSize,
-                pixelSize,
-                pixelSize,
-                brush
-            );
-        }
+    float scale;
+    if (getDimensionLimit() == DimensionLimit::WIDTH) {
+        scale = (float)width() / sprite.width();
+    } else {
+        scale = (float)height() / sprite.height();
+    }
+    painter.drawImage(
+        0,
+        0,
+        sprite.scaled(
+            sprite.width() * scale,
+            sprite.height() * scale,
+            Qt::IgnoreAspectRatio,
+            Qt::FastTransformation
+        )
+    );
+}
+DimensionLimit SpriteCanvas::getDimensionLimit() {
+    if ((float)width() / height() < (float)sprite.width() / sprite.height()) {
+        return DimensionLimit::WIDTH;
+    } else {
+        return DimensionLimit::HEIGHT;
     }
 }
 
 float SpriteCanvas::getPixelSize() {
-    if ((float)width() / height() < (float)sprite.width() / sprite.height()) {
+    if (getDimensionLimit() == DimensionLimit::WIDTH) {
         return (float)width() / sprite.width();
     } else {
         return (float)height() / sprite.height();
