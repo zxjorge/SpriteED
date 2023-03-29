@@ -70,9 +70,6 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
 
     QPoint pos = mousePointFtoPoint(event->position(), getPixelSize());
 
-//    if (pos.x() >= sprite.width() || pos.y() >= sprite.height()) {
-//        return;
-//    }
     QPainter painter(&sprite);
     painter.setPen(QPen(Qt::red, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.drawLine(lastMousePos, pos);
