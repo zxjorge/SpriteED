@@ -6,12 +6,12 @@ AnimationFrames::AnimationFrames()
 }
 
 
-QImage* AnimationFrames::addFrame()
+QImage AnimationFrames::addFrame()
 {
 
 }
 
-QImage* AnimationFrames::getFrame(int index)
+QImage AnimationFrames::getFrame(int index)
 {
 
 }

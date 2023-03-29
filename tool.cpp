@@ -1,6 +1,9 @@
 #include "tool.h"
 
-Tool::Tool()
+Tool::Tool() :
+    brushPen(QPen()),
+    erasePen(QPen()),
+    selectedToolType(ToolType::BRUSH)
 {
 
 }
@@ -21,12 +24,26 @@ QColor Tool::getFillColor(){
     return brushPen.color();
 }
 
-QPen* Tool::getBrushPen(){
-    return &brushPen;
+QPen Tool::getBrushPen(){
+    return brushPen;
 }
 
 ToolType Tool::getSelectedToolType() {
     return selectedToolType;
+}
+
+QPen Tool::getAirBrushPen() {
+    QPen pen = brushPen;
+
+    // TODO Random texture for pen
+
+    return pen;
+}
+
+QPen Tool::getErasePen() {
+    QPen erasePen = brushPen;
+    erasePen.setColor(Qt::white);
+    return erasePen;
 }
 
 

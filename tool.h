@@ -21,14 +21,13 @@ public:
     void setSelectedToolType(ToolType type);
 
     ToolType getSelectedToolType();
-    QPen* getBrushPen();
+    QPen getBrushPen();
     QPen getAirBrushPen();
-    QPen* getErasePen();
+    QPen getErasePen();
     QColor getFillColor();
 
 private:
     QPen brushPen;
-    QPen erasePen;
     ToolType selectedToolType;
 };
 

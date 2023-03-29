@@ -9,7 +9,7 @@ SpriteCanvas::SpriteCanvas(QWidget *parent) :
     ui(new Ui::SpriteCanvas)
 {
     ui->setupUi(this);
-    sprite = QImage(16, 24, QImage::Format_ARGB32_Premultiplied);
+    sprite = QImage(24, 16, QImage::Format_ARGB32_Premultiplied);
     sprite.fill(Qt::white);
 
 }
