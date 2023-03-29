@@ -24,13 +24,11 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent = nullptr);
-
     ~MainWindow();
 
 private slots:
-    void on_actionAbout_triggered();
-
-    void on_actionOpen_triggered();
+    void HelpTriggered();
+    void OpenTriggered();
 
 private:
     Ui::MainWindow *ui;

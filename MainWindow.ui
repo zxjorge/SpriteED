@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
+    <width>1028</width>
     <height>681</height>
    </rect>
   </property>
@@ -74,8 +74,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>743</width>
-     <height>25</height>
+     <width>1028</width>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -91,7 +91,7 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
+    <addaction name="actionHelp"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -144,9 +144,12 @@
     <string>Ctrl+C</string>
    </property>
   </action>
-  <action name="actionAbout">
+  <action name="actionHelp">
    <property name="text">
-    <string>About</string>
+    <string>Help</string>
+   </property>
+   <property name="toolTip">
+    <string>Help</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>

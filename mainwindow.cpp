@@ -29,11 +29,16 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &BrushProperties::showBrushIcon,
             ui->sprite_canvas,
             &SpriteCanvas::showBrushIcon);
-    //    connect(ui->actionAbout,
-    //            &QMenuBar::triggered,
-    //            this,
-    //            &MainWindow::OnActionAboutTriggered)
 
+    connect(ui->actionHelp,
+            &QAction::triggered,
+            this,
+            &MainWindow::HelpTriggered);
+
+    connect(ui->actionOpen,
+            &QAction::triggered,
+            this,
+            &MainWindow::OpenTriggered);
 }
 
 
@@ -42,14 +47,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//will change name
-void MainWindow::on_actionAbout_triggered()
+void MainWindow::HelpTriggered()
 {
     QMessageBox::information(this, "About", "help");
 }
 
-//will change name
-void MainWindow::on_actionOpen_triggered()
+void MainWindow::OpenTriggered()
 {
     QString fileContent;
 
@@ -69,6 +72,5 @@ void MainWindow::on_actionOpen_triggered()
     fileContent= in.readAll();
 
     file.close();
-
 }
 
