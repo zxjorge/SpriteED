@@ -29,6 +29,10 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &BrushProperties::showBrushIcon,
             ui->sprite_canvas,
             &SpriteCanvas::showBrushIcon);
+//    connect(ui->actionAbout,
+//            &QMenuBar::triggered,
+//            this,
+//            &MainWindow::OnActionAboutTriggered)
 
 }
 
@@ -36,5 +40,13 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QMessageBox::information(this, "About", "help");
 }
 

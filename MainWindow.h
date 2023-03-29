@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QAction>
+#include <QMenuBar>
 #include "tool.h"
 #include "animationframes.h"
 
@@ -19,7 +22,11 @@ public:
 
     ~MainWindow();
 
+private slots:
+    void on_actionAbout_triggered();
+
 private:
     Ui::MainWindow *ui;
+    QAction* action;
 };
 #endif // MAINWINDOW_H
