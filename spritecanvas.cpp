@@ -11,7 +11,6 @@ SpriteCanvas::SpriteCanvas(QWidget *parent) :
     ui->setupUi(this);
     sprite = QImage(24, 16, QImage::Format_ARGB32_Premultiplied);
     sprite.fill(Qt::white);
-
 }
 
 SpriteCanvas::~SpriteCanvas()
@@ -74,10 +73,13 @@ void SpriteCanvas::mousePressEvent(QMouseEvent *event)
     }
 
     QPoint pos = getScaledMousePoint(event);
+
+    QPainter painter(&sprite);
     if(tool->getSelectedToolType() == ERASER)
-        sprite.setPixelColor(pos,Qt::white);
+        painter.setPen(tool->getErasePen());
     else
-        sprite.setPixelColor(pos, tool->getFillColor());
+        painter.setPen(tool->getBrushPen());
+    painter.drawLine(pos, pos);
     lastMousePos = pos;
     update();
  }
@@ -92,9 +94,9 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
 
     QPainter painter(&sprite);
     if(tool->getSelectedToolType() == ERASER)
-        painter.setPen(QPen(Qt::white, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        painter.setPen(tool->getErasePen());
     else
-        painter.setPen(QPen(tool->getFillColor(), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        painter.setPen(tool->getBrushPen());
     painter.drawLine(lastMousePos, pos);
     lastMousePos = pos;
     update();
