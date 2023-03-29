@@ -74,8 +74,10 @@ void SpriteCanvas::mousePressEvent(QMouseEvent *event)
     }
 
     QPoint pos = getScaledMousePoint(event);
-
-    sprite.setPixelColor(pos, Qt::red);
+    if(tool->getSelectedToolType() == ERASER)
+        sprite.setPixelColor(pos,Qt::white);
+    else
+        sprite.setPixelColor(pos, tool->getFillColor());
     lastMousePos = pos;
     update();
  }
@@ -89,7 +91,10 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
     QPoint pos = getScaledMousePoint(event);
 
     QPainter painter(&sprite);
-    painter.setPen(QPen(Qt::red, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    if(tool->getSelectedToolType() == ERASER)
+        painter.setPen(QPen(Qt::white, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    else
+        painter.setPen(QPen(tool->getFillColor(), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.drawLine(lastMousePos, pos);
     lastMousePos = pos;
     update();
@@ -101,13 +106,14 @@ void SpriteCanvas::showAirBrushIcon(){
     QPixmap scaledBrushPixmap = brushPixmap.scaled(90, 90, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
     setCursor(brushCursor);
-
+    tool->setSelectedToolType(AIRBRUSH);
 }
 void SpriteCanvas::showFillIcon(){
     QPixmap brushPixmap(":/icons/filltool_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
     setCursor(brushCursor);
+    tool->setSelectedToolType(FILL);
 
 }
 void SpriteCanvas::showEraseIcon(){
@@ -115,13 +121,14 @@ void SpriteCanvas::showEraseIcon(){
     QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
     setCursor(brushCursor);
-
+    tool->setSelectedToolType(ERASER);
 }
 void SpriteCanvas::showBrushIcon(){
     QPixmap brushPixmap(":/icons/brush_icon .png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
+    QCursor brushCursor(scaledBrushPixmap, 0, scaledBrushPixmap.height());
     setCursor(brushCursor);
+    tool->setSelectedToolType(BRUSH);
 }
 
 

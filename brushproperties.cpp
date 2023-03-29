@@ -34,7 +34,7 @@ void BrushProperties::on_colorPaletteButton_clicked()
     //setColor(brushColor);
        QString buttonColorString = QString("background-color: %1").arg(brushColor.name());
        ui->colorPaletteButton->setStyleSheet(buttonColorString);
-
+    tool->setColor(currentColor);
 
 }
 
