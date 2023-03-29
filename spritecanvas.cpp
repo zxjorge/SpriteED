@@ -2,6 +2,7 @@
 #include "ui_spritecanvas.h"
 #include <iostream>
 #include <cmath>
+#include <QPainter>
 
 SpriteCanvas::SpriteCanvas(QWidget *parent) :
     QWidget(parent),

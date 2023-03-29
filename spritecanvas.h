@@ -3,12 +3,6 @@
 
 #include <QWidget>
 #include <QMouseEvent>
-#include <QPainter>
-#include "brush.h"
-#include "brushproperties.h"
-#include <QPixmap>
-#include <QCursor>
-
 
 enum DimensionLimit { WIDTH, HEIGHT };
 
