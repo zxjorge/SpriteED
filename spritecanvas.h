@@ -5,6 +5,10 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include "brush.h"
+#include "brushproperties.h"
+#include <QPixmap>
+#include <QCursor>
+
 
 enum DimensionLimit { WIDTH, HEIGHT };
 
@@ -20,6 +24,11 @@ public:
     explicit SpriteCanvas(QWidget *parent = nullptr);
     ~SpriteCanvas();
 
+    void showEraseIcon();
+    void showFillIcon();
+    void showAirBrushIcon();
+    void showBrushIcon();
+
 private:
     Ui::SpriteCanvas *ui;
 
@@ -32,6 +41,7 @@ private:
     float getPixelSize();
     QPoint getScaledMousePoint(QMouseEvent *event);
     DimensionLimit getDimensionLimit();
+
 };
 
 #endif // SPRITECANVAS_H

@@ -2,8 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPixmap>
-#include <QCursor>
 
 
 
@@ -17,10 +15,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void showEraseIcon();
-    void showFillIcon();
-    void showAirBrushIcon();
-    void showBrushIcon();
+
     ~MainWindow();
 
 private:
