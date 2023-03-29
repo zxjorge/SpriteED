@@ -19,9 +19,11 @@ void Tool::setSelectedToolType(ToolType type){
     selectedToolType = type;
 }
 
-QColor Tool::getFillColor(){
-    return brushPen.color();
+
+void fillImageAtPosition(QImage* image, QPoint point){
+
 }
+
 
 QPen Tool::getBrushPen(){
     return brushPen;
