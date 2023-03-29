@@ -2,6 +2,8 @@
 #define SPRITECANVAS_H
 
 #include <QWidget>
+#include <QMouseEvent>
+#include <QPainter>
 
 namespace Ui {
 class SpriteCanvas;
@@ -17,6 +19,14 @@ public:
 
 private:
     Ui::SpriteCanvas *ui;
+
+    QImage sprite;
+    QPoint lastMousePos;
+
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
+    int getPixelSize();
 };
 
 #endif // SPRITECANVAS_H

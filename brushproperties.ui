@@ -26,7 +26,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="sizeConstraint">
-      <enum>QLayout::SetDefaultConstraint</enum>
+      <enum>QLayout::SetMinimumSize</enum>
      </property>
      <item>
       <widget class="QPushButton" name="brushButton">
@@ -63,6 +63,9 @@
      <property name="spacing">
       <number>6</number>
      </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
      <item>
       <widget class="QLabel" name="brushSizeLabel">
        <property name="text">
@@ -84,6 +87,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="Palette">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
