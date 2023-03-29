@@ -26,7 +26,8 @@ private:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
-    int getPixelSize();
+    float getPixelSize();
+    QPoint getScaledMousePoint(QMouseEvent *event);
 };
 
 #endif // SPRITECANVAS_H

@@ -1,14 +1,14 @@
 #include "spritecanvas.h"
 #include "ui_spritecanvas.h"
 #include <iostream>
-#include <algorithm>
+#include <cmath>
 
 SpriteCanvas::SpriteCanvas(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SpriteCanvas)
 {
     ui->setupUi(this);
-    sprite = QImage(32, 48, QImage::Format_ARGB32_Premultiplied);
+    sprite = QImage(16, 24, QImage::Format_ARGB32_Premultiplied);
     sprite.fill(Qt::white);
 }
 
@@ -36,16 +36,20 @@ void SpriteCanvas::paintEvent(QPaintEvent *event) {
     }
 }
 
-int SpriteCanvas::getPixelSize() {
+float SpriteCanvas::getPixelSize() {
     if ((float)width() / height() < (float)sprite.width() / sprite.height()) {
-        return width() / sprite.width();
+        return (float)width() / sprite.width();
     } else {
-        return height() / sprite.height();
+        return (float)height() / sprite.height();
     }
 }
 
-QPoint mousePointFtoPoint(QPointF point, int pixelSize) {
-    point = point / pixelSize;
+QPoint SpriteCanvas::getScaledMousePoint(QMouseEvent* event) {
+    QPointF point = event->position();
+    point /= getPixelSize();
+    // Offset to pixel centers instead of corners
+    point.rx() = point.x() - 0.5;
+    point.ry() = point.y() - 0.5;
     return point.toPoint();
 }
 
@@ -55,7 +59,7 @@ void SpriteCanvas::mousePressEvent(QMouseEvent *event)
         return;
     }
 
-    QPoint pos = mousePointFtoPoint(event->position(), getPixelSize());
+    QPoint pos = getScaledMousePoint(event);
 
     sprite.setPixelColor(pos, Qt::red);
     lastMousePos = pos;
@@ -68,7 +72,7 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
         return;
     }
 
-    QPoint pos = mousePointFtoPoint(event->position(), getPixelSize());
+    QPoint pos = getScaledMousePoint(event);
 
     QPainter painter(&sprite);
     painter.setPen(QPen(Qt::red, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
