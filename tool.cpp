@@ -83,7 +83,7 @@ QImage Tool::getAirBrushTexture() {
     QImage texture = QImage(brushPen.width(), brushPen.width(), QImage::Format_ARGB32_Premultiplied);
     texture.fill(QColor(0, 0, 0, 0));
     float radius = brushPen.widthF() / 2;
-    int pixelCount = M_PI * radius * radius * airBrushDensity;
+    int pixelCount = std::ceil(M_PI * radius * radius * airBrushDensity);
     QRandomGenerator* rng = QRandomGenerator::global();
 
     for (int i = 0; i < pixelCount; i++) {
