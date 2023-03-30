@@ -5,7 +5,8 @@
 #include <QRandomGenerator>
 #include <cmath>
 #include <QPainter>
-#
+#include <QSet>
+
 
 using std::queue;
 using std::vector;
