@@ -19,17 +19,20 @@ public:
     void setColor(QColor color);
     void setBrushSize(int size);
     void setSelectedToolType(ToolType type);
-    void fillImageAtPosition(QImage& image, QPoint point);
+
+    void drawPointOnImage(QImage& image, QPoint point);
+    void drawLineOnImage(QImage& image, QPoint from, QPoint to);
 
     ToolType getSelectedToolType();
-    QPen getBrushPen();
-    QPen getAirBrushPen();
-    QPen getErasePen();
-
 
 private:
     QPen brushPen;
     ToolType selectedToolType;
+    float airBrushDensity;
+
+    QImage getAirBrushTexture();
+
+    void fillImageAtPosition(QImage& image, QPoint point);
 };
 
 #endif // TOOL_H

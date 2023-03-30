@@ -2,8 +2,8 @@
 
 AnimationFrames::AnimationFrames() :
     frames(vector<QImage>()),
-    width(24),
-    height(16),
+    width(64),
+    height(64),
     selectedIndex(0)
 {
     addFrame();
