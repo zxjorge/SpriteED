@@ -89,8 +89,8 @@ QImage Tool::getAirBrushTexture() {
     for (int i = 0; i < pixelCount; i++) {
         float angle = rng->bounded(2 * M_PI);
         float distance = rng->bounded(radius);
-        int x = distance * (1 + sin(angle));
-        int y = distance * (1 + cos(angle));
+        int x = radius + distance * sin(angle);
+        int y = radius + distance * cos(angle);
         color.setAlphaF(rng->bounded(0.7));
         texture.setPixelColor(x, y, color);
     }

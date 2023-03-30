@@ -37,6 +37,7 @@ private:
     AnimationFrames* frames;
 
     void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     float getPixelSize();

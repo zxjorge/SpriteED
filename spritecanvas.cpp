@@ -95,6 +95,10 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
     update();
 }
 
+void SpriteCanvas::mouseReleaseEvent(QMouseEvent*) {
+    frames->updateSelectedFrame(sprite);
+}
+
 void SpriteCanvas::showAirBrushIcon(){
     QPixmap brushPixmap(":/icons/airbrush_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(90, 90, Qt::KeepAspectRatio, Qt::SmoothTransformation);
