@@ -8,8 +8,7 @@
 /// @param parent 
 SpriteCanvas::SpriteCanvas(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::SpriteCanvas),
-    frames(nullptr)
+    ui(new Ui::SpriteCanvas)
 {
     ui->setupUi(this);
 }

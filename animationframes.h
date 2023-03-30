@@ -5,7 +5,7 @@
 #include <vector>
 #include <QImage>
 
-using std::vector;
+using std::vector, std::string;
 
 class AnimationFrames:public QWidget
 {
@@ -19,6 +19,10 @@ public:
     void clear();
     void setSelectedIndex(int index);
     int getSelectedIndex();
+
+private slots:
+    void saveToFile(QString filename);
+    void loadFromFile(QString filename);
 
 private:
     vector<QImage> frames;
