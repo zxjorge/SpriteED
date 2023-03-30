@@ -3,7 +3,6 @@
 #include <QColor>
 #include <QBrush>
 #include <QPen>
-#include <QSet>
 
 enum ToolType{
     BRUSH,
