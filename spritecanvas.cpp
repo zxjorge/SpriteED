@@ -79,7 +79,7 @@ void SpriteCanvas::mousePressEvent(QMouseEvent *event)
         painter.setPen(tool->getErasePen());
     else
         painter.setPen(tool->getBrushPen());
-    painter.drawLine(pos, pos);
+    painter.drawPoint(pos);
     lastMousePos = pos;
     update();
  }

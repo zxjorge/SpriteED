@@ -1,7 +1,7 @@
 #include "tool.h"
 
 Tool::Tool() :
-    brushPen(QPen()),
+    brushPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)),
     selectedToolType(ToolType::BRUSH)
 {
 
