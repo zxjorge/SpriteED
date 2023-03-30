@@ -12,12 +12,17 @@ class AnimationFrames
 public:
     AnimationFrames();
     QImage addFrame();
-    QImage getFrame(int index);
-    void updateFrame(int index, QImage image);
+    QImage getSelectedFrame();
+    void updateSelectedFrame(QImage image);
     void deleteFrame(int index);
     int getFrameCount();
+    void clear();
+
 private:
     vector<QImage> frames;
+    int width;
+    int height;
+    int selectedIndex;
 };
 
 #endif // ANIMATIONFRAMES_H

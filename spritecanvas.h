@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include "tool.h"
+#include "animationframes.h"
 
 enum DimensionLimit { WIDTH, HEIGHT };
 
@@ -25,6 +26,7 @@ public:
     void showBrushIcon();
 
     void setTool(Tool* tool);
+    void setAnimFrames(AnimationFrames* frames);
 
 private:
     Ui::SpriteCanvas *ui;
@@ -32,6 +34,7 @@ private:
     QImage sprite;
     QPoint lastMousePos;
     Tool* tool;
+    AnimationFrames* frames;
 
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;

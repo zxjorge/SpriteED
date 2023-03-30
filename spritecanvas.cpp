@@ -6,11 +6,10 @@
 
 SpriteCanvas::SpriteCanvas(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::SpriteCanvas)
+    ui(new Ui::SpriteCanvas),
+    frames(nullptr)
 {
     ui->setupUi(this);
-    sprite = QImage(24, 16, QImage::Format_ARGB32_Premultiplied);
-    sprite.fill(Qt::white);
 }
 
 SpriteCanvas::~SpriteCanvas()
@@ -20,6 +19,12 @@ SpriteCanvas::~SpriteCanvas()
 
 void SpriteCanvas::setTool(Tool* tool) {
     this->tool = tool;
+}
+
+void SpriteCanvas::setAnimFrames(AnimationFrames* frames) {
+    this->frames = frames;
+    sprite = frames->getSelectedFrame();
+    update();
 }
 
 void SpriteCanvas::paintEvent(QPaintEvent*) {
@@ -82,7 +87,7 @@ void SpriteCanvas::mousePressEvent(QMouseEvent *event)
     painter.drawPoint(pos);
     lastMousePos = pos;
     update();
- }
+}
 
 void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
 {
@@ -102,7 +107,6 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
     update();
 }
 
-
 void SpriteCanvas::showAirBrushIcon(){
     QPixmap brushPixmap(":/icons/airbrush_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(90, 90, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -110,6 +114,7 @@ void SpriteCanvas::showAirBrushIcon(){
     setCursor(brushCursor);
     tool->setSelectedToolType(AIRBRUSH);
 }
+
 void SpriteCanvas::showFillIcon(){
     QPixmap brushPixmap(":/icons/filltool_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -118,6 +123,7 @@ void SpriteCanvas::showFillIcon(){
     tool->setSelectedToolType(FILL);
 
 }
+
 void SpriteCanvas::showEraseIcon(){
     QPixmap brushPixmap(":/icons/erase_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -125,6 +131,7 @@ void SpriteCanvas::showEraseIcon(){
     setCursor(brushCursor);
     tool->setSelectedToolType(ERASER);
 }
+
 void SpriteCanvas::showBrushIcon(){
     QPixmap brushPixmap(":/icons/brush_icon .png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -132,9 +139,3 @@ void SpriteCanvas::showBrushIcon(){
     setCursor(brushCursor);
     tool->setSelectedToolType(BRUSH);
 }
-
-
-
-
-
-
