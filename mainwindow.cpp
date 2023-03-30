@@ -40,6 +40,11 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &QAction::triggered,
             this,
             &MainWindow::OpenTriggered);
+
+    connect(ui->actionClear,
+            &QAction::triggered,
+            frames,
+            &AnimationFrames::clearSelectedFrame);
 }
 
 

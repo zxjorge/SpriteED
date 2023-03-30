@@ -45,3 +45,8 @@ void AnimationFrames::updateSelectedFrame(QImage image) {
     // Replace image at selectedIndex
     frames.at(selectedIndex) = image;
 }
+
+
+void AnimationFrames::clearSelectedFrame() {
+    frames.at(selectedIndex).fill(Qt::white);
+}

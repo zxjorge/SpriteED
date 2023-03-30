@@ -23,6 +23,9 @@ private:
     int width;
     int height;
     int selectedIndex;
+
+public slots:
+     void clearSelectedFrame();
 };
 
 #endif // ANIMATIONFRAMES_H
