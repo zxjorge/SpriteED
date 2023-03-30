@@ -1,16 +1,17 @@
 #ifndef ANIMATIONFRAMES_H
 #define ANIMATIONFRAMES_H
 
+#include "QtWidgets/qwidget.h"
 #include <QObject>
 #include <vector>
 #include <QImage>
 
 using std::vector;
 
-class AnimationFrames
+class AnimationFrames:public QWidget
 {
 public:
-    AnimationFrames();
+    explicit AnimationFrames(QWidget *parent = nullptr);;
     QImage addFrame();
     QImage getSelectedFrame();
     void updateSelectedFrame(QImage image);

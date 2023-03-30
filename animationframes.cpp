@@ -1,6 +1,8 @@
 #include "animationframes.h"
+#include "ui_brushproperties.h"
 
-AnimationFrames::AnimationFrames() :
+AnimationFrames::AnimationFrames(QWidget *parent) :
+    QWidget(parent),
     frames(vector<QImage>()),
     width(192),
     height(128),
