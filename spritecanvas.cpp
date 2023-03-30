@@ -47,6 +47,7 @@ void SpriteCanvas::paintEvent(QPaintEvent*) {
         )
     );
 }
+
 DimensionLimit SpriteCanvas::getDimensionLimit() {
     if ((float)width() / height() < (float)sprite.width() / sprite.height()) {
         return DimensionLimit::WIDTH;

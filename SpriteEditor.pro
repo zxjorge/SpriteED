@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     animationframes.cpp \
     brushproperties.cpp \
+    frame.cpp \
     framesviewer.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 HEADERS += \
     animationframes.h \
     brushproperties.h \
+    frame.h \
     framesviewer.h \
     mainwindow.h \
     spritecanvas.h \
@@ -27,6 +29,7 @@ HEADERS += \
 
 FORMS += \
     brushproperties.ui \
+    frame.ui \
     framesviewer.ui \
     mainwindow.ui \
     spritecanvas.ui

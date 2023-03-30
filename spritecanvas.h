@@ -19,12 +19,10 @@ class SpriteCanvas : public QWidget
 public:
     explicit SpriteCanvas(QWidget *parent = nullptr);
     ~SpriteCanvas();
-
     void showEraseIcon();
     void showFillIcon();
     void showAirBrushIcon();
     void showBrushIcon();
-
     void setTool(Tool* tool);
     void setAnimFrames(AnimationFrames* frames);
 
