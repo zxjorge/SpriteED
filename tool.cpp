@@ -5,6 +5,7 @@
 #include <QRandomGenerator>
 #include <cmath>
 #include <QPainter>
+#
 
 using std::queue;
 using std::vector;
@@ -29,18 +30,20 @@ void Tool::setSelectedToolType(ToolType type){
     selectedToolType = type;
 }
 
-bool isValid(vector<QPoint>& visited, QPoint point, QImage& image, QColor originalColor) {
+bool isValid(QSet<QPoint>& visited, QPoint &point, QImage& image, QColor originalColor) {
     QColor currentColor = image.pixel(point);
-    return std::find(visited.begin(), visited.end(), point) == visited.end() && currentColor == originalColor;
+    return !visited.contains(point) && currentColor == originalColor;
 }
 
 void Tool::fillImageAtPosition(QImage& image, QPoint point){
     QColor fillColor = brushPen.color();
     QColor originalColor = image.pixel(point);
     queue<QPoint> fillQueue = queue<QPoint>();
-    vector<QPoint> visited = vector<QPoint>();
+    QSet<QPoint> visited;
+
+
     fillQueue.push(point);
-    visited.push_back(point);
+    visited.insert(point);
 
     while (!fillQueue.empty()) {
         QPoint currentPoint = fillQueue.front();
@@ -51,25 +54,25 @@ void Tool::fillImageAtPosition(QImage& image, QPoint point){
         tmpPoint.rx() -= 1;
         if (tmpPoint.x() >= 0 && isValid(visited, tmpPoint, image, originalColor)) {
             fillQueue.push(tmpPoint);
-            visited.push_back(tmpPoint);
+            visited.insert(tmpPoint);
         }
         tmpPoint = currentPoint;
         tmpPoint.rx() += 1;
         if (tmpPoint.x() < image.width() && isValid(visited, tmpPoint, image, originalColor)) {
             fillQueue.push(tmpPoint);
-            visited.push_back(tmpPoint);
+            visited.insert(tmpPoint);
         }
         tmpPoint = currentPoint;
         tmpPoint.ry() += 1;
         if (tmpPoint.y() < image.height() && isValid(visited, tmpPoint, image, originalColor)) {
             fillQueue.push(tmpPoint);
-            visited.push_back(tmpPoint);
+            visited.insert(tmpPoint);
         }
         tmpPoint = currentPoint;
         tmpPoint.ry() -= 1;
         if (tmpPoint.y() >= 0 && isValid(visited, tmpPoint, image, originalColor)) {
             fillQueue.push(tmpPoint);
-            visited.push_back(tmpPoint);
+            visited.insert(tmpPoint);
         }
     }
 }
