@@ -126,5 +126,4 @@ void SpriteCanvas::showBrushIcon(){
     QCursor brushCursor(scaledBrushPixmap, 0, scaledBrushPixmap.height());
     setCursor(brushCursor);
     tool->setSelectedToolType(BRUSH);
-
 }

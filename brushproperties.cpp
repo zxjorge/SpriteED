@@ -55,8 +55,6 @@ void BrushProperties::onBrushButtonClicked() {
     ui->airBrushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
     ui->eraseButton->setStyleSheet("");
-    ui->spinBox->setMinimum(1);
-    ui->brushSizeSlider->setMinimum(1);
 }
 
 void BrushProperties::onAirBrushButtonClicked() {
@@ -66,8 +64,6 @@ void BrushProperties::onAirBrushButtonClicked() {
     ui->brushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
     ui->eraseButton->setStyleSheet("");
-    ui->spinBox->setMinimum(3);
-    ui->brushSizeSlider->setMinimum(3);
 }
 
 void BrushProperties::onFillButtonClicked() {
@@ -78,8 +74,6 @@ void BrushProperties::onFillButtonClicked() {
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");
     ui->eraseButton->setStyleSheet("");
-    ui->spinBox->setMinimum(1);
-    ui->brushSizeSlider->setMinimum(1);
 }
 
 void BrushProperties::onEraseButtonClicked() {
@@ -91,6 +85,4 @@ void BrushProperties::onEraseButtonClicked() {
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
-    ui->spinBox->setMinimum(1);
-    ui->brushSizeSlider->setMinimum(1);
 }
