@@ -12,7 +12,7 @@ using std::vector;
 Tool::Tool() :
     brushPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)),
     selectedToolType(ToolType::BRUSH),
-    airBrushDensity(0.15)
+    airBrushDensity(0.05)
 {
 
 }
@@ -29,46 +29,47 @@ void Tool::setSelectedToolType(ToolType type){
     selectedToolType = type;
 }
 
+bool isValid(vector<QPoint>& visited, QPoint point, QColor currentColor, QColor originalColor) {
+    return std::find(visited.begin(), visited.end(), point) == visited.end() && currentColor == originalColor;
+}
+
 void Tool::fillImageAtPosition(QImage& image, QPoint point){
     QColor fillColor = brushPen.color();
     QColor originalColor = image.pixel(point);
     queue<QPoint> fillQueue = queue<QPoint>();
     vector<QPoint> visited = vector<QPoint>();
     fillQueue.push(point);
+    visited.push_back(point);
 
     while (!fillQueue.empty()) {
         QPoint currentPoint = fillQueue.front();
         QColor currentColor = image.pixel(currentPoint);
         fillQueue.pop();
 
-        if (currentColor != originalColor) {
-            continue;
-        }
-        if (std::find(visited.begin(), visited.end(), currentPoint) != visited.end()) {
-            continue;
-        }
-
-        visited.push_back(currentPoint);
         image.setPixelColor(currentPoint, fillColor);
         QPoint tmpPoint = currentPoint;
         tmpPoint.rx() -= 1;
-        if (tmpPoint.rx() >= 0) {
+        if (tmpPoint.rx() >= 0 && isValid(visited, tmpPoint, currentColor, originalColor)) {
             fillQueue.push(tmpPoint);
+            visited.push_back(tmpPoint);
         }
         tmpPoint = currentPoint;
         tmpPoint.rx() += 1;
-        if (tmpPoint.rx() < image.width()) {
+        if (tmpPoint.rx() < image.width() && isValid(visited, tmpPoint, currentColor, originalColor)) {
             fillQueue.push(tmpPoint);
+            visited.push_back(tmpPoint);
         }
         tmpPoint = currentPoint;
         tmpPoint.ry() += 1;
-        if (tmpPoint.ry() < image.height()) {
+        if (tmpPoint.ry() < image.height() && isValid(visited, tmpPoint, currentColor, originalColor)) {
             fillQueue.push(tmpPoint);
+            visited.push_back(tmpPoint);
         }
         tmpPoint = currentPoint;
         tmpPoint.ry() -= 1;
-        if (tmpPoint.ry() >= 0) {
+        if (tmpPoint.ry() >= 0 && isValid(visited, tmpPoint, currentColor, originalColor)) {
             fillQueue.push(tmpPoint);
+            visited.push_back(tmpPoint);
         }
     }
 }
