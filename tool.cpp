@@ -29,7 +29,8 @@ void Tool::setSelectedToolType(ToolType type){
     selectedToolType = type;
 }
 
-bool isValid(vector<QPoint>& visited, QPoint point, QColor currentColor, QColor originalColor) {
+bool isValid(vector<QPoint>& visited, QPoint point, QImage& image, QColor originalColor) {
+    QColor currentColor = image.pixel(point);
     return std::find(visited.begin(), visited.end(), point) == visited.end() && currentColor == originalColor;
 }
 
@@ -43,31 +44,30 @@ void Tool::fillImageAtPosition(QImage& image, QPoint point){
 
     while (!fillQueue.empty()) {
         QPoint currentPoint = fillQueue.front();
-        QColor currentColor = image.pixel(currentPoint);
         fillQueue.pop();
 
         image.setPixelColor(currentPoint, fillColor);
         QPoint tmpPoint = currentPoint;
         tmpPoint.rx() -= 1;
-        if (tmpPoint.rx() >= 0 && isValid(visited, tmpPoint, currentColor, originalColor)) {
+        if (tmpPoint.x() >= 0 && isValid(visited, tmpPoint, image, originalColor)) {
             fillQueue.push(tmpPoint);
             visited.push_back(tmpPoint);
         }
         tmpPoint = currentPoint;
         tmpPoint.rx() += 1;
-        if (tmpPoint.rx() < image.width() && isValid(visited, tmpPoint, currentColor, originalColor)) {
+        if (tmpPoint.x() < image.width() && isValid(visited, tmpPoint, image, originalColor)) {
             fillQueue.push(tmpPoint);
             visited.push_back(tmpPoint);
         }
         tmpPoint = currentPoint;
         tmpPoint.ry() += 1;
-        if (tmpPoint.ry() < image.height() && isValid(visited, tmpPoint, currentColor, originalColor)) {
+        if (tmpPoint.y() < image.height() && isValid(visited, tmpPoint, image, originalColor)) {
             fillQueue.push(tmpPoint);
             visited.push_back(tmpPoint);
         }
         tmpPoint = currentPoint;
         tmpPoint.ry() -= 1;
-        if (tmpPoint.ry() >= 0 && isValid(visited, tmpPoint, currentColor, originalColor)) {
+        if (tmpPoint.y() >= 0 && isValid(visited, tmpPoint, image, originalColor)) {
             fillQueue.push(tmpPoint);
             visited.push_back(tmpPoint);
         }
