@@ -19,7 +19,7 @@ public:
     void setColor(QColor color);
     void setBrushSize(int size);
     void setSelectedToolType(ToolType type);
-    void fillImageAtPosition(QImage* image, QPoint point);
+    void fillImageAtPosition(QImage& image, QPoint point);
 
     ToolType getSelectedToolType();
     QPen getBrushPen();

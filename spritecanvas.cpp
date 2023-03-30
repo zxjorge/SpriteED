@@ -80,10 +80,15 @@ void SpriteCanvas::mousePressEvent(QMouseEvent *event)
     QPoint pos = getScaledMousePoint(event);
 
     QPainter painter(&sprite);
-    if(tool->getSelectedToolType() == ERASER)
+    if(tool->getSelectedToolType() == ERASER){
         painter.setPen(tool->getErasePen());
-    else
+    } else if(tool->getSelectedToolType() == FILL) {
+        tool->fillImageAtPosition(sprite, pos);
+        update();
+        return;
+    } else {
         painter.setPen(tool->getBrushPen());
+    }
     painter.drawPoint(pos);
     lastMousePos = pos;
     update();
@@ -98,10 +103,13 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
     QPoint pos = getScaledMousePoint(event);
 
     QPainter painter(&sprite);
-    if(tool->getSelectedToolType() == ERASER)
+    if(tool->getSelectedToolType() == ERASER) {
         painter.setPen(tool->getErasePen());
-    else
+    } else if(tool->getSelectedToolType() == FILL) {
+        return;
+    } else {
         painter.setPen(tool->getBrushPen());
+    }
     painter.drawLine(lastMousePos, pos);
     lastMousePos = pos;
     update();
