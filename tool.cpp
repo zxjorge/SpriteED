@@ -79,7 +79,6 @@ ToolType Tool::getSelectedToolType() {
 
 QImage Tool::getAirBrushTexture() {
     QColor color = brushPen.color();
-    color.setAlphaF(0.4);
     QImage texture = QImage(brushPen.width(), brushPen.width(), QImage::Format_ARGB32_Premultiplied);
     texture.fill(QColor(0, 0, 0, 0));
     float radius = brushPen.widthF() / 2;
@@ -91,6 +90,7 @@ QImage Tool::getAirBrushTexture() {
         float distance = rng->bounded(radius);
         int x = distance * (1 + sin(angle));
         int y = distance * (1 + cos(angle));
+        color.setAlphaF(rng->bounded(0.7));
         texture.setPixelColor(x, y, color);
     }
 
@@ -128,13 +128,16 @@ void Tool::drawLineOnImage(QImage& image, QPoint from, QPoint to) {
         return;
     } else if(selectedToolType == AIRBRUSH) {
         QPainter painter(&image);
-        QImage texture = getAirBrushTexture();
         QPoint travel = to - from;
-        float travelDistance = sqrt(travel.x() * travel.x() + travel.y() * travel.y());
-        QPointF step = travel / travelDistance;
+        int travelDistance = travel.manhattanLength();
+        if (travelDistance == 0) {
+            return;
+        }
+        QPointF step = travel.toPointF() / travelDistance;
 
         for (int i = 0; i < travelDistance; i++) {
             QPoint point = (from + step * i).toPoint();
+            QImage texture = getAirBrushTexture();
             painter.drawImage(QPoint(point.x() - texture.width() / 2, point.y() - texture.width() / 2), texture);
         }
 
