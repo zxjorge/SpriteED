@@ -19,6 +19,7 @@ SpriteCanvas::~SpriteCanvas()
 
 void SpriteCanvas::setTool(Tool* tool) {
     this->tool = tool;
+    showBrushIcon();
 }
 
 void SpriteCanvas::setAnimFrames(AnimationFrames* frames) {
@@ -104,7 +105,6 @@ void SpriteCanvas::showAirBrushIcon(){
     QPixmap scaledBrushPixmap = brushPixmap.scaled(90, 90, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
     setCursor(brushCursor);
-    tool->setSelectedToolType(AIRBRUSH);
 }
 
 void SpriteCanvas::showFillIcon(){
@@ -112,7 +112,6 @@ void SpriteCanvas::showFillIcon(){
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
     setCursor(brushCursor);
-    tool->setSelectedToolType(FILL);
 
 }
 
@@ -121,7 +120,6 @@ void SpriteCanvas::showEraseIcon(){
     QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
     setCursor(brushCursor);
-    tool->setSelectedToolType(ERASER);
 }
 
 void SpriteCanvas::showBrushIcon(){
@@ -129,5 +127,4 @@ void SpriteCanvas::showBrushIcon(){
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QCursor brushCursor(scaledBrushPixmap, 0, scaledBrushPixmap.height());
     setCursor(brushCursor);
-    tool->setSelectedToolType(BRUSH);
 }

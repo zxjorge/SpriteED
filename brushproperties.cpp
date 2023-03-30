@@ -49,12 +49,12 @@ void BrushProperties::onBrushButtonClicked() {
 
     emit showBrushIcon();
 
-    //QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
 
     ui->brushButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
     ui->eraseButton->setStyleSheet("");
+    tool->setSelectedToolType(BRUSH);
 }
 
 void BrushProperties::onAirBrushButtonClicked() {
@@ -64,6 +64,7 @@ void BrushProperties::onAirBrushButtonClicked() {
     ui->brushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
     ui->eraseButton->setStyleSheet("");
+    tool->setSelectedToolType(AIRBRUSH);
 }
 
 void BrushProperties::onFillButtonClicked() {
@@ -74,6 +75,7 @@ void BrushProperties::onFillButtonClicked() {
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");
     ui->eraseButton->setStyleSheet("");
+    tool->setSelectedToolType(FILL);
 }
 
 void BrushProperties::onEraseButtonClicked() {
@@ -85,4 +87,5 @@ void BrushProperties::onEraseButtonClicked() {
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
+    tool->setSelectedToolType(ERASER);
 }
