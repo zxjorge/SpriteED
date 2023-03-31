@@ -11,6 +11,8 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     ui->brush_properties->setTool(tool);
     ui->sprite_canvas->setTool(tool);
     ui->sprite_canvas->setAnimFrames(frames);
+    ui->frames_viewer->setAnimFrames(frames);
+
     connect(ui->brush_properties,
             &BrushProperties::showAirBrushIcon,
             ui->sprite_canvas,

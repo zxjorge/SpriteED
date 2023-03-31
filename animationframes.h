@@ -1,6 +1,5 @@
 #ifndef ANIMATIONFRAMES_H
 #define ANIMATIONFRAMES_H
-
 #include "QtWidgets/qwidget.h"
 #include <QObject>
 #include <vector>
@@ -18,6 +17,7 @@ public:
     void deleteFrame(int index);
     int getFrameCount();
     void clear();
+    void setSelectedIndex(int index);
 
 private:
     vector<QImage> frames;
