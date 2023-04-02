@@ -10,7 +10,7 @@ using std::vector;
 class AnimationFrames:public QWidget
 {
 public:
-    explicit AnimationFrames(QWidget *parent = nullptr);;
+    explicit AnimationFrames(QWidget *parent = nullptr);
     QImage addFrame();
     QImage getSelectedFrame();
     void updateSelectedFrame(QImage image);
@@ -18,6 +18,7 @@ public:
     int getFrameCount();
     void clear();
     void setSelectedIndex(int index);
+    int getSelectedIndex();
 
 private:
     vector<QImage> frames;

@@ -35,19 +35,24 @@ BrushProperties::BrushProperties(QWidget *parent) :
     connect(ui->spinBox, &QSpinBox::valueChanged, this, &::BrushProperties::onBrushSizeChanged);
 }
 
+/// @brief 
 BrushProperties::~BrushProperties()
 {
     delete ui;
 }
 
-
+/// @brief 
 void BrushProperties::onBrushSizeChanged(){
     tool->setBrushSize(ui->spinBox->value());
 }
+
+/// @brief 
+/// @param tool 
 void BrushProperties::setTool(Tool* tool) {
     this->tool = tool;
 }
 
+/// @brief 
 void BrushProperties::onColorPaletteButtonClicked()
 {
     QColor brushColor = QColorDialog::getColor(currentColor,this,"Choose a Color");
@@ -59,6 +64,7 @@ void BrushProperties::onColorPaletteButtonClicked()
 
 }
 
+/// @brief 
 void BrushProperties::onBrushButtonClicked() {
 
     emit showBrushIcon();
@@ -71,6 +77,7 @@ void BrushProperties::onBrushButtonClicked() {
     tool->setSelectedToolType(BRUSH);
 }
 
+/// @brief 
 void BrushProperties::onAirBrushButtonClicked() {
     emit showAirBrushIcon();
 
@@ -81,6 +88,7 @@ void BrushProperties::onAirBrushButtonClicked() {
     tool->setSelectedToolType(AIRBRUSH);
 }
 
+/// @brief 
 void BrushProperties::onFillButtonClicked() {
     emit showFillIcon();
 
@@ -92,6 +100,7 @@ void BrushProperties::onFillButtonClicked() {
     tool->setSelectedToolType(FILL);
 }
 
+/// @brief 
 void BrushProperties::onEraseButtonClicked() {
     emit showEraseIcon();
 

@@ -19,11 +19,13 @@ FramesViewer::FramesViewer(QWidget *parent) :
             &FramesViewer::addFrame);
 }
 
+/// @brief 
 FramesViewer::~FramesViewer()
 {
     delete ui;
 }
 
+/// @brief 
 void FramesViewer::addFrame(){
     Frame* frame = new Frame(nullptr);
     frame->setFixedHeight(100); // Set the height to a fixed value
@@ -35,6 +37,8 @@ void FramesViewer::addFrame(){
     frame->drawImage(image);
 }
 
+/// @brief 
+/// @param animationF 
 void FramesViewer::setAnimFrames(AnimationFrames* animationF) {
     this->animationF = animationF;
-  }
+}

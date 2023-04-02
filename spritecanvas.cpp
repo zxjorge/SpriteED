@@ -4,6 +4,8 @@
 #include <cmath>
 #include <QPainter>
 
+/// @brief 
+/// @param parent 
 SpriteCanvas::SpriteCanvas(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SpriteCanvas),
@@ -12,22 +14,29 @@ SpriteCanvas::SpriteCanvas(QWidget *parent) :
     ui->setupUi(this);
 }
 
+/// @brief 
 SpriteCanvas::~SpriteCanvas()
 {
     delete ui;
 }
 
+/// @brief 
+/// @param tool 
 void SpriteCanvas::setTool(Tool* tool) {
     this->tool = tool;
     showBrushIcon();
 }
 
+/// @brief 
+/// @param frames 
 void SpriteCanvas::setAnimFrames(AnimationFrames* frames) {
     this->frames = frames;
     sprite = frames->getSelectedFrame();
     update();
 }
 
+/// @brief 
+/// @param  
 void SpriteCanvas::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     float scale;
@@ -48,6 +57,8 @@ void SpriteCanvas::paintEvent(QPaintEvent*) {
     );
 }
 
+/// @brief 
+/// @return 
 DimensionLimit SpriteCanvas::getDimensionLimit() {
     if ((float)width() / height() < (float)sprite.width() / sprite.height()) {
         return DimensionLimit::WIDTH;
@@ -56,6 +67,8 @@ DimensionLimit SpriteCanvas::getDimensionLimit() {
     }
 }
 
+/// @brief 
+/// @return 
 float SpriteCanvas::getPixelSize() {
     if (getDimensionLimit() == DimensionLimit::WIDTH) {
         return (float)width() / sprite.width();
@@ -64,6 +77,9 @@ float SpriteCanvas::getPixelSize() {
     }
 }
 
+/// @brief 
+/// @param event 
+/// @return 
 QPoint SpriteCanvas::getScaledMousePoint(QMouseEvent* event) {
     QPointF point = event->position();
     point /= getPixelSize();
@@ -73,6 +89,8 @@ QPoint SpriteCanvas::getScaledMousePoint(QMouseEvent* event) {
     return point.toPoint();
 }
 
+/// @brief 
+/// @param event 
 void SpriteCanvas::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() != Qt::LeftButton) {
@@ -85,6 +103,8 @@ void SpriteCanvas::mousePressEvent(QMouseEvent *event)
     update();
 }
 
+/// @brief 
+/// @param event 
 void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
 {
     if (event->buttons() != Qt::LeftButton) {
@@ -97,10 +117,13 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
     update();
 }
 
+/// @brief 
+/// @param  
 void SpriteCanvas::mouseReleaseEvent(QMouseEvent*) {
     frames->updateSelectedFrame(sprite);
 }
 
+/// @brief 
 void SpriteCanvas::showAirBrushIcon(){
     QPixmap brushPixmap(":/icons/airbrush_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(90, 90, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -108,6 +131,7 @@ void SpriteCanvas::showAirBrushIcon(){
     setCursor(brushCursor);
 }
 
+/// @brief 
 void SpriteCanvas::showFillIcon(){
     QPixmap brushPixmap(":/icons/filltool_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -116,6 +140,7 @@ void SpriteCanvas::showFillIcon(){
 
 }
 
+/// @brief 
 void SpriteCanvas::showEraseIcon(){
     QPixmap brushPixmap(":/icons/erase_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -123,6 +148,7 @@ void SpriteCanvas::showEraseIcon(){
     setCursor(brushCursor);
 }
 
+/// @brief 
 void SpriteCanvas::showBrushIcon(){
     QPixmap brushPixmap(":/icons/brush_icon .png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);

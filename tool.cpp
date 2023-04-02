@@ -6,11 +6,10 @@
 #include <cmath>
 #include <QPainter>
 #include <QSet>
-
-
 using std::queue;
 using std::vector;
 
+/// @brief 
 Tool::Tool() :
     brushPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)),
     selectedToolType(ToolType::BRUSH),
@@ -19,23 +18,38 @@ Tool::Tool() :
 
 }
 
+/// @brief 
+/// @param color 
 void Tool::setColor(QColor color){
     brushPen.setColor(color);
 }
 
+/// @brief 
+/// @param size 
 void Tool::setBrushSize(int size){
     brushPen.setWidth(size);
 }
 
+/// @brief 
+/// @param type 
 void Tool::setSelectedToolType(ToolType type){
     selectedToolType = type;
 }
 
+/// @brief 
+/// @param visited 
+/// @param point 
+/// @param image 
+/// @param originalColor 
+/// @return 
 bool isValid(QSet<QPoint>& visited, QPoint &point, QImage& image, QColor originalColor) {
     QColor currentColor = image.pixel(point);
     return !visited.contains(point) && currentColor == originalColor;
 }
 
+/// @brief 
+/// @param image 
+/// @param point 
 void Tool::fillImageAtPosition(QImage& image, QPoint point){
     QColor fillColor = brushPen.color();
     QColor originalColor = image.pixel(point);
@@ -78,10 +92,14 @@ void Tool::fillImageAtPosition(QImage& image, QPoint point){
     }
 }
 
+/// @brief 
+/// @return 
 ToolType Tool::getSelectedToolType() {
     return selectedToolType;
 }
 
+/// @brief 
+/// @return 
 QImage Tool::getAirBrushTexture() {
     QColor color = brushPen.color();
     QImage texture = QImage(brushPen.width(), brushPen.width(), QImage::Format_ARGB32_Premultiplied);
@@ -102,6 +120,9 @@ QImage Tool::getAirBrushTexture() {
     return texture;
 }
 
+/// @brief 
+/// @param image 
+/// @param point 
 void Tool::drawPointOnImage(QImage& image, QPoint point) {
     QPen pen;
     if(selectedToolType == ERASER){
@@ -123,6 +144,10 @@ void Tool::drawPointOnImage(QImage& image, QPoint point) {
     painter.drawPoint(point);
 }
 
+/// @brief 
+/// @param image 
+/// @param from 
+/// @param to 
 void Tool::drawLineOnImage(QImage& image, QPoint from, QPoint to) {
     QPen pen;
     if(selectedToolType == ERASER){

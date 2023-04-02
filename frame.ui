@@ -18,13 +18,19 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>111</width>
-     <height>62</height>
+     <width>191</width>
+     <height>71</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QPushButton" name="pushButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
        <string/>
       </property>

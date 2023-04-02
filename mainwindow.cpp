@@ -10,8 +10,9 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     ui->setupUi(this);
     ui->brush_properties->setTool(tool);
     ui->sprite_canvas->setTool(tool);
-    ui->sprite_canvas->setAnimFrames(frames);
     ui->frames_viewer->setAnimFrames(frames);
+    ui->frames_viewer->addFrame();
+    ui->sprite_canvas->setAnimFrames(frames);
 
     connect(ui->brush_properties,
             &BrushProperties::showAirBrushIcon,
@@ -49,17 +50,19 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &AnimationFrames::clearSelectedFrame);
 }
 
-
+/// @brief 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+/// @brief 
 void MainWindow::HelpTriggered()
 {
     QMessageBox::information(this, "About", "help");
 }
 
+/// @brief 
 void MainWindow::OpenTriggered()
 {
     QString fileContent;
