@@ -35,6 +35,7 @@ void FramesViewer::addFrame(){
     animationF->addFrame();
     QImage image = animationF->getSelectedFrame();
     frame->drawImage(image);
+//    ui->label->setText("Sprite (");
 }
 
 /// @brief 
