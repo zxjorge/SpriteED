@@ -25,7 +25,7 @@ public:
 
 public:
     void onFrameDrawnOn();
-    void deleteFrame(Frame *frame);
+    void deleteFrame(Frame* frame);
 
 private:
     Ui::FramesViewer *ui;
@@ -33,6 +33,12 @@ private:
     AnimationFrames* animationF;
     vector<Frame*> frames;
 
+signals:
+    void updateSprite();
+
+private slots:
+    void setFrame(int id);
+    void setFrameLabel(int id);
 };
 
 #endif // FRAMESVIEWER_H

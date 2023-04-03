@@ -18,12 +18,18 @@ public:
     ~Frame();
     void drawImage(QImage image);
     void deleteFrame();
+    void sendFrame();
+    void setFrameID(int id);
+    int getFrameID();
 
 signals:
-    void deleteFrameClicked(Frame *frame);
+    void deleteFrameClicked(Frame * frame);
+    void sendID(int id);
+    void updateFrameLabel(int id);
 
 private:
     Ui::Frame *ui;
+    int frameID;
 };
 
 #endif // FRAME_H

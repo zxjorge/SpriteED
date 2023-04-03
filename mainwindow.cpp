@@ -2,7 +2,10 @@
 #include "ui_mainwindow.h"
 #include "brushproperties.h"
 
-
+/// @brief 
+/// @param tool 
+/// @param frames 
+/// @param parent 
 MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -58,6 +61,10 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &AnimationFrames::frameAdded,
             ui->sprite_canvas,
             &SpriteCanvas::onFrameAdded);
+    connect(ui->frames_viewer,
+            &FramesViewer::updateSprite,
+            ui->sprite_canvas,
+            &SpriteCanvas::updateSprite);
 }
 
 /// @brief 

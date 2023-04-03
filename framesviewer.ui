@@ -54,6 +54,16 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Sprite (0 of 0)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QScrollArea" name="scrollArea">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
@@ -70,7 +80,7 @@
           <x>0</x>
           <y>0</y>
           <width>984</width>
-          <height>227</height>
+          <height>211</height>
          </rect>
         </property>
        </widget>

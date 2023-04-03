@@ -141,7 +141,7 @@
     <string>Clear</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+C</string>
+    <string>Ctrl+Backspace</string>
    </property>
   </action>
   <action name="actionHelp">

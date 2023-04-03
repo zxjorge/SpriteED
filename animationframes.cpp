@@ -64,6 +64,8 @@ void AnimationFrames::updateSelectedFrame(QImage image) {
     frames.at(selectedIndex) = image;
 }
 
+/// @brief 
+/// @param filename 
 void AnimationFrames::saveToFile(QString filename) {
     QJsonObject json = QJsonObject();
     json["height"] = height;
@@ -99,6 +101,8 @@ void AnimationFrames::saveToFile(QString filename) {
     }
 }
 
+/// @brief 
+/// @param filename 
 void AnimationFrames::loadFromFile(QString filename) {
     QFile file(filename);
     QJsonObject json;

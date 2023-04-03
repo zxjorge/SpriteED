@@ -34,7 +34,13 @@ void SpriteCanvas::setAnimFrames(AnimationFrames* frames) {
     update();
 }
 
+/// @brief 
 void SpriteCanvas::onFrameAdded() {
+    sprite = frames->getSelectedFrame();
+    update();
+}
+
+void SpriteCanvas::updateSprite(){
     sprite = frames->getSelectedFrame();
     update();
 }

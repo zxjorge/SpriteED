@@ -3,8 +3,8 @@
 #include <QObject>
 #include <vector>
 #include <QImage>
-
-using std::vector, std::string;
+using std::vector;
+using std::string;
 
 class AnimationFrames: public QObject
 {

@@ -31,6 +31,7 @@ signals:
 
 public slots:
     void onFrameAdded();
+    void updateSprite();
 
 private:
     Ui::SpriteCanvas *ui;
