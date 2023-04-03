@@ -27,15 +27,18 @@ FramesViewer::~FramesViewer()
 
 /// @brief 
 void FramesViewer::addFrame(){
-    Frame* frame = new Frame(nullptr);
+    Frame* frame = new Frame(this);
     frame->setFixedHeight(100); // Set the height to a fixed value
     frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     layout->addWidget(frame);
     frames.push_back(frame);
-    animationF->addFrame();
-    QImage image = animationF->getSelectedFrame();
+    QImage image = animationF->addFrame();
     frame->drawImage(image);
 //    ui->label->setText("Sprite (");
+}
+
+void FramesViewer::onFrameDrawnOn() {
+    frames.at(animationF->getSelectedIndex())->drawImage(animationF->getSelectedFrame());
 }
 
 /// @brief 

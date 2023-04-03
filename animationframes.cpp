@@ -6,8 +6,8 @@
 
 /// @brief 
 /// @param parent 
-AnimationFrames::AnimationFrames(QWidget *parent) :
-    QWidget(parent),
+AnimationFrames::AnimationFrames(QObject *parent) :
+    QObject(parent),
     frames(vector<QImage>()),
     width(192),
     height(128),
@@ -19,12 +19,11 @@ AnimationFrames::AnimationFrames(QWidget *parent) :
 /// @return 
 QImage AnimationFrames::addFrame()
 {
-    if(frames.size() > 0){
-        selectedIndex++;
-    }
+    selectedIndex = frames.size();
     QImage img = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
     img.fill(Qt::white);
     frames.push_back(img);
+    emit frameAdded();
     return img;
 }
 

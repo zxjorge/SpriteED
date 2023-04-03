@@ -48,6 +48,16 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &QAction::triggered,
             frames,
             &AnimationFrames::clearSelectedFrame);
+
+    connect(ui->sprite_canvas,
+            &SpriteCanvas::frameDrawnOn,
+            ui->frames_viewer,
+            &FramesViewer::onFrameDrawnOn);
+
+    connect(frames,
+            &AnimationFrames::frameAdded,
+            ui->sprite_canvas,
+            &SpriteCanvas::onFrameAdded);
 }
 
 /// @brief 

@@ -34,6 +34,11 @@ void SpriteCanvas::setAnimFrames(AnimationFrames* frames) {
     update();
 }
 
+void SpriteCanvas::onFrameAdded() {
+    sprite = frames->getSelectedFrame();
+    update();
+}
+
 /// @brief 
 /// @param  
 void SpriteCanvas::paintEvent(QPaintEvent*) {
@@ -120,6 +125,7 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
 /// @param  
 void SpriteCanvas::mouseReleaseEvent(QMouseEvent*) {
     frames->updateSelectedFrame(sprite);
+    emit frameDrawnOn();
 }
 
 /// @brief 

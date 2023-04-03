@@ -23,6 +23,8 @@ public:
     void addFrame();
     void setAnimFrames(AnimationFrames* animationF);
 
+public slots:
+    void onFrameDrawnOn();
 
 private:
     Ui::FramesViewer *ui;

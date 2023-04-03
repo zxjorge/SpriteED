@@ -19,11 +19,11 @@ Frame::~Frame()
 /// @brief 
 /// @param image 
 void Frame::drawImage(QImage image){
-    QSize size = ui->pushButton->size();
+    QSize size = QSize(75, 75);
     QPixmap pixmap(size);
-    QImage scaledImage = image.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation); // scale the image to fit within the pixmap size
-    pixmap.convertFromImage(scaledImage);
+//    QImage scaledImage = image.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation); // scale the image to fit within the pixmap size
+    pixmap.convertFromImage(image);
     // Set the QPixmap as the pixmap of the QLabel.
     ui->pushButton->setIcon(QIcon(pixmap));
-    ui->pushButton->setIconSize(pixmap.rect().size());
+    ui->pushButton->setIconSize(size);
 }

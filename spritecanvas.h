@@ -26,6 +26,12 @@ public:
     void setTool(Tool* tool);
     void setAnimFrames(AnimationFrames* frames);
 
+signals:
+    void frameDrawnOn();
+
+public slots:
+    void onFrameAdded();
+
 private:
     Ui::SpriteCanvas *ui;
 
