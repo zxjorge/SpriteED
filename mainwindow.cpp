@@ -14,6 +14,7 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     ui->frames_viewer->addFrame();
     ui->sprite_canvas->setAnimFrames(frames);
 
+
     connect(ui->brush_properties,
             &BrushProperties::showAirBrushIcon,
             ui->sprite_canvas,
@@ -48,6 +49,11 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &QAction::triggered,
             frames,
             &AnimationFrames::clearSelectedFrame);
+
+    connect(ui->actionClear,
+            &QAction::triggered,
+            ui->frames_viewer,
+            &FramesViewer::clearFrames);
 
     connect(ui->sprite_canvas,
             &SpriteCanvas::frameDrawnOn,

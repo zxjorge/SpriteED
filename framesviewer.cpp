@@ -41,6 +41,14 @@ void FramesViewer::addFrame(){
 
 void FramesViewer::deleteFrame(Frame *frame) {
     layout->removeWidget(frame);
+
+}
+
+void FramesViewer::clearFrames(){
+    foreach(Frame* frame,frames){
+        frame->deleteFrame();
+    }
+    frames.clear();
 }
 
 
