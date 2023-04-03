@@ -23,7 +23,7 @@ public:
     void addFrame();
     void setAnimFrames(AnimationFrames* animationF);
 
-public slots:
+public:
     void onFrameDrawnOn();
     void deleteFrame();
 

@@ -104,8 +104,6 @@ void BrushProperties::onFillButtonClicked() {
 void BrushProperties::onEraseButtonClicked() {
     emit showEraseIcon();
 
-
-
     ui->eraseButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");

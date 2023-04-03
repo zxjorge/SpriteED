@@ -35,6 +35,10 @@ void Frame::drawImage(QImage image){
 
 void Frame::deleteFrame() {
     emit deleteFrameClicked(this);
+    delete ui->horizontalLayoutWidget;
+
+
+
 }
 
 

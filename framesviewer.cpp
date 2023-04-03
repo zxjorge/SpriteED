@@ -18,7 +18,6 @@ FramesViewer::FramesViewer(QWidget *parent) :
             this,
             &FramesViewer::addFrame);
 
-    //connect(Frame, &Frame::deleteFrameClicked, this, &FramesViewer::deleteFrame);
 }
 
 /// @brief 
@@ -36,6 +35,7 @@ void FramesViewer::addFrame(){
     frames.push_back(frame);
     QImage image = animationF->addFrame();
     frame->drawImage(image);
+    connect(frame,&Frame::deleteFrameClicked, this, &FramesViewer::deleteFrame);
 //    ui->label->setText("Sprite (");
 }
 
