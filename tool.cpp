@@ -56,7 +56,6 @@ void Tool::fillImageAtPosition(QImage& image, QPoint point){
     queue<QPoint> fillQueue = queue<QPoint>();
     QSet<QPoint> visited;
 
-
     fillQueue.push(point);
     visited.insert(point);
 

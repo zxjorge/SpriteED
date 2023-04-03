@@ -26,7 +26,6 @@ public:
 public:
     void onFrameDrawnOn();
     void deleteFrame(Frame *frame);
-    void clearFrames();
 
 private:
     Ui::FramesViewer *ui;
