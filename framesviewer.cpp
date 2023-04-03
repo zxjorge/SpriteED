@@ -1,5 +1,6 @@
 #include "framesviewer.h"
 #include "ui_framesviewer.h"
+#include <QDebug>
 
 FramesViewer::FramesViewer(QWidget *parent) :
     QWidget(parent),
@@ -41,6 +42,8 @@ void FramesViewer::addFrame(){
 
 void FramesViewer::deleteFrame(Frame *frame) {
     layout->removeWidget(frame);
+    auto it = std::remove(frames.begin(), frames.end(), frame);
+    frames.erase(it, frames.end());
 }
 
 
