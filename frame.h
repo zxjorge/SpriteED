@@ -17,6 +17,10 @@ public:
     explicit Frame(QWidget *parent = nullptr);
     ~Frame();
     void drawImage(QImage image);
+    void deleteFrame();
+
+signals:
+    void deleteFrameClicked(Frame *frame);
 
 private:
     Ui::Frame *ui;

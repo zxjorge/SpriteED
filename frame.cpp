@@ -8,6 +8,11 @@ Frame::Frame(QWidget *parent) :
     ui(new Ui::Frame)
 {
     ui->setupUi(this);
+
+    connect(ui->deleteButton,
+            &QPushButton::clicked,
+            this,
+            &Frame::deleteFrame);
 }
 
 /// @brief 
@@ -27,3 +32,9 @@ void Frame::drawImage(QImage image){
     ui->pushButton->setIcon(QIcon(pixmap));
     ui->pushButton->setIconSize(size);
 }
+
+void Frame::deleteFrame() {
+    emit deleteFrameClicked(this);
+}
+
+
