@@ -39,8 +39,8 @@ void FramesViewer::addFrame(){
 //    ui->label->setText("Sprite (");
 }
 
-void FramesViewer::deleteFrame() {
-
+void FramesViewer::deleteFrame(Frame *frame) {
+    layout->removeWidget(frame);
 }
 
 
