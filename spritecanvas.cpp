@@ -148,8 +148,8 @@ void SpriteCanvas::mouseReleaseEvent(QMouseEvent*) {
 /// @brief 
 void SpriteCanvas::showAirBrushIcon(){
     QPixmap brushPixmap(":/icons/airbrush_icon.png");
-    QPixmap scaledBrushPixmap = brushPixmap.scaled(90, 90, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
+    QPixmap scaledBrushPixmap = brushPixmap.scaled(110, 110, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2.5, scaledBrushPixmap.height() / 2);
     setCursor(brushCursor);
 }
 
@@ -157,7 +157,7 @@ void SpriteCanvas::showAirBrushIcon(){
 void SpriteCanvas::showFillIcon(){
     QPixmap brushPixmap(":/icons/filltool_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 1.8);
     setCursor(brushCursor);
 
 }
@@ -166,14 +166,14 @@ void SpriteCanvas::showFillIcon(){
 void SpriteCanvas::showEraseIcon(){
     QPixmap brushPixmap(":/icons/erase_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 6, scaledBrushPixmap.height() / 1.2);
     setCursor(brushCursor);
 }
 
 /// @brief 
 void SpriteCanvas::showBrushIcon(){
     QPixmap brushPixmap(":/icons/brush_icon.png");
-    QPixmap scaledBrushPixmap = brushPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
+    QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 8, scaledBrushPixmap.height()/1.1);
     setCursor(brushCursor);
 }
