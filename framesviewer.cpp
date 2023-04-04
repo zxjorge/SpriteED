@@ -57,11 +57,6 @@ void FramesViewer::addFrame(){
             &FramesViewer::setFrame);
 
     connect(frame,
-            &Frame::updateFrameLabel,
-            this,
-            &FramesViewer::setFrameLabel);
-
-    connect(frame,
             &Frame::deleteFrameClicked,
             this,
             &FramesViewer::deleteFrame);
@@ -78,59 +73,71 @@ void FramesViewer::addFrame(){
     QImage image = animationF->addFrame();
     frame->setFrameID(animationF->getSelectedIndex());
     frame->drawImage(image);
-    connect(frame,&Frame::deleteFrameClicked, this, &FramesViewer::deleteFrame);
     ui->label->setText("Sprite (" + QString::number(frame->getFrameID() + 1) + " of " + QString::number(frames.size()) + ")");
 }
 
 /**
  * @brief FramesViewer::deleteFrame method that deletes the frame from the framesviewer
- * @param frame this is the frame to be deleted
+ * @param Id This is the id of the frame to be deleted
  */
-void FramesViewer::deleteFrame(Frame* frame) {
+void FramesViewer::deleteFrame(int id) {
     if (isAnimating) {
         return;
     }
+    Frame* frame = frames[id];
 
-    layout->removeWidget(frame);
+    if(frames.size() == 1){
+        animationF->clear();
+        frame->drawImage(animationF->getSelectedFrame());
+    }else{
 
-    //finds the frame from the frames vector and deletes it
-    auto it = std::find(frames.begin(), frames.end(), frame);
-    if (it != frames.end()) {
-        frames.erase(it);
+        frames.erase(frames.begin() + id);
+        animationF->removeFrame(id);
+
+        //Handles changing the sprite label when deleting the first frame in the vector
+        if(id != 0){
+            ui->label->setText("Sprite (" + QString::number(id)  + " of " + QString::number(frames.size()) + ")");
+        }
+        else{
+            ui->label->setText("Sprite (" + QString::number(id + 1)  + " of " + QString::number(frames.size()) + ")");
+        }
+
+        //Handles changing the selected index when deleting the first frame in the vector
+        if(id != 0){
+            animationF->setSelectedIndex(id - 1);
+        }else{
+            animationF->setSelectedIndex(id);
+        }
+
+        layout->removeWidget(frame);
+
+        //finds the frame from the frames vector and deletes it
+        auto it = std::find(frames.begin(), frames.end(), frame);
+        if (it != frames.end()) {
+            frames.erase(it);
+        }
+        delete frame;
+
+        //updates frame ids to make sure they're all indexed properly
+        updateFrameIDs();
     }
-    delete frame;
-
-    //updates frame ids to make sure they're all indexed properly
-    updateFrameIDs();
+    emit updateSprite();
 }
 
 /**
  * @brief FramesViewer::setFrame sets the frame
  * @param id this is the id of the frame to be set
  */
-void FramesViewer::setFrame(int id) {
+void FramesViewer::setFrame(int id){
     if (isAnimating) {
         return;
     }
+
     ui->label->setText("Sprite (" + QString::number(id + 1)  + " of " + QString::number(frames.size()) + ")");
     animationF->setSelectedIndex(id);
     emit updateSprite();
 }
 
-/**
- * @brief FramesViewer::setFrameLabel sets the frame label
- * @param id this is the id of the frame
- */
-void FramesViewer::setFrameLabel(int id){
-    if (isAnimating) {
-        return;
-    }
-    frames.erase(frames.begin() + id);
-    animationF->removeFrame(id);
-    ui->label->setText("Sprite (" + QString::number(id)  + " of " + QString::number(frames.size()) + ")");
-    animationF->setSelectedIndex(id - 1);
-    emit updateSprite();
-}
 
 /**
  * @brief FramesViewer::onFrameDrawnOn

@@ -28,7 +28,7 @@ public:
     int getFrameID();
 
 signals:
-    void deleteFrameClicked(Frame * frame);
+    void deleteFrameClicked(int id);
     void sendID(int id);
     void updateFrameLabel(int id);
 
