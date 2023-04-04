@@ -21,16 +21,16 @@ BrushProperties::BrushProperties(QWidget *parent) :
     ui->colorPaletteButton->setStyleSheet(QString("background-color: black"));
 
     ui->brushButton->setIcon(QIcon(":/icons/brush_icon.png"));
-    ui->brushButton->setIconSize(QSize(65, 65));
+    ui->brushButton->setIconSize(QSize(90, 90));
 
     ui->airBrushButton->setIcon(QIcon(":/icons/airbrush_icon.png"));
-    ui->airBrushButton->setIconSize(QSize(65, 65));
+    ui->airBrushButton->setIconSize(QSize(90, 90));
 
     ui->fillButton->setIcon(QIcon(":/icons/filltool_icon.png"));
-    ui->fillButton->setIconSize(QSize(65, 65));
+    ui->fillButton->setIconSize(QSize(90, 90));
 
     ui->eraseButton->setIcon(QIcon(":/icons/erase_icon.png"));
-    ui->eraseButton->setIconSize(QSize(65, 65));
+    ui->eraseButton->setIconSize(QSize(90, 90));
 
 
     connect(ui->brushButton, &QPushButton::clicked, this, &::BrushProperties::onBrushButtonClicked);
