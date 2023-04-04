@@ -1,18 +1,17 @@
+/**
+* spritecanvas.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+* This cpp file uses spritecanvas.h header file and implements all its methods.
+*/
 #include "spritecanvas.h"
 #include "ui_spritecanvas.h"
 #include <iostream>
 #include <cmath>
 #include <QPainter>
 
-/*
- * NajMingle: 
- * CS3505
- * A7: Sprite Editor
- * 
+/**
+ * @brief SpriteCanvas::SpriteCanvas constructor for spriteCanvas.
+ * @param parent
  */
-
-/// @brief 
-/// @param parent 
 SpriteCanvas::SpriteCanvas(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SpriteCanvas)
@@ -20,41 +19,53 @@ SpriteCanvas::SpriteCanvas(QWidget *parent) :
     ui->setupUi(this);
 }
 
-/// @brief 
+/**
+ * @brief SpriteCanvas::~SpriteCanvas destructor for spriteCanvas.
+ */
 SpriteCanvas::~SpriteCanvas()
 {
     delete ui;
 }
 
-/// @brief 
-/// @param tool 
+/**
+ * @brief SpriteCanvas::setTool sets the tool on the sprite canvas to be the one which is
+ * highlighted amongst the tool buttons.
+ * @param tool tool to be set.
+ */
 void SpriteCanvas::setTool(Tool* tool) {
     this->tool = tool;
     showBrushIcon();
 }
 
-/// @brief 
-/// @param frames 
+/**
+ * @brief SpriteCanvas::setAnimFrames sets the animation frames
+ * @param frames frames in animation
+ */
 void SpriteCanvas::setAnimFrames(AnimationFrames* frames) {
     this->frames = frames;
     sprite = frames->getSelectedFrame();
     update();
 }
 
-/// @brief 
+/**
+ * @brief SpriteCanvas::onExternalFrameUpdate updates the sprite canvas to be the selected frame.
+ */
 void SpriteCanvas::onExternalFrameUpdate() {
     sprite = frames->getSelectedFrame();
     update();
 }
 
-/// @brief 
+/**
+ * @brief SpriteCanvas::updateSprite updates the sprite canvas to be the selected frame.
+ */
 void SpriteCanvas::updateSprite(){
     sprite = frames->getSelectedFrame();
     update();
 }
 
-/// @brief 
-/// @param  
+/**
+ * @brief SpriteCanvas::paintEvent
+ */
 void SpriteCanvas::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     float scale;
@@ -75,8 +86,10 @@ void SpriteCanvas::paintEvent(QPaintEvent*) {
     );
 }
 
-/// @brief 
-/// @return 
+/**
+ * @brief SpriteCanvas::getDimensionLimit gets the dimensions of the sprite canvas
+ * @return the width and the height of the sprite canvas
+ */
 DimensionLimit SpriteCanvas::getDimensionLimit() {
     if ((float)width() / height() < (float)sprite.width() / sprite.height()) {
         return DimensionLimit::WIDTH;
@@ -85,8 +98,10 @@ DimensionLimit SpriteCanvas::getDimensionLimit() {
     }
 }
 
-/// @brief 
-/// @return 
+/**
+ * @brief SpriteCanvas::getPixelSize returns the pixel size of the sprite canvas
+ * @return a float value which represents the pixel size
+ */
 float SpriteCanvas::getPixelSize() {
     if (getDimensionLimit() == DimensionLimit::WIDTH) {
         return (float)width() / sprite.width();
@@ -95,9 +110,12 @@ float SpriteCanvas::getPixelSize() {
     }
 }
 
-/// @brief 
-/// @param event 
-/// @return 
+/**
+ * @brief SpriteCanvas::getScaledMousePoint convert the position of the mouse to a QPoint object which is
+ * scaled based on the size of the sprite canvas' pixel size
+ * @param event this QMouseEvent is used to get the current position of the mouse
+ * @return the scaled position of the mouse cursor as a QPoint
+ */
 QPoint SpriteCanvas::getScaledMousePoint(QMouseEvent* event) {
     QPointF point = event->position();
     point /= getPixelSize();
@@ -107,8 +125,11 @@ QPoint SpriteCanvas::getScaledMousePoint(QMouseEvent* event) {
     return point.toPoint();
 }
 
-/// @brief 
-/// @param event 
+/**
+ * @brief SpriteCanvas::mousePressEvent this method is responsible for handling what happens when something is drawn on the spriteCanvas.
+ * It updates the canvas based on the current drawing tool and the position of the mouse cursor.
+ * @param event this QMouseEvent is used to check if the left button of the mouse is being clicked or not and to get the position.
+ */
 void SpriteCanvas::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() != Qt::LeftButton || frames->isAnimating()) {
@@ -121,8 +142,11 @@ void SpriteCanvas::mousePressEvent(QMouseEvent *event)
     update();
 }
 
-/// @brief 
-/// @param event 
+/**
+ * @brief SpriteCanvas::mouseMoveEvent this method is responsible for handling what happens when the mouse is moved on the sprite canvas while the left click is being
+ * held down. It updates the canvas based on the current drawing tool and the position of the mouse cursor.
+ * @param event this QMouseEvent is used to check if the left button of the mouse is being clicked or not and to get the position.
+ */
 void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
 {
     if (event->buttons() != Qt::LeftButton || frames->isAnimating()) {
@@ -135,8 +159,9 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
     update();
 }
 
-/// @brief 
-/// @param  
+/**
+ * @brief SpriteCanvas::mouseReleaseEvent this method is responsible for handling what happens when the mouse button is released on the sprite canvas.
+ */
 void SpriteCanvas::mouseReleaseEvent(QMouseEvent*) {
     if (frames->isAnimating()) {
         return;
@@ -145,7 +170,9 @@ void SpriteCanvas::mouseReleaseEvent(QMouseEvent*) {
     emit frameDrawnOn();
 }
 
-/// @brief 
+/**
+ * @brief SpriteCanvas::showAirBrushIcon shows the airbrush icon when the cursor is over the sprite canvas
+ */
 void SpriteCanvas::showAirBrushIcon(){
     QPixmap brushPixmap(":/icons/airbrush_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(90, 90, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -153,7 +180,9 @@ void SpriteCanvas::showAirBrushIcon(){
     setCursor(brushCursor);
 }
 
-/// @brief 
+/**
+ * @brief SpriteCanvas::showFillIcon shows the fill icon when the cursor is over the sprite canvas
+ */
 void SpriteCanvas::showFillIcon(){
     QPixmap brushPixmap(":/icons/filltool_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -162,7 +191,9 @@ void SpriteCanvas::showFillIcon(){
 
 }
 
-/// @brief 
+/**
+ * @brief SpriteCanvas::showEraseIcon shows the erase icon when the cursor is over the sprite canvas
+ */
 void SpriteCanvas::showEraseIcon(){
     QPixmap brushPixmap(":/icons/erase_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -170,7 +201,9 @@ void SpriteCanvas::showEraseIcon(){
     setCursor(brushCursor);
 }
 
-/// @brief 
+/**
+ * @brief SpriteCanvas::showBrushIcon shows the brush icon when the cursor is over the sprite canvas
+ */
 void SpriteCanvas::showBrushIcon(){
     QPixmap brushPixmap(":/icons/brush_icon .png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
