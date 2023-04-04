@@ -1,3 +1,9 @@
+/**
+ * framesviewer.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * This header file will be used by framesviewer.cpp and has methods, signals, and slots to handle
+ * the logic and data in regards to how the frames are viewed on the UI, and for the animation's
+ * play, pause, and fps sliders on the sprite editor.
+ */
 #ifndef FRAMESVIEWER_H
 #define FRAMESVIEWER_H
 #include "frame.h"

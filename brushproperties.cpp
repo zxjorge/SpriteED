@@ -1,3 +1,7 @@
+/**
+* BrushProperties.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+* This cpp file uses BrushProperties.h header file and implements all its methods.
+*/
 #include "brushproperties.h"
 #include "ui_brushproperties.h"
 #include <QColorDialog>
@@ -5,12 +9,9 @@
 #include "tool.h"
 
 /**
-* BrushProperties.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
-* This cpp file uses BrushProperties.h header file and implements all its methods.
-*/
-
-/// @brief Constructor for BrushProperites. Sets the color of the tool buttons and displays the associated icons.
-/// @param parent 
+ * @brief BrushProperties::BrushProperties Constructor for BrushProperites. Sets the color of the tool buttons and displays the associated icons.
+ * @param parent widget that is used to help handle memory and resources.
+ */
 BrushProperties::BrushProperties(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BrushProperties)
@@ -40,24 +41,34 @@ BrushProperties::BrushProperties(QWidget *parent) :
     connect(ui->spinBox, &QSpinBox::valueChanged, this, &::BrushProperties::onBrushSizeChanged);
 }
 
-/// @brief Destructor for BrushProperties
+/**
+ * @brief BrushProperties::~BrushProperties destructor for brushproperties
+ */
 BrushProperties::~BrushProperties()
 {
     delete ui;
 }
 
-/// @brief Called when the brush size is changed by the user. Changes the brush size.
+/**
+ * @brief BrushProperties::onBrushSizeChanged Called when the brush size is changed by the user. Changes the brush size.
+ */
 void BrushProperties::onBrushSizeChanged(){
     tool->setBrushSize(ui->spinBox->value());
 }
 
-/// @brief Sets the tool to the highlighted tool button.
-/// @param tool This is the tool to be set
+
+/**
+ * @brief BrushProperties::setTool sets the tool to the highlighted tool button.
+ * @param tool this is the tool to be set.
+ */
 void BrushProperties::setTool(Tool* tool) {
     this->tool = tool;
 }
 
-/// @brief Displays a window where the user can select a color. Sets that color as the brush color.
+
+/**
+ * @brief BrushProperties::onColorPaletteButtonClicked Displays a window where the user can select a color. Sets that color as the brush color.
+ */
 void BrushProperties::onColorPaletteButtonClicked()
 {
     QColor brushColor = QColorDialog::getColor(currentColor,this,"Choose a Color");
@@ -69,8 +80,10 @@ void BrushProperties::onColorPaletteButtonClicked()
 
 }
 
-/// @brief Sends signal to alert the cursor to change to a brush icon, highlights the tool's button,
-/// and sets the current tool to a brush.
+/**
+ * @brief BrushProperties::onBrushButtonClicked Sends signal to alert the cursor to change to a brush icon, highlights the tool's button,
+ * and sets the current tool to a brush.
+ */
 void BrushProperties::onBrushButtonClicked() {
 
     emit showBrushIcon();
@@ -81,8 +94,10 @@ void BrushProperties::onBrushButtonClicked() {
     tool->setSelectedToolType(BRUSH);
 }
 
-/// @brief Sends signal to alert the cursor to change to a airbrush icon, highlights the tool's button,
-/// and sets the current tool to a air brush.
+/**
+ * @brief BrushProperties::onAirBrushButtonClicked Sends signal to alert the cursor to change to a airbrush icon, highlights the tool's button,
+ * and sets the current tool to a air brush.
+ */
 void BrushProperties::onAirBrushButtonClicked() {
     emit showAirBrushIcon();
     ui->airBrushButton->setStyleSheet(QString("background-color: grey"));
@@ -92,8 +107,10 @@ void BrushProperties::onAirBrushButtonClicked() {
     tool->setSelectedToolType(AIRBRUSH);
 }
 
-/// @brief Sends signal to alert the cursor to change to a fill icon, highlights the tool's button,
-/// and sets the current tool to a fill brush.
+/**
+ * @brief BrushProperties::onFillButtonClicked Sends signal to alert the cursor to change to a fill icon, highlights the tool's button,
+ * and sets the current tool to a fill brush.
+ */
 void BrushProperties::onFillButtonClicked() {
     emit showFillIcon();
     ui->fillButton->setStyleSheet(QString("background-color: grey"));
@@ -103,8 +120,10 @@ void BrushProperties::onFillButtonClicked() {
     tool->setSelectedToolType(FILL);
 }
 
-/// @brief Sends signal to alert the cursor to change to a eraser icon, highlights the tool's button,
-/// and sets the current tool to a eraser.
+/**
+ * @brief BrushProperties::onEraseButtonClicked Sends signal to alert the cursor to change to a eraser icon, highlights the tool's button,
+ * and sets the current tool to a eraser.
+ */
 void BrushProperties::onEraseButtonClicked() {
     emit showEraseIcon();
     ui->eraseButton->setStyleSheet(QString("background-color: grey"));
