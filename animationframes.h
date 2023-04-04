@@ -30,6 +30,7 @@ public:
 signals:
     void frameAdded();
     void animationIndexChanged();
+    void frameCleared();
 
 public slots:
      void clearSelectedFrame();
