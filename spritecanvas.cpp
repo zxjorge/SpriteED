@@ -4,6 +4,13 @@
 #include <cmath>
 #include <QPainter>
 
+/*
+ * NajMingle: 
+ * CS3505
+ * A7: Sprite Editor
+ * 
+ */
+
 /// @brief 
 /// @param parent 
 SpriteCanvas::SpriteCanvas(QWidget *parent) :
@@ -40,6 +47,7 @@ void SpriteCanvas::onFrameAdded() {
     update();
 }
 
+/// @brief 
 void SpriteCanvas::updateSprite(){
     sprite = frames->getSelectedFrame();
     update();

@@ -1,11 +1,18 @@
-
 #include "brushproperties.h"
 #include "ui_brushproperties.h"
 #include <QColorDialog>
 #include <QColor>
 #include "tool.h"
 
+/*
+ * NajMingle: 
+ * CS3505
+ * A7: Sprite Editor
+ * 
+ */
 
+/// @brief 
+/// @param parent 
 BrushProperties::BrushProperties(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BrushProperties)
@@ -68,8 +75,6 @@ void BrushProperties::onColorPaletteButtonClicked()
 void BrushProperties::onBrushButtonClicked() {
 
     emit showBrushIcon();
-
-
     ui->brushButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
@@ -80,7 +85,6 @@ void BrushProperties::onBrushButtonClicked() {
 /// @brief 
 void BrushProperties::onAirBrushButtonClicked() {
     emit showAirBrushIcon();
-
     ui->airBrushButton->setStyleSheet(QString("background-color: grey"));
     ui->brushButton->setStyleSheet("");
     ui->fillButton->setStyleSheet("");
@@ -91,8 +95,6 @@ void BrushProperties::onAirBrushButtonClicked() {
 /// @brief 
 void BrushProperties::onFillButtonClicked() {
     emit showFillIcon();
-
-
     ui->fillButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");
@@ -103,7 +105,6 @@ void BrushProperties::onFillButtonClicked() {
 /// @brief 
 void BrushProperties::onEraseButtonClicked() {
     emit showEraseIcon();
-
     ui->eraseButton->setStyleSheet(QString("background-color: grey"));
     ui->airBrushButton->setStyleSheet("");
     ui->brushButton->setStyleSheet("");

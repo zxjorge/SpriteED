@@ -9,6 +9,13 @@
 using std::queue;
 using std::vector;
 
+/*
+ * NajMingle: 
+ * CS3505
+ * A7: Sprite Editor
+ * 
+ */
+
 /// @brief 
 Tool::Tool() :
     brushPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)),

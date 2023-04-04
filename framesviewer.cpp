@@ -1,6 +1,13 @@
 #include "framesviewer.h"
 #include "ui_framesviewer.h"
 
+/*
+ * NajMingle: 
+ * CS3505
+ * A7: Sprite Editor
+ * 
+ */
+
 /// @brief 
 /// @param parent 
 FramesViewer::FramesViewer(QWidget *parent) :

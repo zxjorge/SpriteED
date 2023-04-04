@@ -31,30 +31,31 @@ Frame::~Frame()
 void Frame::drawImage(QImage image){
     QSize size = QSize(75, 75);
     QPixmap pixmap(size);
-//    QImage scaledImage = image.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation); // scale the image to fit within the pixmap size
     pixmap.convertFromImage(image);
-    // Set the QPixmap as the pixmap of the QLabel.
     ui->frame->setIcon(QIcon(pixmap));
     ui->frame->setIconSize(size);
 }
 
+/// @brief 
 void Frame::deleteFrame() {
     emit updateFrameLabel(frameID);
     emit deleteFrameClicked(this);
     delete ui->horizontalLayoutWidget;
 }
 
+/// @brief 
 void Frame::sendFrame() {
     emit sendID(frameID);
 }
 
+/// @brief 
+/// @param id 
 void Frame::setFrameID(int id){
     frameID = id;
 }
 
+/// @brief 
+/// @return 
 int Frame::getFrameID(){
     return frameID;
 }
-
-
-

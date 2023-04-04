@@ -1,6 +1,12 @@
 #include "mainwindow.h"
-
 #include <QApplication>
+
+/*
+ * NajMingle: 
+ * CS3505
+ * A7: Sprite Editor
+ * 
+ */
 
 int main(int argc, char *argv[])
 {

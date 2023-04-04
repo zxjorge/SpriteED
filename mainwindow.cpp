@@ -2,6 +2,13 @@
 #include "ui_mainwindow.h"
 #include "brushproperties.h"
 
+/*
+ * NajMingle: 
+ * CS3505
+ * A7: Sprite Editor
+ * 
+ */
+
 /// @brief 
 /// @param tool 
 /// @param frames 
