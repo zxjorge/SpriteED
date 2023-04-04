@@ -1,3 +1,8 @@
+/**
+ * spritecanvas.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * This header file will be used by spritecanvas.cpp and has methods, signals, and slots to handle
+ * the logic and data for the spritecanvas, which is where the user would draw on the sprite editor UI.
+ */
 #ifndef SPRITECANVAS_H
 #define SPRITECANVAS_H
 

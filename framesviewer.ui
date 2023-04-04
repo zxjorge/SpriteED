@@ -79,8 +79,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>974</width>
-          <height>165</height>
+          <width>978</width>
+          <height>185</height>
          </rect>
         </property>
        </widget>
@@ -109,7 +109,7 @@
        <item>
         <widget class="QPushButton" name="playButton">
          <property name="text">
-          <string>Play/Pause</string>
+          <string>Play</string>
          </property>
         </widget>
        </item>

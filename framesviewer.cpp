@@ -179,11 +179,16 @@ void FramesViewer::playButtonPressed() {
     if (isAnimating) {
         animationF->stopAnimation();
         isAnimating = false;
-    } else {
+        ui->playButton->setText("Play");
+    } else if(frames.size()>1){
         animationF->startAnimation();
         isAnimating = true;
+        ui->playButton->setText("Pause");
     }
 }
+
+
+
 
 /**
  * @brief FramesViewer::updateFrameIDs updates the frames' ids to make sure
