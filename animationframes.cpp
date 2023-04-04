@@ -181,8 +181,9 @@ int AnimationFrames::getSelectedIndex(){
 
 /// @brief 
 void AnimationFrames::clearSelectedFrame() {
-    frames.at(selectedIndex).fill(Qt::white);
-    emit frameCleared();
+    if(!animTimer.isActive())
+        frames.at(selectedIndex).fill(Qt::white);
+        emit frameCleared();
 }
 
 /// @brief
