@@ -162,3 +162,9 @@ int AnimationFrames::getSelectedIndex(){
 void AnimationFrames::clearSelectedFrame() {
     frames.at(selectedIndex).fill(Qt::white);
 }
+
+/// @brief
+/// @param id
+void AnimationFrames::removeFrame(int id){
+    frames.erase(frames.begin() + id);
+}

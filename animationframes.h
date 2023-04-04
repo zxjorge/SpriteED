@@ -20,6 +20,7 @@ public:
     void clear();
     void setSelectedIndex(int index);
     int getSelectedIndex();
+    void removeFrame(int id);
 
 signals:
     void frameAdded();

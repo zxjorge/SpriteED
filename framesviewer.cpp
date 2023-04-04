@@ -79,6 +79,7 @@ void FramesViewer::setFrame(int id){
 /// @param id 
 void FramesViewer::setFrameLabel(int id){
     frames.erase(frames.begin() + id);
+    animationF->removeFrame(id);
     ui->label->setText("Sprite (" + QString::number(id)  + " of " + QString::number(frames.size()) + ")");
     animationF->setSelectedIndex(id - 1);
     emit updateSprite();
