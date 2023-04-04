@@ -51,8 +51,7 @@ void Frame::drawImage(QImage image){
  * in the deletion of the frame widget from the framesviewer.ui
  */
 void Frame::deleteFrame() {
-    emit updateFrameLabel(frameID);
-    emit deleteFrameClicked(this);
+    emit deleteFrameClicked(frameID);
 }
 
 /**

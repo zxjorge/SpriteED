@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/icons">
-        <file>brush_icon .png</file>
+        <file>brush_icon.png</file>
         <file>airbrush_icon.png</file>
         <file>filltool_icon.png</file>
         <file>erase_icon.png</file>

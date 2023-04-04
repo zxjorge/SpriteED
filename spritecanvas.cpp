@@ -205,8 +205,8 @@ void SpriteCanvas::showEraseIcon(){
  * @brief SpriteCanvas::showBrushIcon shows the brush icon when the cursor is over the sprite canvas
  */
 void SpriteCanvas::showBrushIcon(){
-    QPixmap brushPixmap(":/icons/brush_icon .png");
-    QPixmap scaledBrushPixmap = brushPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QCursor brushCursor(scaledBrushPixmap, 0, scaledBrushPixmap.height());
+    QPixmap brushPixmap(":/icons/brush_icon.png");
+    QPixmap scaledBrushPixmap = brushPixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2, scaledBrushPixmap.height() / 2);
     setCursor(brushCursor);
 }

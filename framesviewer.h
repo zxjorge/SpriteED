@@ -30,7 +30,7 @@ public:
 
 public:
     void onFrameDrawnOn();
-    void deleteFrame(Frame* frame);
+    void deleteFrame(int id);
 
 private:
     Ui::FramesViewer *ui;
@@ -45,7 +45,6 @@ signals:
 
 private slots:
     void setFrame(int id);
-    void setFrameLabel(int id);
     void fpsChanged(int newFPS);
     void playButtonPressed();
     void addFrame();
