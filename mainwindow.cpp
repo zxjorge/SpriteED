@@ -95,9 +95,7 @@ void MainWindow::HelpTriggered()
 void MainWindow::OpenTriggered()
 {
     QString fileContent;
-
     QString filename= QFileDialog::getOpenFileName(this, "Choose File");
-
 
     if(filename.isEmpty())
         return;
@@ -108,9 +106,7 @@ void MainWindow::OpenTriggered()
         return;
 
     QTextStream in(&file);
-
     fileContent = in.readAll();
-
     file.close();
 }
 
