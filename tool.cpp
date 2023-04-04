@@ -22,7 +22,6 @@ Tool::Tool() :
     selectedToolType(ToolType::BRUSH),
     airBrushDensity(0.05)
 {
-
 }
 
 /// @brief 

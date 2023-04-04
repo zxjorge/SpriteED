@@ -73,17 +73,20 @@ void FramesViewer::addFrame(){
     ui->label->setText("Sprite (" + QString::number(frame->getFrameID() + 1) + " of " + QString::number(frames.size()) + ")");
 }
 
-/// @brief 
-/// @param frame 
-void FramesViewer::deleteFrame(Frame *frame) {
+/// @brief
+/// @param frame
+void FramesViewer::deleteFrame(Frame* frame) {
     if (isAnimating) {
         return;
     }
+
     layout->removeWidget(frame);
     auto it = std::find(frames.begin(), frames.end(), frame);
     if (it != frames.end()) {
         frames.erase(it);
     }
+    delete frame;
+    updateFrameIDs();
 }
 
 /// @brief
@@ -130,10 +133,13 @@ void FramesViewer::setAnimFrames(AnimationFrames* animationF) {
     addFrame();
 }
 
+/// @brief 
+/// @param newFPS 
 void FramesViewer::fpsChanged(int newFPS) {
     animationF->setFPS(newFPS);
 }
 
+/// @brief 
 void FramesViewer::playButtonPressed() {
     if (isAnimating) {
         animationF->stopAnimation();
@@ -143,3 +149,11 @@ void FramesViewer::playButtonPressed() {
         isAnimating = true;
     }
 }
+
+/// @brief 
+void FramesViewer::updateFrameIDs(){
+    for (int i = frames.size() - 1; i >= 0; i--) {
+        frames[i]->setFrameID(i);
+    }
+}
+

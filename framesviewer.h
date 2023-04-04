@@ -32,6 +32,7 @@ private:
     AnimationFrames* animationF;
     vector<Frame*> frames;
     bool isAnimating;
+    void updateFrameIDs();
 
 signals:
     void updateSprite();

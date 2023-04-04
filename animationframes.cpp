@@ -4,6 +4,13 @@
 #include <QFile>
 #include <QJsonDocument>
 
+/*
+ * NajMingle:
+ * CS3505
+ * A7: Sprite Editor
+ *
+ */
+
 /// @brief 
 /// @param parent 
 AnimationFrames::AnimationFrames(QObject *parent) :

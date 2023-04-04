@@ -1,6 +1,13 @@
 #include "frame.h"
 #include "ui_frame.h"
 
+/*
+ * NajMingle:
+ * CS3505
+ * A7: Sprite Editor
+ *
+ */
+
 /// @brief
 /// @param parent
 Frame::Frame(QWidget *parent) :
