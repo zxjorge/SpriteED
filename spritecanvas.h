@@ -30,8 +30,8 @@ signals:
     void frameDrawnOn();
 
 public slots:
-    void onFrameAdded();
     void updateSprite();
+    void onExternalFrameUpdate();
 
 private:
     Ui::SpriteCanvas *ui;

@@ -40,7 +40,6 @@ void Frame::drawImage(QImage image){
 void Frame::deleteFrame() {
     emit updateFrameLabel(frameID);
     emit deleteFrameClicked(this);
-    delete ui->horizontalLayoutWidget;
 }
 
 /// @brief 

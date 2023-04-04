@@ -11,8 +11,22 @@ AnimationFrames::AnimationFrames(QObject *parent) :
     frames(vector<QImage>()),
     width(192),
     height(128),
-    selectedIndex(0)
+    selectedIndex(0),
+    animTimer(QTimer(this))
 {
+    setFPS(1);
+    animTimer.setTimerType(Qt::PreciseTimer);
+    connect(&animTimer,
+            &QTimer::timeout,
+            this,
+            [this] {
+                selectedIndex++;
+                if (selectedIndex >= (int)frames.size()) {
+                    selectedIndex = 0;
+                }
+                emit animationIndexChanged();
+                this->animTimer.start();
+            });
 }
 
 /// @brief 
@@ -167,4 +181,21 @@ void AnimationFrames::clearSelectedFrame() {
 /// @param id
 void AnimationFrames::removeFrame(int id){
     frames.erase(frames.begin() + id);
+}
+
+void AnimationFrames::setFPS(int newFPS) {
+    fps = newFPS;
+    animTimer.setInterval(1000 / fps);
+}
+
+void AnimationFrames::startAnimation() {
+    animTimer.start();
+}
+
+void AnimationFrames::stopAnimation() {
+    animTimer.stop();
+}
+
+bool AnimationFrames::isAnimating() {
+    return animTimer.isActive();
 }

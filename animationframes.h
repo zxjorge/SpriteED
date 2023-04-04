@@ -3,8 +3,9 @@
 #include <QObject>
 #include <vector>
 #include <QImage>
-using std::vector;
-using std::string;
+#include <QTimer>
+
+using std::vector, std::string;
 
 class AnimationFrames: public QObject
 {
@@ -21,9 +22,14 @@ public:
     void setSelectedIndex(int index);
     int getSelectedIndex();
     void removeFrame(int id);
+    void setFPS(int newFPS);
+    void startAnimation();
+    void stopAnimation();
+    bool isAnimating();
 
 signals:
     void frameAdded();
+    void animationIndexChanged();
 
 public slots:
      void clearSelectedFrame();
@@ -37,6 +43,8 @@ private:
     int width;
     int height;
     int selectedIndex;
+    int fps;
+    QTimer animTimer;
 };
 
 #endif // ANIMATIONFRAMES_H

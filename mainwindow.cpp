@@ -14,14 +14,13 @@
 /// @param frames 
 /// @param parent 
 MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->brush_properties->setTool(tool);
     ui->sprite_canvas->setTool(tool);
     ui->frames_viewer->setAnimFrames(frames);
-    ui->frames_viewer->addFrame();
     ui->sprite_canvas->setAnimFrames(frames);
 
     connect(ui->brush_properties,
@@ -67,7 +66,13 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     connect(frames,
             &AnimationFrames::frameAdded,
             ui->sprite_canvas,
-            &SpriteCanvas::onFrameAdded);
+            &SpriteCanvas::onExternalFrameUpdate);
+
+    connect(frames,
+            &AnimationFrames::animationIndexChanged,
+            ui->sprite_canvas,
+            &SpriteCanvas::onExternalFrameUpdate);
+
     connect(ui->frames_viewer,
             &FramesViewer::updateSprite,
             ui->sprite_canvas,
@@ -104,7 +109,7 @@ void MainWindow::OpenTriggered()
 
     QTextStream in(&file);
 
-    fileContent= in.readAll();
+    fileContent = in.readAll();
 
     file.close();
 }

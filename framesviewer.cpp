@@ -12,7 +12,8 @@
 /// @param parent 
 FramesViewer::FramesViewer(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::FramesViewer)
+    ui(new Ui::FramesViewer),
+    isAnimating(false)
 {
     ui->setupUi(this);
     layout = new QVBoxLayout(ui->scrollArea);
@@ -26,6 +27,11 @@ FramesViewer::FramesViewer(QWidget *parent) :
             &QPushButton::clicked,
             this,
             &FramesViewer::addFrame);
+
+    connect(ui->playButton,
+            &QPushButton::clicked,
+            this,
+            &FramesViewer::playButtonPressed);
 }
 
 /// @brief 
@@ -36,6 +42,9 @@ FramesViewer::~FramesViewer()
 
 /// @brief 
 void FramesViewer::addFrame(){
+    if (isAnimating) {
+        return;
+    }
     Frame* frame = new Frame(this);
 
     connect(frame,
@@ -67,6 +76,9 @@ void FramesViewer::addFrame(){
 /// @brief 
 /// @param frame 
 void FramesViewer::deleteFrame(Frame *frame) {
+    if (isAnimating) {
+        return;
+    }
     layout->removeWidget(frame);
     auto it = std::find(frames.begin(), frames.end(), frame);
     if (it != frames.end()) {
@@ -76,7 +88,10 @@ void FramesViewer::deleteFrame(Frame *frame) {
 
 /// @brief
 /// @param id
-void FramesViewer::setFrame(int id){
+void FramesViewer::setFrame(int id) {
+    if (isAnimating) {
+        return;
+    }
     ui->label->setText("Sprite (" + QString::number(id + 1)  + " of " + QString::number(frames.size()) + ")");
     animationF->setSelectedIndex(id);
     emit updateSprite();
@@ -85,6 +100,9 @@ void FramesViewer::setFrame(int id){
 /// @brief 
 /// @param id 
 void FramesViewer::setFrameLabel(int id){
+    if (isAnimating) {
+        return;
+    }
     frames.erase(frames.begin() + id);
     animationF->removeFrame(id);
     ui->label->setText("Sprite (" + QString::number(id)  + " of " + QString::number(frames.size()) + ")");
@@ -101,4 +119,27 @@ void FramesViewer::onFrameDrawnOn() {
 /// @param animationF 
 void FramesViewer::setAnimFrames(AnimationFrames* animationF) {
     this->animationF = animationF;
+    connect(ui->fpsSlider,
+            &QSlider::valueChanged,
+            animationF,
+            &AnimationFrames::setFPS);
+    connect(ui->fpsSpinBox,
+            &QSpinBox::valueChanged,
+            animationF,
+            &AnimationFrames::setFPS);
+    addFrame();
+}
+
+void FramesViewer::fpsChanged(int newFPS) {
+    animationF->setFPS(newFPS);
+}
+
+void FramesViewer::playButtonPressed() {
+    if (isAnimating) {
+        animationF->stopAnimation();
+        isAnimating = false;
+    } else {
+        animationF->startAnimation();
+        isAnimating = true;
+    }
 }

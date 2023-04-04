@@ -20,7 +20,6 @@ class FramesViewer : public QWidget
 public:
     explicit FramesViewer(QWidget *parent = nullptr);
     ~FramesViewer();
-    void addFrame();
     void setAnimFrames(AnimationFrames* animationF);
 
 public:
@@ -32,6 +31,7 @@ private:
     QVBoxLayout* layout;
     AnimationFrames* animationF;
     vector<Frame*> frames;
+    bool isAnimating;
 
 signals:
     void updateSprite();
@@ -39,6 +39,9 @@ signals:
 private slots:
     void setFrame(int id);
     void setFrameLabel(int id);
+    void fpsChanged(int newFPS);
+    void playButtonPressed();
+    void addFrame();
 };
 
 #endif // FRAMESVIEWER_H

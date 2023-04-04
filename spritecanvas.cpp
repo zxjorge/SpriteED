@@ -42,7 +42,7 @@ void SpriteCanvas::setAnimFrames(AnimationFrames* frames) {
 }
 
 /// @brief 
-void SpriteCanvas::onFrameAdded() {
+void SpriteCanvas::onExternalFrameUpdate() {
     sprite = frames->getSelectedFrame();
     update();
 }
@@ -111,7 +111,7 @@ QPoint SpriteCanvas::getScaledMousePoint(QMouseEvent* event) {
 /// @param event 
 void SpriteCanvas::mousePressEvent(QMouseEvent *event)
 {
-    if (event->button() != Qt::LeftButton) {
+    if (event->button() != Qt::LeftButton || frames->isAnimating()) {
         return;
     }
 
@@ -125,7 +125,7 @@ void SpriteCanvas::mousePressEvent(QMouseEvent *event)
 /// @param event 
 void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
 {
-    if (event->buttons() != Qt::LeftButton) {
+    if (event->buttons() != Qt::LeftButton || frames->isAnimating()) {
         return;
     }
 
@@ -138,6 +138,9 @@ void SpriteCanvas::mouseMoveEvent(QMouseEvent *event)
 /// @brief 
 /// @param  
 void SpriteCanvas::mouseReleaseEvent(QMouseEvent*) {
+    if (frames->isAnimating()) {
+        return;
+    }
     frames->updateSelectedFrame(sprite);
     emit frameDrawnOn();
 }
@@ -174,5 +177,3 @@ void SpriteCanvas::showBrushIcon(){
     QCursor brushCursor(scaledBrushPixmap, 0, scaledBrushPixmap.height());
     setCursor(brushCursor);
 }
-
-

@@ -79,8 +79,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>984</width>
-          <height>211</height>
+          <width>974</width>
+          <height>165</height>
          </rect>
         </property>
        </widget>
@@ -107,17 +107,24 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="playButton">
          <property name="text">
           <string>Play/Pause</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="fpsSpinBox"/>
+        <widget class="QSpinBox" name="fpsSpinBox">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QSlider" name="fpsSlider">
+         <property name="minimum">
+          <number>1</number>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>

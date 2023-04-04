@@ -14,7 +14,7 @@ class Frame : public QWidget
     Q_OBJECT
 
 public:
-    explicit Frame(QWidget *parent = nullptr);
+    explicit Frame(QWidget *parent);
     ~Frame();
     void drawImage(QImage image);
     void deleteFrame();
