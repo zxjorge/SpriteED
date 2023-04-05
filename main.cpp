@@ -8,10 +8,6 @@
  * 
  */
 
-/// @brief 
-/// @param argc 
-/// @param argv 
-/// @return 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -21,6 +17,7 @@ int main(int argc, char *argv[])
     MainWindow w(&tool, &frames);
     w.show();
     w.setWindowTitle("Sprite Editor");
-//    w.setWindowIcon();
+    QIcon icon(":/icons/logo.png");
+    w.setWindowIcon(icon);
     return a.exec();
 }

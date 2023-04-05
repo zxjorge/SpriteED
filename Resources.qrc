@@ -4,5 +4,6 @@
         <file>airbrush_icon.png</file>
         <file>filltool_icon.png</file>
         <file>erase_icon.png</file>
+        <file>logo.png</file>
     </qresource>
 </RCC>
