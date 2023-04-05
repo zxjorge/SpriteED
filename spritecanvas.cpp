@@ -209,7 +209,7 @@ void SpriteCanvas::showAirBrushIcon(){
 void SpriteCanvas::showFillIcon(){
     QPixmap brushPixmap(":/icons/filltool_icon.png");
     QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width()/2, scaledBrushPixmap.height()/2);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width()/8, scaledBrushPixmap.height()/1.1);
     setCursor(brushCursor);
 
 }
