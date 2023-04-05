@@ -124,6 +124,56 @@ void FramesViewer::deleteFrame(int id) {
     emit updateSprite();
 }
 
+
+/**
+ * @brief FramesViewer::deleteFrame method that deletes the frame from the framesviewer
+ * @param Id This is the id of the frame to be deleted
+ */
+void FramesViewer::deleteAllFrames() {
+    if (isAnimating) {
+        return;
+    }
+    for(int id = 0; id<animationF->getFrameCount();id++){
+        Frame* frame = frames[id];
+
+        if(frames.size() == 1){
+            animationF->clear();
+            frame->drawImage(animationF->getSelectedFrame());
+        }else{
+
+            frames.erase(frames.begin() + id);
+            animationF->removeFrame(id);
+
+            //Handles changing the sprite label when deleting the first frame in the vector
+            if(id != 0){
+                ui->label->setText("Sprite (" + QString::number(id)  + " of " + QString::number(frames.size()) + ")");
+            }
+            else{
+                ui->label->setText("Sprite (" + QString::number(id + 1)  + " of " + QString::number(frames.size()) + ")");
+            }
+
+            //Handles changing the selected index when deleting the first frame in the vector
+            if(id != 0){
+                animationF->setSelectedIndex(id - 1);
+            }else{
+                animationF->setSelectedIndex(id);
+            }
+
+            layout->removeWidget(frame);
+
+            //finds the frame from the frames vector and deletes it
+            auto it = std::find(frames.begin(), frames.end(), frame);
+            if (it != frames.end()) {
+                frames.erase(it);
+            }
+            delete frame;
+
+            //updates frame ids to make sure they're all indexed properly
+            updateFrameIDs();
+        }
+        emit updateSprite();
+    }
+}
 /**
  * @brief FramesViewer::setFrame sets the frame
  * @param id this is the id of the frame to be set

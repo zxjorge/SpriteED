@@ -71,6 +71,16 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &FramesViewer::onFrameDrawnOn);
 
 
+    connect(ui->actionNew,
+            &QAction::triggered,
+            frames,
+            &AnimationFrames::deleteAllFrames);
+
+    connect(frames,
+            &AnimationFrames::deleteEveryFrame,
+            ui->frames_viewer,
+            &FramesViewer::deleteAllFrames);
+
     connect(frames,
             &AnimationFrames::frameCleared,
             ui->sprite_canvas,

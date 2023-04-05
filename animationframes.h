@@ -37,6 +37,7 @@ signals:
     void filePathChanged(QString);
     void disableMenuBar(bool);
     void enableMenuBar(bool);
+    void deleteEveryFrame(int);
 
 public slots:
      void clearSelectedFrame();

@@ -43,11 +43,15 @@ private:
 signals:
     void updateSprite();
 
+
+public slots:
+       void deleteAllFrames();
 private slots:
     void setFrame(int id);
     void fpsChanged(int newFPS);
     void playButtonPressed();
     void addFrame();
+
 };
 
 #endif // FRAMESVIEWER_H

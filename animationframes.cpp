@@ -75,6 +75,7 @@ void AnimationFrames::deleteAllFrames()
         clearSelectedFrame();
     }
     setSelectedIndex(0);
+    emit deleteEveryFrame(frames.size());
 }
 
 /// @brief Gets the number of frames.
