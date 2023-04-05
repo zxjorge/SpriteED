@@ -137,6 +137,16 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             ui->fileNameLabel,
             &QLabel::setText);
 
+    connect(frames,
+            &AnimationFrames::disableMenuBar,
+            ui->menuFile,
+            &QMenuBar::setDisabled);
+
+    connect(frames,
+            &AnimationFrames::enableMenuBar,
+            ui->menuFile,
+            &QMenuBar::setEnabled);
+
 }
 
 /// @brief Destructor for MainWindow.

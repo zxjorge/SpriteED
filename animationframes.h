@@ -35,6 +35,8 @@ signals:
     void fileLoadError();
     void fileSaveError();
     void filePathChanged(QString);
+    void disableMenuBar(bool);
+    void enableMenuBar(bool);
 
 public slots:
      void clearSelectedFrame();

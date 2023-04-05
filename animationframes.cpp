@@ -233,11 +233,13 @@ void AnimationFrames::setFPS(int newFPS) {
 /// @brief Starts the animation timer.
 void AnimationFrames::startAnimation() {
     animTimer.start();
+    emit disableMenuBar(true);
 }
 
 /// @brief Stops the animation timer.
 void AnimationFrames::stopAnimation() {
     animTimer.stop();
+    emit enableMenuBar(true);
 }
 
 /// @brief Checks if the animation is running.
