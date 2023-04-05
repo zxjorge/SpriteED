@@ -29,10 +29,12 @@ public:
 signals:
     void openClicked(QString);
     void saveAsClicked(QString);
+    void saveClicked(QString);
 private slots:
     void HelpTriggered();
     void OpenTriggered();
     void saveAsTriggered();
+    void saveTriggered();
     void saveFileError();
     void loadFileError();
 

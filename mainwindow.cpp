@@ -167,6 +167,16 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             ui->menuEdit,
             &QMenuBar::setEnabled);
 
+    connect(ui->actionSave,
+            &QAction::triggered,
+            this,
+            &MainWindow::saveTriggered);
+
+    connect(this,
+            &MainWindow::saveClicked,
+            frames,
+            &AnimationFrames::saveToFile);
+
 }
 
 /// @brief Destructor for MainWindow.
@@ -200,7 +210,12 @@ void MainWindow::saveAsTriggered()
     emit saveAsClicked(filename);
 }
 
-
+void MainWindow::saveTriggered(){
+    QString filename = ui->fileNameLabel->text();
+    QStringList arr = filename.split("Current File: ");
+    filename = arr[1];
+    emit saveClicked(filename);
+}
 void MainWindow::saveFileError(){
     QMessageBox::information(this, "Error saving file", "File type may be incorrect.");
 }
