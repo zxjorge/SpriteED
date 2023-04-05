@@ -201,8 +201,12 @@ void MainWindow::HelpTriggered()
 /// Allows the user to open a sprite editor project.
 void MainWindow::OpenTriggered()
 {
-    QString fileContent;
-    QString filename= QFileDialog::getOpenFileName(this, "Choose File");
+    QString filename = QFileDialog::getOpenFileName(this, "Choose Project",
+                                                    ".",
+                                                    "Project (*.ssp)");
+    if (filename.size() == 0) {
+        return;
+    }
     emit openClicked(filename);
 }
 
@@ -210,8 +214,12 @@ void MainWindow::OpenTriggered()
 /// Allows the user to open a sprite editor project.
 void MainWindow::saveAsTriggered()
 {
-    QString fileContent;
-    QString filename= QFileDialog::getSaveFileName();
+    QString filename = QFileDialog::getSaveFileName(this, "Save Project",
+                                                    ".",
+                                                    "Project (*.ssp)");
+    if (filename.size() == 0) {
+        return;
+    }
     emit saveAsClicked(filename);
 }
 
