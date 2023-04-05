@@ -76,6 +76,7 @@ void AnimationFrames::deleteAllFrames()
     }
     setSelectedIndex(0);
     emit deleteEveryFrame(frames.size());
+    emit filePathChanged("Current File: ");
 }
 
 /// @brief Gets the number of frames.
@@ -137,9 +138,9 @@ void AnimationFrames::saveToFile(QString filename) {
         QString fname(fileInfo.fileName());
         emit filePathChanged("Current File: " + fname);
     }
-    else {
-        emit fileSaveError();
-    }
+//    else {
+//        emit fileSaveError();
+//    }
 }
 
 /// @brief Loads a sprite editor project from a file.
@@ -191,9 +192,9 @@ void AnimationFrames::loadFromFile(QString filename) {
             emit filePathChanged("Current File: " + fname);
         }
     }
-    else {
-        emit fileLoadError();
-    }
+//    else {
+//        emit fileLoadError();
+//    }
 
 }
 
