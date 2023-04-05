@@ -17,8 +17,8 @@
 AnimationFrames::AnimationFrames(QObject *parent) :
     QObject(parent),
     frames(vector<QImage>()),
-    width(192),
-    height(128),
+    width(32),
+    height(32),
     selectedIndex(0),
     animTimer(QTimer(this))
 {
@@ -102,12 +102,17 @@ void AnimationFrames::updateSelectedFrame(QImage image) {
 /// @brief Saves a sprite editor project to a file in JSON format.
 /// @param filename The name of the file that will be saved to.
 void AnimationFrames::saveToFile(QString filename) {
+    if (!filename.endsWith(".ssp")) {
+        filename += ".ssp";
+    }
     QJsonObject json = QJsonObject();
 
     // Sets all necessary JSON attributes to represent the current state of a sprite editor project.
     json["height"] = height;
     json["width"] = width;
     json["numberOfFrames"] = (long long int)frames.size();
+
+    QJsonObject framesJson = QJsonObject();
 
     // Creates a JsonArray to represent a Json attribute that holds all the pixels and their colors.
     for (int i = 0; i < (int)frames.size(); i++) {
@@ -126,8 +131,10 @@ void AnimationFrames::saveToFile(QString filename) {
             }
             frameJson.append(row);
         }
-        json[&"frame" [ i]] = frameJson;
+        framesJson["frame" + QString::number(i)] = frameJson;
     }
+
+    json["frames"] = framesJson;
 
     // Writes to file.
     QFile file(filename);
@@ -161,12 +168,14 @@ void AnimationFrames::loadFromFile(QString filename) {
             width = json["width"].toInt(32);
             height = json["height"].toInt(32);
             frames = vector<QImage>(json["numberOfFrames"].toInt(1));
-            for (QString& key : json.keys()) {
+            QJsonObject framesJson = json["frames"].toObject();
+
+            for (QString& key : framesJson.keys()) {
                 if (!key.startsWith("frame")) {
                     continue;
                 }
                 QImage image = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
-                QJsonArray imageJson = json[key].toArray();
+                QJsonArray imageJson = framesJson[key].toArray();
                 for (int y = 0; y < height; y++) {
                     for (int x = 0; x < width; x++) {
                         QJsonArray pixel = imageJson[y][x].toArray();

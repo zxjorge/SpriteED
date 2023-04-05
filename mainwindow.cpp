@@ -213,6 +213,10 @@ void MainWindow::saveAsTriggered()
 void MainWindow::saveTriggered(){
     QString filename = ui->fileNameLabel->text();
     QStringList arr = filename.split("Current File: ");
+    if (arr.size() == 1) {
+        saveAsTriggered();
+        return;
+    }
     filename = arr[1];
     emit saveClicked(filename);
 }
