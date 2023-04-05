@@ -11,7 +11,7 @@
  *
  */
 
-/// @brief 
+/// @brief Constructor for AnimationFrames. Sets up for frame animating.
 /// @param parent 
 AnimationFrames::AnimationFrames(QObject *parent) :
     QObject(parent),
@@ -23,6 +23,8 @@ AnimationFrames::AnimationFrames(QObject *parent) :
 {
     setFPS(1);
     animTimer.setTimerType(Qt::PreciseTimer);
+
+    // Connection used for switching between the frames based on the frame speed.
     connect(&animTimer,
             &QTimer::timeout,
             this,
@@ -36,8 +38,8 @@ AnimationFrames::AnimationFrames(QObject *parent) :
             });
 }
 
-/// @brief 
-/// @return 
+/// @brief Adds a new frame that can be edited.
+/// @return The image representing the frame.
 QImage AnimationFrames::addFrame()
 {
     selectedIndex = frames.size();
@@ -48,15 +50,15 @@ QImage AnimationFrames::addFrame()
     return img;
 }
 
-/// @brief 
-/// @return 
+/// @brief Gets the selected frame.
+/// @return The selected frame
 QImage AnimationFrames::getSelectedFrame()
 {
     return frames.at(selectedIndex);
 }
 
-/// @brief 
-/// @param index 
+/// @brief Deletes a frame selected by the user.
+/// @param index Used to specify which frame to be deleted.
 void AnimationFrames::deleteFrame(int index)
 {
     frames.erase(frames.begin() + index);
@@ -65,34 +67,37 @@ void AnimationFrames::deleteFrame(int index)
     }
 }
 
-/// @brief 
-/// @return 
+/// @brief Gets the number of frames.
+/// @return The amount of frames.
 int AnimationFrames::getFrameCount()
 {
     return frames.size();
 }
 
-/// @brief 
+/// @brief Deletes all the frames, adds a new frame to ensure at least one frame at all times.
 void AnimationFrames::clear() {
     frames.clear();
     addFrame();
 }
 
-/// @brief 
-/// @param image 
+/// @brief Updates the selected frame.
+/// @param image The image to replace the outdated image in the frames list.
 void AnimationFrames::updateSelectedFrame(QImage image) {
     // Replace image at selectedIndex
     frames.at(selectedIndex) = image;
 }
 
-/// @brief 
-/// @param filename 
+/// @brief Saves a sprite editor project to a file in JSON format.
+/// @param filename The name of the file that will be saved to.
 void AnimationFrames::saveToFile(QString filename) {
     QJsonObject json = QJsonObject();
+
+    // Sets all necessary JSON attributes to represent the current state of a sprite editor project.
     json["height"] = height;
     json["width"] = width;
     json["numberOfFrames"] = (long long int)frames.size();
 
+    // Creates a JsonArray to represent a Json attribute that holds all the pixels and their colors.
     for (int i = 0; i < (int)frames.size(); i++) {
         QImage& frame = frames.at(i);
         QJsonArray frameJson = QJsonArray();
@@ -112,6 +117,7 @@ void AnimationFrames::saveToFile(QString filename) {
         json[&"json" [ i]] = frameJson;
     }
 
+    // Writes to file.
     QFile file(filename);
     if (file.open(QIODevice::WriteOnly)) {
         QTextStream stream( &file );
@@ -122,9 +128,11 @@ void AnimationFrames::saveToFile(QString filename) {
     }
 }
 
-/// @brief 
-/// @param filename 
+/// @brief Loads a sprite editor project from a file.
+/// @param filename The file to be loaded from.
 void AnimationFrames::loadFromFile(QString filename) {
+
+    // Reads from file.
     QFile file(filename);
     QJsonObject json;
     if (file.open(QIODevice::ReadOnly)) {
@@ -136,6 +144,7 @@ void AnimationFrames::loadFromFile(QString filename) {
         return;
     }
 
+    // Parsing all the Json elements and updating the necessary objects.
     width = json["width"].toInt(32);
     height = json["height"].toInt(32);
     frames = vector<QImage>(json["numberOfFrames"].toInt(1));
@@ -167,44 +176,51 @@ void AnimationFrames::loadFromFile(QString filename) {
     }
 }
 
-/// @brief 
-/// @param index 
+/// @brief Sets the selected frame index
+/// @param index The index of the frame to be selected.
 void AnimationFrames::setSelectedIndex(int index){
     this->selectedIndex = index;
 }
 
-/// @brief 
-/// @return 
+/// @brief Gets the selected frame index
+/// @return the index of the selected frame.
 int AnimationFrames::getSelectedIndex(){
     return selectedIndex;
 }
 
-/// @brief 
+/// @brief Public slot used to clear a single frame of any edits.
 void AnimationFrames::clearSelectedFrame() {
+
+    // Cannot be cleared if animation is running.
     if(!animTimer.isActive())
         frames.at(selectedIndex).fill(Qt::white);
         emit frameCleared();
 }
 
-/// @brief
-/// @param id
+/// @brief Removes a frame
+/// @param id Uses id to determine the frame to be removed.
 void AnimationFrames::removeFrame(int id){
     frames.erase(frames.begin() + id);
 }
 
+/// @brief Sets the frames per second for the animation.
+/// @param newFPS The desired frame speed.
 void AnimationFrames::setFPS(int newFPS) {
     fps = newFPS;
     animTimer.setInterval(1000 / fps);
 }
 
+/// @brief Starts the animation timer.
 void AnimationFrames::startAnimation() {
     animTimer.start();
 }
 
+/// @brief Stops the animation timer.
 void AnimationFrames::stopAnimation() {
     animTimer.stop();
 }
 
+/// @brief Checks if the animation is running.
 bool AnimationFrames::isAnimating() {
     return animTimer.isActive();
 }
