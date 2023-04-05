@@ -175,8 +175,8 @@ void SpriteCanvas::mouseReleaseEvent(QMouseEvent*) {
  */
 void SpriteCanvas::showAirBrushIcon(){
     QPixmap brushPixmap(":/icons/airbrush_icon.png");
-    QPixmap scaledBrushPixmap = brushPixmap.scaled(110, 110, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 2.5, scaledBrushPixmap.height() / 3);
+    QPixmap scaledBrushPixmap = brushPixmap.scaled(55, 55, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 3.5, scaledBrushPixmap.height() / 6 );
     setCursor(brushCursor);
 }
 
