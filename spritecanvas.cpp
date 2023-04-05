@@ -14,7 +14,8 @@
  */
 SpriteCanvas::SpriteCanvas(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::SpriteCanvas)
+    ui(new Ui::SpriteCanvas),
+    resized(true)
 {
     ui->setupUi(this);
 }
@@ -68,15 +69,31 @@ void SpriteCanvas::updateSprite(){
  */
 void SpriteCanvas::paintEvent(QPaintEvent*) {
     QPainter painter(this);
+    if (!resized) {
+        canvasOffsetX = (width() - sprite.width()) / 2;
+        canvasOffsetY = (height() - sprite.height()) / 2;
+        painter.drawImage(
+            canvasOffsetX,
+            canvasOffsetY,
+            sprite
+        );
+        return;
+    }
+
     float scale;
     if (getDimensionLimit() == DimensionLimit::WIDTH) {
         scale = (float)width() / sprite.width();
+        canvasOffsetX = 0;
+        canvasOffsetY = (height() - sprite.height() * scale) / 2;
     } else {
         scale = (float)height() / sprite.height();
+        canvasOffsetX = (width() - sprite.width() * scale) / 2;
+        canvasOffsetY = 0;
     }
+
     painter.drawImage(
-        0,
-        0,
+        canvasOffsetX,
+        canvasOffsetY,
         sprite.scaled(
             sprite.width() * scale,
             sprite.height() * scale,
@@ -103,6 +120,9 @@ DimensionLimit SpriteCanvas::getDimensionLimit() {
  * @return a float value which represents the pixel size
  */
 float SpriteCanvas::getPixelSize() {
+    if (!resized) {
+        return 1;
+    }
     if (getDimensionLimit() == DimensionLimit::WIDTH) {
         return (float)width() / sprite.width();
     } else {
@@ -118,8 +138,11 @@ float SpriteCanvas::getPixelSize() {
  */
 QPoint SpriteCanvas::getScaledMousePoint(QMouseEvent* event) {
     QPointF point = event->position();
+    point.rx() = point.x() - canvasOffsetX;
+    point.ry() = point.y() - canvasOffsetY;
     point /= getPixelSize();
-    // Offset to pixel centers instead of corners
+
+    // 0.5 offset to pixel centers instead of corners
     point.rx() = point.x() - 0.5;
     point.ry() = point.y() - 0.5;
     return point.toPoint();
@@ -209,4 +232,12 @@ void SpriteCanvas::showBrushIcon(){
     QPixmap scaledBrushPixmap = brushPixmap.scaled(45, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QCursor brushCursor(scaledBrushPixmap, scaledBrushPixmap.width() / 8, scaledBrushPixmap.height()/1.1);
     setCursor(brushCursor);
+}
+
+/**
+ * @brief SpriteCanvas::setResized controls whether or not the canvas should be resized to fit the window
+ */
+void SpriteCanvas::setResized(bool value) {
+    resized = value;
+    update();
 }
