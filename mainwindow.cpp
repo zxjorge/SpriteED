@@ -177,6 +177,11 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             frames,
             &AnimationFrames::saveToFile);
 
+    connect(ui->resized,
+            &QCheckBox::toggled,
+            ui->sprite_canvas,
+            &SpriteCanvas::setResized);
+
 }
 
 /// @brief Destructor for MainWindow.

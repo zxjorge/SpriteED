@@ -37,6 +37,7 @@ signals:
 public slots:
     void updateSprite();
     void onExternalFrameUpdate();
+    void setResized(bool value);
 
 private:
     Ui::SpriteCanvas *ui;
@@ -45,6 +46,9 @@ private:
     QPoint lastMousePos;
     Tool* tool;
     AnimationFrames* frames;
+    bool resized;
+    int canvasOffsetX;
+    int canvasOffsetY;
 
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
