@@ -31,13 +31,16 @@ signals:
     void frameAdded();
     void animationIndexChanged();
     void frameCleared();
+    void framesLoadedFromFile();
+    void fileLoadError();
+    void fileSaveError();
+    void filePathChanged(QString);
 
 public slots:
      void clearSelectedFrame();
-
-private slots:
-    void saveToFile(QString filename);
-    void loadFromFile(QString filename);
+     void loadFromFile(QString filename);
+     void saveToFile(QString filename);
+     void deleteAllFrames();
 
 private:
     vector<QImage> frames;

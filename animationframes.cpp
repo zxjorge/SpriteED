@@ -3,6 +3,7 @@
 #include <QJsonArray>
 #include <QFile>
 #include <QJsonDocument>
+#include <QFileInfo>
 
 /*
  * NajMingle:
@@ -67,6 +68,15 @@ void AnimationFrames::deleteFrame(int index)
     }
 }
 
+void AnimationFrames::deleteAllFrames()
+{
+    for(int i = 0; i < frames.size(); i++){
+        setSelectedIndex(i);
+        clearSelectedFrame();
+    }
+    setSelectedIndex(0);
+}
+
 /// @brief Gets the number of frames.
 /// @return The amount of frames.
 int AnimationFrames::getFrameCount()
@@ -114,7 +124,7 @@ void AnimationFrames::saveToFile(QString filename) {
             }
             frameJson.append(row);
         }
-        json[&"json" [ i]] = frameJson;
+        json[&"frame" [ i]] = frameJson;
     }
 
     // Writes to file.
@@ -122,9 +132,12 @@ void AnimationFrames::saveToFile(QString filename) {
     if (file.open(QIODevice::WriteOnly)) {
         QTextStream stream( &file );
         stream << QJsonDocument(json).toJson(QJsonDocument::Compact) << Qt::endl;
+        QFileInfo fileInfo(filename);
+        QString fname(fileInfo.fileName());
+        emit filePathChanged("Current File: " + fname);
     }
     else {
-        // Error Message
+        emit fileSaveError();
     }
 }
 
@@ -138,42 +151,49 @@ void AnimationFrames::loadFromFile(QString filename) {
     if (file.open(QIODevice::ReadOnly)) {
         QTextStream stream( &file );
         json = QJsonDocument::fromJson(stream.readAll().toLocal8Bit()).object();
+        if(json.count()!=4 || !json.keys().contains("width") || !json.keys().contains("height") || !json.keys().contains("numberOfFrames")){
+            emit fileLoadError();
+        }
+        else{
+            // Parsing all the Json elements and updating the necessary objects.
+            width = json["width"].toInt(32);
+            height = json["height"].toInt(32);
+            frames = vector<QImage>(json["numberOfFrames"].toInt(1));
+            for (QString& key : json.keys()) {
+                if (!key.startsWith("frame")) {
+                    continue;
+                }
+                QImage image = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
+                QJsonArray imageJson = json[key].toArray();
+                for (int y = 0; y < height; y++) {
+                    for (int x = 0; x < width; x++) {
+                        QJsonArray pixel = imageJson[y][x].toArray();
+                        image.setPixelColor(
+                            x,
+                            y,
+                            QColor(
+                                pixel.at(0).toInt(),
+                                pixel.at(1).toInt(),
+                                pixel.at(2).toInt(),
+                                pixel.at(3).toInt()
+                            )
+                        );
+                    }
+                }
+
+                int index = key.right(5).toInt();
+                frames.at(index) = image;
+            }
+            emit framesLoadedFromFile();
+            QFileInfo fileInfo(filename);
+            QString fname(fileInfo.fileName());
+            emit filePathChanged("Current File: " + fname);
+        }
     }
     else {
-        // Error Message
-        return;
+        emit fileLoadError();
     }
 
-    // Parsing all the Json elements and updating the necessary objects.
-    width = json["width"].toInt(32);
-    height = json["height"].toInt(32);
-    frames = vector<QImage>(json["numberOfFrames"].toInt(1));
-
-    for (QString& key : json.keys()) {
-        if (!key.startsWith("frame")) {
-            continue;
-        }
-        QImage image = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
-        QJsonArray imageJson = json[key].toArray();
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                QJsonArray pixel = imageJson[y][x].toArray();
-                image.setPixelColor(
-                    x,
-                    y,
-                    QColor(
-                        pixel.at(0).toInt(),
-                        pixel.at(1).toInt(),
-                        pixel.at(2).toInt(),
-                        pixel.at(3).toInt()
-                    )
-                );
-            }
-        }
-
-        int index = key.right(5).toInt();
-        frames.at(index) = image;
-    }
 }
 
 /// @brief Sets the selected frame index

@@ -26,9 +26,15 @@ public:
     MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void openClicked(QString);
+    void saveAsClicked(QString);
 private slots:
     void HelpTriggered();
     void OpenTriggered();
+    void saveAsTriggered();
+    void saveFileError();
+    void loadFileError();
 
 private:
     Ui::MainWindow *ui;

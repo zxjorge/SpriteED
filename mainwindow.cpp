@@ -9,9 +9,9 @@
  * 
  */
 
-/// @brief 
-/// @param tool 
-/// @param frames 
+/// @brief Constructor for the MainWindow.
+/// @param tool Represents the tool which is used to draw/erase on the canvas.
+/// @param frames Represents the frames.
 /// @param parent 
 MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     : QMainWindow(parent),
@@ -22,6 +22,7 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     ui->sprite_canvas->setTool(tool);
     ui->frames_viewer->setAnimFrames(frames);
     ui->sprite_canvas->setAnimFrames(frames);
+
 
     connect(ui->brush_properties,
             &BrushProperties::showAirBrushIcon,
@@ -53,6 +54,12 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             this,
             &MainWindow::OpenTriggered);
 
+    connect(ui->actionNew,
+            &QAction::triggered,
+            frames,
+            &AnimationFrames::deleteAllFrames);
+
+
     connect(ui->actionClear,
             &QAction::triggered,
             frames,
@@ -75,6 +82,16 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &FramesViewer::onFrameDrawnOn);
 
     connect(frames,
+            &AnimationFrames::framesLoadedFromFile,
+            ui->sprite_canvas,
+            &SpriteCanvas::onExternalFrameUpdate);
+
+    connect(frames,
+            &AnimationFrames::framesLoadedFromFile,
+            ui->frames_viewer,
+            &FramesViewer::onFrameDrawnOn);
+
+    connect(frames,
             &AnimationFrames::frameAdded,
             ui->sprite_canvas,
             &SpriteCanvas::onExternalFrameUpdate);
@@ -88,36 +105,76 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             &FramesViewer::updateSprite,
             ui->sprite_canvas,
             &SpriteCanvas::updateSprite);
+
+    connect(frames,
+            &AnimationFrames::fileLoadError,
+            this,
+            &MainWindow::loadFileError);
+
+    connect(frames,
+            &AnimationFrames::fileSaveError,
+            this,
+            &MainWindow::saveFileError);
+
+
+    connect(this,
+            &MainWindow::openClicked,
+            frames,
+            &AnimationFrames::loadFromFile);
+
+    connect(ui->actionSave_As,
+            &QAction::triggered,
+            this,
+            &MainWindow::saveAsTriggered);
+
+    connect(this,
+            &MainWindow::saveAsClicked,
+            frames,
+            &AnimationFrames::saveToFile);
+
+    connect(frames,
+            &AnimationFrames::filePathChanged,
+            ui->fileNameLabel,
+            &QLabel::setText);
+
 }
 
-/// @brief 
+/// @brief Destructor for MainWindow.
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-/// @brief 
+/// @brief When help is clicked, this method is called through the connection.
+/// Displays a message box with help information.
 void MainWindow::HelpTriggered()
 {
     QMessageBox::information(this, "About", "help");
 }
 
-/// @brief 
+/// @brief When open is clicked, this method is called through the connection.
+/// Allows the user to open a sprite editor project.
 void MainWindow::OpenTriggered()
 {
     QString fileContent;
     QString filename= QFileDialog::getOpenFileName(this, "Choose File");
-
-    if(filename.isEmpty())
-        return;
-
-    QFile file(filename);
-
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
-        return;
-
-    QTextStream in(&file);
-    fileContent = in.readAll();
-    file.close();
+    emit openClicked(filename);
 }
 
+/// @brief When open is clicked, this method is called through the connection.
+/// Allows the user to open a sprite editor project.
+void MainWindow::saveAsTriggered()
+{
+    QString fileContent;
+    QString filename= QFileDialog::getSaveFileName();
+    emit saveAsClicked(filename);
+}
+
+
+void MainWindow::saveFileError(){
+    QMessageBox::information(this, "Error saving file", "File type may be incorrect.");
+}
+
+void MainWindow::loadFileError(){
+    QMessageBox::information(this, "Error opening file", "File may not have enough elements or type may be incorrect");
+}
