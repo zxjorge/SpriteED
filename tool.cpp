@@ -50,7 +50,7 @@ void Tool::setSelectedToolType(ToolType type){
 /// @return True if the point has not been checked and if the color is the original,
 /// false otherwise.
 bool isValid(QSet<QPoint>& visited, QPoint &point, QImage& image, QColor originalColor) {
-    QColor currentColor = image.pixel(point);
+    QColor currentColor = image.pixelColor(point);
     return !visited.contains(point) && currentColor == originalColor;
 }
 
@@ -59,7 +59,7 @@ bool isValid(QSet<QPoint>& visited, QPoint &point, QImage& image, QColor origina
 /// @param point The point where the fill tool was originally applied.
 void Tool::fillImageAtPosition(QImage& image, QPoint point){
     QColor fillColor = brushPen.color();
-    QColor originalColor = image.pixel(point);
+    QColor originalColor = image.pixelColor(point);
 
     //Queue of points to be filled.
     queue<QPoint> fillQueue = queue<QPoint>();
@@ -144,23 +144,23 @@ QImage Tool::getAirBrushTexture() {
 /// @param point The point that has been modified.
 void Tool::drawPointOnImage(QImage& image, QPoint point) {
     QPen pen;
+    QPainter painter(&image);
 
     // The following if statements determine the logic to be used depending on the selected tool.
     if(selectedToolType == ERASER){
+        painter.setCompositionMode(QPainter::CompositionMode_DestinationOver);
         pen = brushPen;
-        pen.setColor(Qt::white);
+        pen.setColor(QColor(0, 0, 0, 0));
     } else if(selectedToolType == FILL) {
         fillImageAtPosition(image, point);
         return;
     } else if(selectedToolType == AIRBRUSH) {
-        QPainter painter(&image);
         QImage texture = getAirBrushTexture();
         painter.drawImage(QPoint(point.x() - texture.width() / 2, point.y() - texture.width() / 2), texture);
         return;
     } else {
         pen = brushPen;
     }
-    QPainter painter(&image);
     painter.setPen(pen);
     painter.drawPoint(point);
 }
@@ -171,16 +171,17 @@ void Tool::drawPointOnImage(QImage& image, QPoint point) {
 /// @param to The point where the mouse was released.
 void Tool::drawLineOnImage(QImage& image, QPoint from, QPoint to) {
     QPen pen;
+    QPainter painter(&image);
 
     // The following if statements determine the logic to be used depending on the selected tool.
     if(selectedToolType == ERASER){
+        painter.setCompositionMode(QPainter::CompositionMode_Source);
         pen = brushPen;
-        pen.setColor(Qt::white);
+        pen.setColor(QColor(0, 0, 0, 0));
     } else if(selectedToolType == FILL) {
         // Do nothing
         return;
     } else if(selectedToolType == AIRBRUSH) {
-        QPainter painter(&image);
         QPoint travel = to - from;
         int travelDistance = travel.manhattanLength();
         if (travelDistance == 0) {
@@ -198,7 +199,6 @@ void Tool::drawLineOnImage(QImage& image, QPoint from, QPoint to) {
     } else {
         pen = brushPen;
     }
-    QPainter painter(&image);
     painter.setPen(pen);
     painter.drawLine(from, to);
 }

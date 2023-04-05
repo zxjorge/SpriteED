@@ -44,8 +44,8 @@ AnimationFrames::AnimationFrames(QObject *parent) :
 QImage AnimationFrames::addFrame()
 {
     selectedIndex = frames.size();
-    QImage img = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
-    img.fill(Qt::white);
+    QImage img = QImage(width, height, QImage::Format_ARGB32);
+    img.fill(QColor(0, 0, 0, 0));
     frames.push_back(img);
     emit frameAdded();
     return img;
@@ -70,7 +70,7 @@ void AnimationFrames::deleteFrame(int index)
 
 void AnimationFrames::deleteAllFrames()
 {
-    for(int i = 0; i < frames.size(); i++){
+    for(int i = 0; i < (int)frames.size(); i++){
         setSelectedIndex(i);
         clearSelectedFrame();
     }
