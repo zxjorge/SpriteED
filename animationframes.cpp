@@ -119,6 +119,7 @@ void AnimationFrames::clear() {
 void AnimationFrames::updateSelectedFrame(QImage image) {
     // Replace image at selectedIndex
     frames.at(selectedIndex) = image;
+    wasModified = true;
 }
 
 
@@ -168,6 +169,7 @@ void AnimationFrames::saveToFile(QString filename) {
         stream << QJsonDocument(json).toJson(QJsonDocument::Compact) << Qt::endl;
         QFileInfo fileInfo(filename);
         QString fname(fileInfo.fileName());
+        wasModified = false;
         emit filePathChanged("Current File: " + fname);
     }
 }
@@ -220,6 +222,7 @@ void AnimationFrames::loadFromFile(QString filename) {
                 frames.at(index) = image;
             }
 
+            wasModified = false;
             emit framesLoadedFromFile();
             QFileInfo fileInfo(filename);
             QString fname(fileInfo.fileName());
@@ -326,4 +329,12 @@ void AnimationFrames::generateBackground() {
  */
 const QImage& AnimationFrames::getBackground() {
     return background;
+}
+
+/**
+ * @brief AnimationFrames::getWasModified Checks if any frame was modified without being saved
+ * @return True iff a frame was modified and not saved
+ */
+bool AnimationFrames::getWasModified() {
+    return wasModified;
 }

@@ -32,6 +32,7 @@ public:
     void stopAnimation();
     bool isAnimating();
     const QImage& getBackground();
+    bool getWasModified();
 
 signals:
     void frameAdded();
@@ -59,6 +60,7 @@ private:
     int fps;
     QTimer animTimer;
     QImage background;
+    bool wasModified;
 
     void generateBackground();
 };
