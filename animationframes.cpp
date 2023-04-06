@@ -1,3 +1,8 @@
+/**
+ * animationframes.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * Model for handling frames of an animation
+ * Reviewed by: Najman Husaini
+ */
 #include "animationframes.h"
 #include <QJsonObject>
 #include <QJsonArray>
@@ -5,13 +10,6 @@
 #include <QJsonDocument>
 #include <QFileInfo>
 #include <iostream>
-
-/*
- * NajMingle:
- * CS3505
- * A7: Sprite Editor
- *
- */
 
 /// @brief Constructor for AnimationFrames. Sets up for frame animating.
 /// @param parent 

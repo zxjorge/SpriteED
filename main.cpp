@@ -1,11 +1,14 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-/*
+/**
  * NajMingle: 
  * CS3505
  * A7: Sprite Editor
- * 
+ *
+ * Entry point for the application
+ * Singletons are initialized here
+ * Reviewed by: Najman Husaini
  */
 
 int main(int argc, char *argv[])

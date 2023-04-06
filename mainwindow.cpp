@@ -3,11 +3,10 @@
 #include "brushproperties.h"
 #include <QInputDialog>
 
-/*
- * NajMingle: 
- * CS3505
- * A7: Sprite Editor
- * 
+/**
+ * mainwindow.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * The main window of our application
+ * Reviewed by: George Benyeogor
  */
 
 /// @brief Constructor for the MainWindow.

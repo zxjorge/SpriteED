@@ -2,6 +2,7 @@
  * BrushProperties.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
  * This header file will be used by BrushProperties.cpp and has methods, signals, and slots to handle
  * the users ability to select different tools, showing which tool is currently selected and displaying the current brush color.
+ * Reviewed by: Arkein Singh
  */
 #ifndef BRUSHPROPERTIES_H
 #define BRUSHPROPERTIES_H
@@ -13,6 +14,9 @@ namespace Ui {
 class BrushProperties;
 }
 
+/**
+ * @brief The BrushProperties widget to allow users to configure the tools
+ */
 class BrushProperties : public QWidget
 {
     Q_OBJECT

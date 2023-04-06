@@ -1,3 +1,8 @@
+/**
+ * spritecanvas.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * Model for tools and drawing on images
+ * Reviewed by: Najman Husaini
+ */
 #include <queue>
 #include <vector>
 #include "tool.h"
@@ -6,15 +11,7 @@
 #include <cmath>
 #include <QPainter>
 #include <QSet>
-using std::queue;
-using std::vector;
-
-/*
- * NajMingle: 
- * CS3505
- * A7: Sprite Editor
- * 
- */
+using std::queue, std::vector;
 
 /// @brief Constructor for the Tool class, sets the default tool.
 Tool::Tool() :

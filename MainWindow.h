@@ -1,3 +1,8 @@
+/**
+ * mainwindow.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * The main window of our application
+ * Reviewed by: George Benyeogor
+ */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QLineEdit>
@@ -14,11 +19,13 @@
 #include <QIODevice>
 #include <QFileDialog>
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+/**
+ * @brief The MainWindow of our application
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
