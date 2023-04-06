@@ -11,8 +11,10 @@
 #include <QFileInfo>
 #include <iostream>
 
-/// @brief Constructor for AnimationFrames. Sets up for frame animating.
-/// @param parent 
+/**
+ * @brief AnimationFrames::AnimationFrames Constructor for AnimationFrames. Sets up for frame animating.
+ * @param parent widget that is used to help handle memory and resources.
+ */
 AnimationFrames::AnimationFrames(QObject *parent) :
     QObject(parent),
     frames(vector<QImage>()),
@@ -39,8 +41,10 @@ AnimationFrames::AnimationFrames(QObject *parent) :
             });
 }
 
-/// @brief Adds a new frame that can be edited.
-/// @return The image representing the frame.
+/**
+ * @brief AnimationFrames::addFrame Adds a new frame that can be edited
+ * @return The image representing the frame
+ */
 QImage AnimationFrames::addFrame()
 {
     selectedIndex = frames.size();
@@ -51,15 +55,21 @@ QImage AnimationFrames::addFrame()
     return img;
 }
 
-/// @brief Gets the selected frame.
-/// @return The selected frame
+
+/**
+ * @brief AnimationFrames::getSelectedFrame returns the currently selected frame.
+ * @return the currently selected frame as a QImage.
+ */
 QImage AnimationFrames::getSelectedFrame()
 {
     return frames.at(selectedIndex);
 }
 
-/// @brief Deletes a frame selected by the user.
-/// @param index Used to specify which frame to be deleted.
+
+/**
+ * @brief AnimationFrames::deleteFrame deletes a frame selected by the user.
+ * @param index Used to specify which frame is to be deleted.
+ */
 void AnimationFrames::deleteFrame(int index)
 {
     frames.erase(frames.begin() + index);
@@ -68,7 +78,9 @@ void AnimationFrames::deleteFrame(int index)
     }
 }
 
-/// @brief Deletes all frames
+/**
+ * @brief AnimationFrames::deleteAllFrames Deletes all the frames
+ */
 void AnimationFrames::deleteAllFrames()
 {
     for(int i = 0; i < (int)frames.size(); i++){
@@ -80,28 +92,40 @@ void AnimationFrames::deleteAllFrames()
     emit filePathChanged("Current File: ");
 }
 
-/// @brief Gets the number of frames.
-/// @return The amount of frames.
+
+/**
+ * @brief AnimationFrames::getFrameCount Returns the total number of frames present on the sprite editor.
+ * @return number of frames
+ */
 int AnimationFrames::getFrameCount()
 {
     return frames.size();
 }
 
-/// @brief Deletes all the frames, adds a new frame to ensure at least one frame at all times.
+
+/**
+ * @brief AnimationFrames::clear Deletes all the frames, adds a new frame to ensure at least one frame at all times.
+ */
 void AnimationFrames::clear() {
     frames.clear();
     addFrame();
 }
 
-/// @brief Updates the selected frame.
-/// @param image The image to replace the outdated image in the frames list.
+
+/**
+ * @brief AnimationFrames::updateSelectedFrame updates the selected frame.
+ * @param image The image to replace the outdated image in the frames list.
+ */
 void AnimationFrames::updateSelectedFrame(QImage image) {
     // Replace image at selectedIndex
     frames.at(selectedIndex) = image;
 }
 
-/// @brief Saves a sprite editor project to a file in JSON format.
-/// @param filename The name of the file that will be saved to.
+
+/**
+ * @brief AnimationFrames::saveToFile saves a sprite editor project to a file in JSON format.
+ * @param filename The name of the file that will be saved to.
+ */
 void AnimationFrames::saveToFile(QString filename) {
     if (!filename.endsWith(".ssp")) {
         filename += ".ssp";
@@ -148,8 +172,11 @@ void AnimationFrames::saveToFile(QString filename) {
     }
 }
 
-/// @brief Loads a sprite editor project from a file.
-/// @param filename The file to be loaded from.
+
+/**
+ * @brief AnimationFrames::loadFromFile Loads a sprite editor project from a file
+ * @param filename The file to be loaded from.
+ */
 void AnimationFrames::loadFromFile(QString filename) {
 
     // Reads from file.
@@ -201,19 +228,28 @@ void AnimationFrames::loadFromFile(QString filename) {
     }
 }
 
-/// @brief Sets the selected frame index
-/// @param index The index of the frame to be selected.
+
+/**
+ * @brief AnimationFrames::setSelectedIndex Sets the selected frame's index.
+ * @param index The index of the frame to be selected.
+ */
 void AnimationFrames::setSelectedIndex(int index){
     this->selectedIndex = index;
 }
 
-/// @brief Gets the selected frame index
-/// @return the index of the selected frame.
+
+/**
+ * @brief AnimationFrames::getSelectedIndex Get the selected frame's index
+ * @return The index of the selected frame.
+ */
 int AnimationFrames::getSelectedIndex(){
     return selectedIndex;
 }
 
-/// @brief Public slot used to clear a single frame of any edits.
+
+/**
+ * @brief AnimationFrames::clearSelectedFrame Public slot used to clear a single frame of any edits
+ */
 void AnimationFrames::clearSelectedFrame() {
 
     // Cannot be cleared if animation is running.
@@ -222,37 +258,55 @@ void AnimationFrames::clearSelectedFrame() {
         emit frameCleared();
 }
 
-/// @brief Removes a frame
-/// @param id Uses id to determine the frame to be removed.
+
+/**
+ * @brief AnimationFrames::removeFrame Removes a frame.
+ * @param id Uses id to determine the frame to be removed.
+ */
 void AnimationFrames::removeFrame(int id){
     frames.erase(frames.begin() + id);
 }
 
-/// @brief Sets the frames per second for the animation.
-/// @param newFPS The desired frame speed.
+
+/**
+ * @brief AnimationFrames::setFPS Sets the frames per second for the animation.
+ * @param newFPS The desired frames per second speed.
+ */
 void AnimationFrames::setFPS(int newFPS) {
     fps = newFPS;
     animTimer.setInterval(1000 / fps);
 }
 
-/// @brief Starts the animation timer.
+
+/**
+ * @brief AnimationFrames::startAnimation Starts the animation timer.
+ */
 void AnimationFrames::startAnimation() {
     animTimer.start();
     emit disableMenuBar(true);
 }
 
-/// @brief Stops the animation timer.
+
+/**
+ * @brief AnimationFrames::stopAnimation Stops the animation timer and enables the menu bar.
+ */
 void AnimationFrames::stopAnimation() {
     animTimer.stop();
     emit enableMenuBar(true);
 }
 
-/// @brief Checks if the animation is running.
+/**
+ * @brief AnimationFrames::isAnimating Checks if the animation is running.
+ * @return true if animation is running and false otherwise.
+ */
 bool AnimationFrames::isAnimating() {
     return animTimer.isActive();
 }
 
-/// @brief Generates a background to be drawn behind the canvas
+
+/**
+ * @brief AnimationFrames::generateBackground Generates a background to be drawn behind the canvas.
+ */
 void AnimationFrames::generateBackground() {
     background = QImage(width, height, QImage::Format_Grayscale8);
     for (int y = 0; y < height; y++) {
@@ -266,7 +320,10 @@ void AnimationFrames::generateBackground() {
     }
 }
 
-/// @brief Retrieves a const binding to the background
+/**
+ * @brief AnimationFrames::getBackground Retrieves a const binding to the background
+ * @return
+ */
 const QImage& AnimationFrames::getBackground() {
     return background;
 }
