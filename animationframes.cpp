@@ -1,3 +1,8 @@
+/**
+ * animationframes.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * Model for handling frames of an animation
+ * Reviewed by: Najman Husaini
+ */
 #include "animationframes.h"
 #include <QJsonObject>
 #include <QJsonArray>
@@ -5,13 +10,6 @@
 #include <QJsonDocument>
 #include <QFileInfo>
 #include <iostream>
-
-/*
- * NajMingle:
- * CS3505
- * A7: Sprite Editor
- *
- */
 
 /// @brief Constructor for AnimationFrames. Sets up for frame animating.
 /// @param parent 
@@ -70,6 +68,7 @@ void AnimationFrames::deleteFrame(int index)
     }
 }
 
+/// @brief Deletes all frames
 void AnimationFrames::deleteAllFrames()
 {
     for(int i = 0; i < (int)frames.size(); i++){
@@ -253,6 +252,7 @@ bool AnimationFrames::isAnimating() {
     return animTimer.isActive();
 }
 
+/// @brief Generates a background to be drawn behind the canvas
 void AnimationFrames::generateBackground() {
     background = QImage(width, height, QImage::Format_Grayscale8);
     for (int y = 0; y < height; y++) {
@@ -266,6 +266,7 @@ void AnimationFrames::generateBackground() {
     }
 }
 
+/// @brief Retrieves a const binding to the background
 const QImage& AnimationFrames::getBackground() {
     return background;
 }

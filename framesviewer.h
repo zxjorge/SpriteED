@@ -3,6 +3,7 @@
  * This header file will be used by framesviewer.cpp and has methods, signals, and slots to handle
  * the logic and data in regards to how the frames are viewed on the UI, and for the animation's
  * play, pause, and fps sliders on the sprite editor.
+ * Reviewed by: Sahil Karki
  */
 #ifndef FRAMESVIEWER_H
 #define FRAMESVIEWER_H
@@ -14,11 +15,13 @@
 #include <vector>
 #include <QImage>
 
-
 namespace Ui {
 class FramesViewer;
 }
 
+/**
+ * @brief The FramesViewer class where all the frames are shown
+ */
 class FramesViewer : public QWidget
 {
     Q_OBJECT

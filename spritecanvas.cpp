@@ -1,7 +1,8 @@
 /**
-* spritecanvas.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
-* This cpp file uses spritecanvas.h header file and implements all its methods.
-*/
+ * spritecanvas.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * This cpp file uses spritecanvas.h header file and implements all its methods.
+ * Reviewed by: Brayden Newsom
+ */
 #include "spritecanvas.h"
 #include "ui_spritecanvas.h"
 #include <iostream>

@@ -1,7 +1,8 @@
 /**
-* BrushProperties.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
-* This cpp file uses BrushProperties.h header file and implements all its methods.
-*/
+ * BrushProperties.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * This cpp file uses BrushProperties.h header file and implements all its methods.
+ * Reviewed by: Arkein Singh
+ */
 #include "brushproperties.h"
 #include "ui_brushproperties.h"
 #include <QColorDialog>

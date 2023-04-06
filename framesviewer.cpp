@@ -1,7 +1,8 @@
 /**
-* framesviewer.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
-* This cpp file uses framesviewer.h header file and implements all its methods.
-*/
+ * framesviewer.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * This cpp file uses framesviewer.h header file and implements all its methods.
+ * Reviewed by: Sahil Karki
+ */
 #include "framesviewer.h"
 #include "ui_framesviewer.h"
 
@@ -256,9 +257,6 @@ void FramesViewer::playButtonPressed() {
         ui->playButton->setText("Pause");
     }
 }
-
-
-
 
 /**
  * @brief FramesViewer::updateFrameIDs updates the frames' ids to make sure

@@ -1,14 +1,12 @@
+/**
+ * mainwindow.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * The main window of our application
+ * Reviewed by: George Benyeogor
+ */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "brushproperties.h"
 #include <QInputDialog>
-
-/*
- * NajMingle: 
- * CS3505
- * A7: Sprite Editor
- * 
- */
 
 /// @brief Constructor for the MainWindow.
 /// @param tool Represents the tool which is used to draw/erase on the canvas.
@@ -187,6 +185,7 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     QPushButton *okButton = new QPushButton("Ok", &dialog);
     QPushButton *cancelButton = new QPushButton("Cancel", &dialog);
 
+    lineEdit->setPlaceholderText("Enter a value between 1 and 128");
     connect(okButton, &QPushButton::clicked, &dialog, [&] {
         storeValue(lineEdit->text());
         dialog.close();

@@ -1,3 +1,8 @@
+/**
+ * animationframes.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
+ * Model for handling frames of an animation
+ * Reviewed by: Najman Husaini
+ */
 #ifndef ANIMATIONFRAMES_H
 #define ANIMATIONFRAMES_H
 #include <QObject>
