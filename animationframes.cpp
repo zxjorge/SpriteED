@@ -173,6 +173,7 @@ void AnimationFrames::loadFromFile(QString filename) {
             for (QString& key : framesJson.keys()) {
                 QImage image = QImage(width, height, QImage::Format_ARGB32);
                 QJsonArray imageJson = framesJson[key].toArray();
+
                 for (int y = 0; y < height; y++) {
                     for (int x = 0; x < width; x++) {
                         QJsonArray pixel = imageJson[y][x].toArray();
@@ -192,6 +193,7 @@ void AnimationFrames::loadFromFile(QString filename) {
                 int index = key.right(1).toInt();
                 frames.at(index) = image;
             }
+
             emit framesLoadedFromFile();
             QFileInfo fileInfo(filename);
             QString fname(fileInfo.fileName());

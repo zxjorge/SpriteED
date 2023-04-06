@@ -93,13 +93,13 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
 
     connect(frames,
             &AnimationFrames::framesLoadedFromFile,
-            ui->sprite_canvas,
-            &SpriteCanvas::onExternalFrameUpdate);
+            ui->frames_viewer,
+            &FramesViewer::onProjectLoaded);
 
     connect(frames,
             &AnimationFrames::framesLoadedFromFile,
-            ui->frames_viewer,
-            &FramesViewer::onProjectLoaded);
+            ui->sprite_canvas,
+            &SpriteCanvas::onExternalFrameUpdate);
 
     connect(frames,
             &AnimationFrames::frameAdded,
