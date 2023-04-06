@@ -15,7 +15,7 @@
 /// @param parent 
 MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     : QMainWindow(parent),
-      ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->brush_properties->setTool(tool);
@@ -182,6 +182,32 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             ui->sprite_canvas,
             &SpriteCanvas::setResized);
 
+    QDialog dialog(this);
+    QLineEdit *lineEdit = new QLineEdit(&dialog);
+    QPushButton *okButton = new QPushButton("Ok", &dialog);
+    QPushButton *cancelButton = new QPushButton("Cancel", &dialog);
+
+    connect(okButton, &QPushButton::clicked, &dialog, [&] {
+        storeValue(lineEdit->text());
+        dialog.close();
+    });
+
+    connect(cancelButton, &QPushButton::clicked, &dialog, &QDialog::close);
+
+    QVBoxLayout *layout = new QVBoxLayout(&dialog);
+    layout->addWidget(lineEdit);
+    QHBoxLayout *buttonLayout = new QHBoxLayout();
+    buttonLayout->addWidget(okButton);
+    buttonLayout->addWidget(cancelButton);
+    layout->addLayout(buttonLayout);
+
+    dialog.exec();
+
+}
+
+void MainWindow::storeValue(QString value)
+{
+    m_value = value;
 }
 
 /// @brief Destructor for MainWindow.

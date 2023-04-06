@@ -63,13 +63,11 @@ void FramesViewer::addFrame(){
 
     //sets the hight to a fixed value
     frame->setFixedHeight(100);
-
     frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     //adds frame to the layout and the vector of frames
     layout->addWidget(frame);
     frames.push_back(frame);
-
     QImage image = animationF->addFrame();
     frame->setFrameID(animationF->getSelectedIndex());
     frame->drawImage(image);

@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <QLineEdit>
+#include <QPushButton>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QAction>
@@ -37,9 +38,12 @@ private slots:
     void saveTriggered();
     void saveFileError();
     void loadFileError();
+    void storeValue(QString value);
 
 private:
     Ui::MainWindow *ui;
     QAction* action;
+    QString m_value;
+
 };
 #endif // MAINWINDOW_H
