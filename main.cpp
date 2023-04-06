@@ -1,15 +1,11 @@
-#include "mainwindow.h"
-#include <QApplication>
-
 /**
- * NajMingle: 
- * CS3505
- * A7: Sprite Editor
- *
+ * main.cpp made by Najmingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
  * Entry point for the application
  * Singletons are initialized here
  * Reviewed by: Najman Husaini
  */
+#include "mainwindow.h"
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
