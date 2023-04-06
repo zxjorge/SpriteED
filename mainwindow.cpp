@@ -319,3 +319,20 @@ void MainWindow::saveFileError(){
 void MainWindow::loadFileError(){
     QMessageBox::information(this, "Error opening file", "File may not have enough elements or type may be incorrect");
 }
+
+/**
+ * @brief MainWindow::closeEvent Handles what happens when the user tries to close the window
+ * @param event The close event used to handle user close
+ */
+void MainWindow::closeEvent(QCloseEvent* event) {
+    if (frames->getWasModified()) {
+        int response = QMessageBox::question(this, tr("Unsaved Changes"), tr("Do you want to save your changes before closing?"), QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel, QMessageBox::Save);
+        if (response == QMessageBox::Save) {
+            saveAsTriggered();
+        } else if (response == QMessageBox::Cancel) {
+            event->ignore();
+            return;
+        }
+    }
+    event->accept();
+}

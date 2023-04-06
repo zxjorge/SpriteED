@@ -21,6 +21,7 @@
 #include <QIODevice>
 #include <QFileDialog>
 #include <QVBoxLayout>
+#include <QCloseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -64,5 +65,6 @@ private:
     QHBoxLayout *widthLayout;
     QHBoxLayout *buttonLayout;
     AnimationFrames* frames;
+    void closeEvent(QCloseEvent* event);
 };
 #endif // MAINWINDOW_H
