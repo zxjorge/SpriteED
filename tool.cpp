@@ -13,47 +13,58 @@
 #include <QSet>
 using std::queue, std::vector;
 
-/// @brief Constructor for the Tool class, sets the default tool.
+/**
+ * @brief Tool::Tool Constructs a default toolset
+ */
 Tool::Tool() :
     brushPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)),
     selectedToolType(ToolType::BRUSH),
-    airBrushDensity(0.05)
+    airBrushDensity(0.1)
 {
 }
 
-/// @brief Sets the color of the selected tool.
-/// @param color The color to be set to the tool.
+/**
+ * @brief Tool::setColor Sets the color of the selected tool.
+ * @param colorThe color to be set to the tool.
+ */
 void Tool::setColor(QColor color){
     brushPen.setColor(color);
 }
 
-/// @brief Sets the size of the brush.
-/// @param size The size to be set to the tool.
+/**
+ * @brief Tool::setBrushSize Sets the size of the brush.
+ * @param size The size to be set to the tool.
+ */
 void Tool::setBrushSize(int size){
     brushPen.setWidth(size);
 }
 
-/// @brief Sets the tool type,
-/// @param type The type that the tool will be set to.
+/**
+ * @brief Tool::setSelectedToolType Sets the tool type
+ * @param type The type that the tool will be set to
+ */
 void Tool::setSelectedToolType(ToolType type){
     selectedToolType = type;
 }
 
-/// @brief Used for the fill tool, helps in determining whether or not a point will be filled.
-/// @param visited A QSet of QPoints that have been checked for fill eligibility.
-/// @param point The point that is being checked for fill eligibility.
-/// @param image The QImage representing what has been drawn on the current frame.
-/// @param originalColor The color that the fill tool changing.
-/// @return True if the point has not been checked and if the color is the original,
-/// false otherwise.
+/**
+ * @brief isValid Used for the fill tool, determinines whether or not a point will be filled.
+ * @param visited A QSet of QPoints that have been checked for fill eligibility
+ * @param point The point that is being checked for fill eligibility
+ * @param image The QImage of the current frame
+ * @param originalColor The color that the fill tool will replace
+ * @return True iff the point can be filled
+ */
 bool isValid(QSet<QPoint>& visited, QPoint &point, QImage& image, QColor originalColor) {
     QColor currentColor = image.pixelColor(point);
     return !visited.contains(point) && currentColor == originalColor;
 }
 
-/// @brief Used for the fill tool and helps in determine what points on the image need to be filled.
-/// @param image The current image that the fill tool is used on.
-/// @param point The point where the fill tool was originally applied.
+/**
+ * @brief Tool::fillImageAtPosition Fills the given image at the given position
+ * @param image The image to draw on
+ * @param point The point to start filling in
+ */
 void Tool::fillImageAtPosition(QImage& image, QPoint point){
     QColor fillColor = brushPen.color();
     QColor originalColor = image.pixelColor(point);
@@ -102,14 +113,18 @@ void Tool::fillImageAtPosition(QImage& image, QPoint point){
     }
 }
 
-/// @brief Gets the selected tool type.
-/// @return The selected tool type.
+/**
+ * @brief Tool::getSelectedToolType Gets the selected tool type.
+ * @return The selected tool type.
+ */
 ToolType Tool::getSelectedToolType() {
     return selectedToolType;
 }
 
-/// @brief Used to set the drawing specifications for the airbrush texture.
-/// @return The texture that the airbrush uses for drawing.
+/**
+ * @brief Tool::getAirBrushTexture Generates the texture to use for drawing with an airbrush
+ * @return The texture that the airbrush uses for drawing.
+ */
 QImage Tool::getAirBrushTexture() {
     QColor color = brushPen.color();
     QImage texture = QImage(brushPen.width(), brushPen.width(), QImage::Format_ARGB32_Premultiplied);
@@ -123,7 +138,7 @@ QImage Tool::getAirBrushTexture() {
         pixelCount = std::ceil(M_PI * radius * radius * airBrushDensity);
     }
 
-    // Math for the color variation and determining random points to be filled within the brush size.
+    // Math for the alpha variation and determining random points to be filled within the brush size.
     for (int i = 0; i < pixelCount; i++) {
         float angle = rng->bounded(2 * M_PI);
         float distance = rng->bounded(radius);
@@ -136,9 +151,11 @@ QImage Tool::getAirBrushTexture() {
     return texture;
 }
 
-/// @brief Fills a pixel on the image with the selected color and associated brush specifications.
-/// @param image The current image that is being drawn on.
-/// @param point The point that has been modified.
+/**
+ * @brief Tool::drawPointOnImage Draws on a single point using the current tool.
+ * @param image The image to draw on
+ * @param point The point to draw at
+ */
 void Tool::drawPointOnImage(QImage& image, QPoint point) {
     QPen pen;
     QPainter painter(&image);
@@ -162,10 +179,12 @@ void Tool::drawPointOnImage(QImage& image, QPoint point) {
     painter.drawPoint(point);
 }
 
-/// @brief Used for drawing when the mouse is clicked and dragged across the image
-/// @param image The current image that is being drawn on.
-/// @param from The point where the mouse was clicked.
-/// @param to The point where the mouse was released.
+/**
+ * @brief Tool::drawLineOnImage Draws along a line using the current tool.
+ * @param image The image to draw on
+ * @param from The starting point of the line
+ * @param to The ending point of the line
+ */
 void Tool::drawLineOnImage(QImage& image, QPoint from, QPoint to) {
     QPen pen;
     QPainter painter(&image);
@@ -180,7 +199,10 @@ void Tool::drawLineOnImage(QImage& image, QPoint from, QPoint to) {
         return;
     } else if(selectedToolType == AIRBRUSH) {
         QPoint travel = to - from;
-        int travelDistance = travel.manhattanLength();
+        // In a pixel grid, the number of pixels between two points is simply
+        // whichever value is bigger: the change in y, or the change in x,
+        // where the change is absolute
+        int travelDistance = std::max(std::abs(travel.x()), std::abs(travel.y()));
         if (travelDistance == 0) {
             return;
         }
