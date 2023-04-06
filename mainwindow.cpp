@@ -222,7 +222,8 @@ void MainWindow::HelpTriggered()
     QMessageBox help;
     help.setText("Help");
     help.setDefaultButton(QMessageBox::Ok);
-    help.setIconPixmap(QPixmap(":/Icons/annotatedUI.png"));
+    QPixmap helpIcon = QPixmap(":/icons/annotatedUI.png").scaled(750, 750, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    help.setIconPixmap(helpIcon);
     help.show();
     help.exec();
 }
