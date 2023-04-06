@@ -19,7 +19,7 @@ using std::queue, std::vector;
 Tool::Tool() :
     brushPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)),
     selectedToolType(ToolType::BRUSH),
-    airBrushDensity(0.05)
+    airBrushDensity(0.1)
 {
 }
 
@@ -199,7 +199,7 @@ void Tool::drawLineOnImage(QImage& image, QPoint from, QPoint to) {
         return;
     } else if(selectedToolType == AIRBRUSH) {
         QPoint travel = to - from;
-        int travelDistance = std::sqrt(travel.x() * travel.x() + travel.y() * travel.y());
+        int travelDistance = std::max(std::abs(travel.x()), std::abs(travel.y()));
         if (travelDistance == 0) {
             return;
         }
