@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "brushproperties.h"
+#include <QInputDialog>
 
 /*
  * NajMingle: 
@@ -22,6 +23,7 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     ui->sprite_canvas->setTool(tool);
     ui->frames_viewer->setAnimFrames(frames);
     ui->sprite_canvas->setAnimFrames(frames);
+    askForCanvasSize();
 
 
     connect(ui->brush_properties,
@@ -222,6 +224,20 @@ void MainWindow::HelpTriggered()
 {
     QMessageBox::information(this, "About", "help");
 }
+
+/// @brief When open is clicked, this method is called through the connection.
+/// Allows the user to open a sprite editor project.
+void MainWindow::askForCanvasSize()
+{
+
+        bool ok;
+        QString name = QInputDialog::getText(this,
+            tr("SpriteEditor"),
+            tr("Enter a desired Canvas Width and Height."),
+            QLineEdit::Normal,
+            tr("Width Height"),               &ok);
+}
+
 
 /// @brief When open is clicked, this method is called through the connection.
 /// Allows the user to open a sprite editor project.
