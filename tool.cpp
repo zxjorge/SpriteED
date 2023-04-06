@@ -148,7 +148,7 @@ void Tool::drawPointOnImage(QImage& image, QPoint point) {
 
     // The following if statements determine the logic to be used depending on the selected tool.
     if(selectedToolType == ERASER){
-        painter.setCompositionMode(QPainter::CompositionMode_DestinationOver);
+        painter.setCompositionMode(QPainter::CompositionMode_Source);
         pen = brushPen;
         pen.setColor(QColor(0, 0, 0, 0));
     } else if(selectedToolType == FILL) {
