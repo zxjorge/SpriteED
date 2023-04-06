@@ -219,7 +219,12 @@ MainWindow::~MainWindow()
 /// Displays a message box with help information.
 void MainWindow::HelpTriggered()
 {
-    QMessageBox::information(this, "About", "help");
+    QMessageBox help;
+    help.setText("Help");
+    help.setDefaultButton(QMessageBox::Ok);
+    help.setIconPixmap(QPixmap(":/Icons/annotatedUI.png"));
+    help.show();
+    help.exec();
 }
 
 /// @brief When open is clicked, this method is called through the connection.
