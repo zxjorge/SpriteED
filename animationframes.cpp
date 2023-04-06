@@ -331,22 +331,9 @@ const QImage& AnimationFrames::getBackground() {
 }
 
 /**
-<<<<<<< Updated upstream
  * @brief AnimationFrames::getWasModified Checks if any frame was modified without being saved
  * @return True iff a frame was modified and not saved
  */
 bool AnimationFrames::getWasModified() {
     return wasModified;
-}
-
-/**
- * @brief AnimationFrames::setHeightWidth
- * @param height
- * @param width
- */
-void AnimationFrames::setHeightWidth(int height, int width){
-    this->height = height;
-    this->width = width;
-    generateBackground();
-    deleteFrame(0);
 }
