@@ -180,43 +180,69 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
             ui->sprite_canvas,
             &SpriteCanvas::setResized);
 
-    QDialog dialog(this);
-    QLineEdit *lineEdit = new QLineEdit(&dialog);
-    QPushButton *okButton = new QPushButton("Ok", &dialog);
-    QPushButton *cancelButton = new QPushButton("Cancel", &dialog);
+    heightSpinBox = new QSpinBox(&inputBox);
+    widthSpinBox = new QSpinBox(&inputBox);
 
-    lineEdit->setPlaceholderText("Enter a value between 1 and 128");
-    connect(okButton, &QPushButton::clicked, &dialog, [&] {
-        storeValue(lineEdit->text());
-        dialog.close();
+    heightSpinBox->setRange(1, 128);
+    heightSpinBox->setValue(32);
+
+    widthSpinBox->setRange(1, 128);
+    widthSpinBox->setValue(32);
+
+    heightLabel = new QLabel("Height", &inputBox);
+    widthLabel = new QLabel("Width", &inputBox);
+    okButton = new QPushButton("Ok", &inputBox);
+    inputLabel = new QLabel("Please enter the height and width:", &inputBox);
+
+    connect(okButton, &QPushButton::clicked, &inputBox, [=] {
+        int height = heightSpinBox->value();
+        int width = widthSpinBox->value();
+        frames->setHeightWidth(height,width);
+        inputBox.close();
     });
 
-    connect(cancelButton, &QPushButton::clicked, &dialog, &QDialog::close);
+    connect(&inputBox, &QDialog::rejected, &inputBox, [=] {
+        int height = heightSpinBox->value();
+        int width = widthSpinBox->value();
+        frames->setHeightWidth(height,width);
+        inputBox.close();
+    });
 
-    QVBoxLayout *layout = new QVBoxLayout(&dialog);
-    layout->addWidget(lineEdit);
-    QHBoxLayout *buttonLayout = new QHBoxLayout();
+
+    inputLayout = new QVBoxLayout(&inputBox);
+    inputLayout->addWidget(inputLabel);
+
+    heightLayout = new QHBoxLayout();
+    heightLayout->addWidget(heightLabel);
+    heightLayout->addWidget(heightSpinBox);
+    inputLayout->addLayout(heightLayout);
+
+    widthLayout = new QHBoxLayout();
+    widthLayout->addWidget(widthLabel);
+    widthLayout->addWidget(widthSpinBox);
+    inputLayout->addLayout(widthLayout);
+
+    buttonLayout = new QHBoxLayout();
     buttonLayout->addWidget(okButton);
-    buttonLayout->addWidget(cancelButton);
-    layout->addLayout(buttonLayout);
+    inputLayout->addLayout(buttonLayout);
 
-    dialog.exec();
-
+    inputBox.exec();
 }
 
-void MainWindow::storeValue(QString value)
-{
-    m_value = value;
-}
-
-/// @brief Destructor for MainWindow.
+/**
+ * @brief MainWindow::~MainWindow
+ * Destructor for MainWindow.
+ */
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-/// @brief When help is clicked, this method is called through the connection.
-/// Displays a message box with help information.
+/**
+ * @brief MainWindow::HelpTriggered
+ * When help is clicked, this method is called through the connection.
+ * Displays a message box with help information.
+ */
 void MainWindow::HelpTriggered()
 {
     QMessageBox help;
@@ -227,8 +253,11 @@ void MainWindow::HelpTriggered()
     help.exec();
 }
 
-/// @brief When open is clicked, this method is called through the connection.
-/// Allows the user to open a sprite editor project.
+/**
+ * @brief MainWindow::OpenTriggered
+ * When open is clicked, this method is called through the connection.
+ * Allows the user to open a sprite editor project.
+ */
 void MainWindow::OpenTriggered()
 {
     QString filename = QFileDialog::getOpenFileName(this, "Choose Project",
@@ -240,12 +269,15 @@ void MainWindow::OpenTriggered()
     emit openClicked(filename);
 }
 
-/// @brief When open is clicked, this method is called through the connection.
-/// Allows the user to open a sprite editor project.
+/**
+ * @brief MainWindow::saveAsTriggered
+ * When open is clicked, this method is called through the connection.
+ * Allows the user to open a sprite editor project.
+ */
 void MainWindow::saveAsTriggered()
 {
     QString filename = QFileDialog::getSaveFileName(this, "Save Project",
-                                                    ".",
+                                                    "Sprite1",
                                                     "Project (*.ssp)");
     if (filename.size() == 0) {
         return;
@@ -253,6 +285,9 @@ void MainWindow::saveAsTriggered()
     emit saveAsClicked(filename);
 }
 
+/**
+ * @brief MainWindow::saveTriggered
+ */
 void MainWindow::saveTriggered(){
     QString filename = ui->fileNameLabel->text();
     QStringList arr = filename.split("Current File: ");
@@ -263,10 +298,17 @@ void MainWindow::saveTriggered(){
     filename = arr[1];
     emit saveClicked(filename);
 }
+
+/**
+ * @brief MainWindow::saveFileError
+ */
 void MainWindow::saveFileError(){
     QMessageBox::information(this, "Error saving file", "File type may be incorrect.");
 }
 
+/**
+ * @brief MainWindow::loadFileError
+ */
 void MainWindow::loadFileError(){
     QMessageBox::information(this, "Error opening file", "File may not have enough elements or type may be incorrect");
 }

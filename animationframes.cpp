@@ -25,7 +25,6 @@ AnimationFrames::AnimationFrames(QObject *parent) :
 {
     setFPS(1);
     animTimer.setTimerType(Qt::PreciseTimer);
-    generateBackground();
 
     // Connection used for switching between the frames based on the frame speed.
     connect(&animTimer,
@@ -213,8 +212,8 @@ void AnimationFrames::loadFromFile(QString filename) {
                                 pixel.at(1).toInt(),
                                 pixel.at(2).toInt(),
                                 pixel.at(3).toInt()
-                            )
-                        );
+                                )
+                            );
                     }
                 }
 
@@ -258,7 +257,7 @@ void AnimationFrames::clearSelectedFrame() {
     // Cannot be cleared if animation is running.
     if(!animTimer.isActive())
         frames.at(selectedIndex).fill(QColor(0, 0, 0, 0));
-        emit frameCleared();
+    emit frameCleared();
 }
 
 
@@ -332,9 +331,22 @@ const QImage& AnimationFrames::getBackground() {
 }
 
 /**
+<<<<<<< Updated upstream
  * @brief AnimationFrames::getWasModified Checks if any frame was modified without being saved
  * @return True iff a frame was modified and not saved
  */
 bool AnimationFrames::getWasModified() {
     return wasModified;
+}
+
+/**
+ * @brief AnimationFrames::setHeightWidth
+ * @param height
+ * @param width
+ */
+void AnimationFrames::setHeightWidth(int height, int width){
+    this->height = height;
+    this->width = width;
+    generateBackground();
+    deleteFrame(0);
 }

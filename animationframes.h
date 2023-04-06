@@ -31,6 +31,7 @@ public:
     void startAnimation();
     void stopAnimation();
     bool isAnimating();
+    void setHeightWidth(int height, int width);
     const QImage& getBackground();
     bool getWasModified();
 

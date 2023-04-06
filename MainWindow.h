@@ -6,6 +6,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QLineEdit>
+#include <QSpinBox>
+#include <QLabel>
 #include <QPushButton>
 #include <QMainWindow>
 #include <QMessageBox>
@@ -18,6 +20,7 @@
 #include <QTextStream>
 #include <QIODevice>
 #include <QFileDialog>
+#include <QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -45,12 +48,20 @@ private slots:
     void saveTriggered();
     void saveFileError();
     void loadFileError();
-    void storeValue(QString value);
 
 private:
     Ui::MainWindow *ui;
     QAction* action;
-    QString m_value;
-
+    QDialog inputBox;
+    QSpinBox *heightSpinBox;
+    QSpinBox *widthSpinBox;
+    QPushButton *okButton;
+    QLabel *heightLabel;
+    QLabel *inputLabel;
+    QLabel *widthLabel;
+    QVBoxLayout *inputLayout;
+    QHBoxLayout *heightLayout;
+    QHBoxLayout *widthLayout;
+    QHBoxLayout *buttonLayout;
 };
 #endif // MAINWINDOW_H
