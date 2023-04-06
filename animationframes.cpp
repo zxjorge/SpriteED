@@ -338,6 +338,11 @@ bool AnimationFrames::getWasModified() {
     return wasModified;
 }
 
+/**
+ * @brief AnimationFrames::setHeightWidth Allows the user to set the height and the width of the canvas
+ * @param height Height of the canvas
+ * @param width Width of the canvas
+ */
 void AnimationFrames::setHeightWidth(int height, int width){
     this->height = height;
     this->width = width;
