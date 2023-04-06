@@ -99,7 +99,7 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     connect(frames,
             &AnimationFrames::framesLoadedFromFile,
             ui->frames_viewer,
-            &FramesViewer::onFrameDrawnOn);
+            &FramesViewer::onProjectLoaded);
 
     connect(frames,
             &AnimationFrames::frameAdded,

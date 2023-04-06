@@ -28,10 +28,6 @@ public:
     ~FramesViewer();
     void setAnimFrames(AnimationFrames* animationF);
 
-public:
-    void onFrameDrawnOn();
-    void deleteFrame(int id);
-
 private:
     Ui::FramesViewer *ui;
     QVBoxLayout* layout;
@@ -39,13 +35,19 @@ private:
     vector<Frame*> frames;
     bool isAnimating;
     void updateFrameIDs();
+    void deleteAllFramesPrivate(bool keepOne, bool uiOnly);
+    void deleteFramePrivate(int id, bool keepOne, bool uiOnly);
 
 signals:
     void updateSprite();
 
 
 public slots:
-       void deleteAllFrames();
+   void deleteAllFrames();
+   void onFrameDrawnOn();
+   void onProjectLoaded();
+   void deleteFrame(int id);
+
 private slots:
     void setFrame(int id);
     void fpsChanged(int newFPS);

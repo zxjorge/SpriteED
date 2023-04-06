@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QFileInfo>
+#include <iostream>
 
 /*
  * NajMingle:
@@ -145,9 +146,6 @@ void AnimationFrames::saveToFile(QString filename) {
         QString fname(fileInfo.fileName());
         emit filePathChanged("Current File: " + fname);
     }
-//    else {
-//        emit fileSaveError();
-//    }
 }
 
 /// @brief Loads a sprite editor project from a file.
@@ -171,10 +169,7 @@ void AnimationFrames::loadFromFile(QString filename) {
             QJsonObject framesJson = json["frames"].toObject();
 
             for (QString& key : framesJson.keys()) {
-                if (!key.startsWith("frame")) {
-                    continue;
-                }
-                QImage image = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
+                QImage image = QImage(width, height, QImage::Format_ARGB32);
                 QJsonArray imageJson = framesJson[key].toArray();
                 for (int y = 0; y < height; y++) {
                     for (int x = 0; x < width; x++) {
@@ -192,7 +187,7 @@ void AnimationFrames::loadFromFile(QString filename) {
                     }
                 }
 
-                int index = key.right(5).toInt();
+                int index = key.right(1).toInt();
                 frames.at(index) = image;
             }
             emit framesLoadedFromFile();
@@ -201,10 +196,6 @@ void AnimationFrames::loadFromFile(QString filename) {
             emit filePathChanged("Current File: " + fname);
         }
     }
-//    else {
-//        emit fileLoadError();
-//    }
-
 }
 
 /// @brief Sets the selected frame index
@@ -224,7 +215,7 @@ void AnimationFrames::clearSelectedFrame() {
 
     // Cannot be cleared if animation is running.
     if(!animTimer.isActive())
-        frames.at(selectedIndex).fill(Qt::white);
+        frames.at(selectedIndex).fill(QColor(0, 0, 0, 0));
         emit frameCleared();
 }
 
