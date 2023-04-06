@@ -151,8 +151,15 @@ void FramesViewer::deleteAllFramesPrivate(bool keepOne, bool uiOnly) {
     if (isAnimating) {
         return;
     }
-    while (!frames.empty()){
-        deleteFramePrivate(0, keepOne, uiOnly);
+    if (keepOne) {
+        while (frames.size() > 1) {
+            deleteFramePrivate(0, true, uiOnly);
+        }
+        deleteFramePrivate(0, true, uiOnly);
+    } else {
+        while (!frames.empty()) {
+            deleteFramePrivate(0, false, uiOnly);
+        }
     }
 }
 /**
