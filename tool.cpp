@@ -199,7 +199,7 @@ void Tool::drawLineOnImage(QImage& image, QPoint from, QPoint to) {
         return;
     } else if(selectedToolType == AIRBRUSH) {
         QPoint travel = to - from;
-        int travelDistance = travel.manhattanLength();
+        int travelDistance = std::sqrt(travel.x() * travel.x() + travel.y() * travel.y());
         if (travelDistance == 0) {
             return;
         }
