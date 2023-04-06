@@ -188,6 +188,7 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     QPushButton *okButton = new QPushButton("Ok", &dialog);
     QPushButton *cancelButton = new QPushButton("Cancel", &dialog);
 
+    lineEdit->setPlaceholderText("Enter a value between 1 and 128");
     connect(okButton, &QPushButton::clicked, &dialog, [&] {
         storeValue(lineEdit->text());
         dialog.close();
