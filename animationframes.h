@@ -26,6 +26,7 @@ public:
     void startAnimation();
     void stopAnimation();
     bool isAnimating();
+    const QImage& getBackground();
 
 signals:
     void frameAdded();
@@ -52,6 +53,9 @@ private:
     int selectedIndex;
     int fps;
     QTimer animTimer;
+    QImage background;
+
+    void generateBackground();
 };
 
 #endif // ANIMATIONFRAMES_H

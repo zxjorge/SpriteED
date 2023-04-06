@@ -75,6 +75,11 @@ void SpriteCanvas::paintEvent(QPaintEvent*) {
         painter.drawImage(
             canvasOffsetX,
             canvasOffsetY,
+            frames->getBackground()
+        );
+        painter.drawImage(
+            canvasOffsetX,
+            canvasOffsetY,
             sprite
         );
         return;
@@ -91,6 +96,16 @@ void SpriteCanvas::paintEvent(QPaintEvent*) {
         canvasOffsetY = 0;
     }
 
+    painter.drawImage(
+        canvasOffsetX,
+        canvasOffsetY,
+        frames->getBackground().scaled(
+            sprite.width() * scale,
+            sprite.height() * scale,
+            Qt::IgnoreAspectRatio,
+            Qt::FastTransformation
+        )
+    );
     painter.drawImage(
         canvasOffsetX,
         canvasOffsetY,

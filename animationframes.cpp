@@ -25,6 +25,7 @@ AnimationFrames::AnimationFrames(QObject *parent) :
 {
     setFPS(1);
     animTimer.setTimerType(Qt::PreciseTimer);
+    generateBackground();
 
     // Connection used for switching between the frames based on the frame speed.
     connect(&animTimer,
@@ -165,6 +166,7 @@ void AnimationFrames::loadFromFile(QString filename) {
             // Parsing all the Json elements and updating the necessary objects.
             width = json["width"].toInt(32);
             height = json["height"].toInt(32);
+            generateBackground();
             frames = vector<QImage>(json["numberOfFrames"].toInt(1));
             QJsonObject framesJson = json["frames"].toObject();
 
@@ -247,4 +249,21 @@ void AnimationFrames::stopAnimation() {
 /// @brief Checks if the animation is running.
 bool AnimationFrames::isAnimating() {
     return animTimer.isActive();
+}
+
+void AnimationFrames::generateBackground() {
+    background = QImage(width, height, QImage::Format_Grayscale8);
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            if (x % 2 == y % 2) {
+                background.setPixelColor(x, y, QColor(235, 235, 235));
+            } else {
+                background.setPixelColor(x, y, Qt::white);
+            }
+        }
+    }
+}
+
+const QImage& AnimationFrames::getBackground() {
+    return background;
 }
