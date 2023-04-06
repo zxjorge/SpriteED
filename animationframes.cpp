@@ -337,3 +337,10 @@ const QImage& AnimationFrames::getBackground() {
 bool AnimationFrames::getWasModified() {
     return wasModified;
 }
+
+void AnimationFrames::setHeightWidth(int height, int width){
+    this->height = height;
+    this->width = width;
+    deleteFrame(0);
+    generateBackground();
+}
