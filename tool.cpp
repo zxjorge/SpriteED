@@ -138,7 +138,7 @@ QImage Tool::getAirBrushTexture() {
         pixelCount = std::ceil(M_PI * radius * radius * airBrushDensity);
     }
 
-    // Math for the color variation and determining random points to be filled within the brush size.
+    // Math for the alpha variation and determining random points to be filled within the brush size.
     for (int i = 0; i < pixelCount; i++) {
         float angle = rng->bounded(2 * M_PI);
         float distance = rng->bounded(radius);
@@ -199,6 +199,9 @@ void Tool::drawLineOnImage(QImage& image, QPoint from, QPoint to) {
         return;
     } else if(selectedToolType == AIRBRUSH) {
         QPoint travel = to - from;
+        // In a pixel grid, the number of pixels between two points is simply
+        // whichever value is bigger: the change in y, or the change in x,
+        // where the change is absolute
         int travelDistance = std::max(std::abs(travel.x()), std::abs(travel.y()));
         if (travelDistance == 0) {
             return;
