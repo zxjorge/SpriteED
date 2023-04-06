@@ -26,7 +26,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent = nullptr);
     ~MainWindow();
-    void askForCanvasSize();
 
 signals:
     void openClicked(QString);
