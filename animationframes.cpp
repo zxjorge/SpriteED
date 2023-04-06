@@ -68,6 +68,7 @@ void AnimationFrames::deleteFrame(int index)
     }
 }
 
+/// @brief Deletes all frames
 void AnimationFrames::deleteAllFrames()
 {
     for(int i = 0; i < (int)frames.size(); i++){
@@ -251,6 +252,7 @@ bool AnimationFrames::isAnimating() {
     return animTimer.isActive();
 }
 
+/// @brief Generates a background to be drawn behind the canvas
 void AnimationFrames::generateBackground() {
     background = QImage(width, height, QImage::Format_Grayscale8);
     for (int y = 0; y < height; y++) {
@@ -264,6 +266,7 @@ void AnimationFrames::generateBackground() {
     }
 }
 
+/// @brief Retrieves a const binding to the background
 const QImage& AnimationFrames::getBackground() {
     return background;
 }

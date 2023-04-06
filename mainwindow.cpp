@@ -1,13 +1,12 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "brushproperties.h"
-#include <QInputDialog>
-
 /**
  * mainwindow.h made by NajMingle for A7: Sprite Editor Implementation - CS 3505 Spring 2023
  * The main window of our application
  * Reviewed by: George Benyeogor
  */
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "brushproperties.h"
+#include <QInputDialog>
 
 /// @brief Constructor for the MainWindow.
 /// @param tool Represents the tool which is used to draw/erase on the canvas.
