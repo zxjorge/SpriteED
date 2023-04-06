@@ -63,5 +63,6 @@ private:
     QHBoxLayout *heightLayout;
     QHBoxLayout *widthLayout;
     QHBoxLayout *buttonLayout;
+    AnimationFrames* frames;
 };
 #endif // MAINWINDOW_H

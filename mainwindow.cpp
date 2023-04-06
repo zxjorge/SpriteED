@@ -21,6 +21,7 @@ MainWindow::MainWindow(Tool* tool, AnimationFrames* frames, QWidget *parent)
     ui->sprite_canvas->setTool(tool);
     ui->frames_viewer->setAnimFrames(frames);
     ui->sprite_canvas->setAnimFrames(frames);
+    this->frames = frames;
 
     connect(ui->brush_properties,
             &BrushProperties::showAirBrushIcon,
@@ -260,6 +261,9 @@ void MainWindow::HelpTriggered()
  */
 void MainWindow::OpenTriggered()
 {
+    if(frames->getWasModified())
+        saveAsTriggered();
+
     QString filename = QFileDialog::getOpenFileName(this, "Choose Project",
                                                     ".",
                                                     "Project (*.ssp)");
