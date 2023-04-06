@@ -291,6 +291,7 @@ void MainWindow::saveAsTriggered()
 
 /**
  * @brief MainWindow::saveTriggered
+ * This saves the file for the user
  */
 void MainWindow::saveTriggered(){
     QString filename = ui->fileNameLabel->text();
@@ -305,6 +306,7 @@ void MainWindow::saveTriggered(){
 
 /**
  * @brief MainWindow::saveFileError
+ * Prompts the user that there was error saving file
  */
 void MainWindow::saveFileError(){
     QMessageBox::information(this, "Error saving file", "File type may be incorrect.");
@@ -312,6 +314,7 @@ void MainWindow::saveFileError(){
 
 /**
  * @brief MainWindow::loadFileError
+ * Prompts the user that there was error loading file.
  */
 void MainWindow::loadFileError(){
     QMessageBox::information(this, "Error opening file", "File may not have enough elements or type may be incorrect");
