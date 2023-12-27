@@ -3,4 +3,3 @@ This repository contains the code required to run a sprite editor application. I
 ## Getting Started
 To use this application, you will need to clone this repository into your local device. You will also need to have QT Creator installed on your device.
 
-[PRESENTATION](https://gh.manglemix.com/a7)
